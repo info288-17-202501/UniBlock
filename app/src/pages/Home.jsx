@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '@components/Header';
 import PreguntasFrecuentes from '@components/PreguntasFrecuentes';
+import Noticias from '../components/Noticias';
 
 
 const Home = () => {
@@ -27,7 +28,7 @@ const Home = () => {
 				</section>
 
 				<section id='noticias'>
-					<h1>Noticias</h1>
+					<Noticias />
 				</section>
 
 				<section id='preguntas-frecuentes'>
