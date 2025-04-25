@@ -15,12 +15,12 @@ const Usuarios = () => {
         {facultades.map((facultad) => (
           <div
             key={facultad.id}
-            className="flex items-center justify-center bg-white py-8 px-4 shadow-md rounded-lg"
+            className="flex items-center justify-center bg-white py-4 px-2 shadow-md rounded-lg"
           >
             <img
               src={facultad.imagen}
               alt="Logo de facultad"
-              className="max-h-28 w-auto object-contain"
+              className="max-h-24 w-auto object-contain"
             />
           </div>
         ))}
