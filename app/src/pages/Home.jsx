@@ -1,5 +1,7 @@
 import React from 'react';
 import Header from '@components/Header';
+import PreguntasFrecuentes from '@components/PreguntasFrecuentes';
+
 
 const Home = () => {
 	return (
@@ -24,12 +26,12 @@ const Home = () => {
 					<h1>Cómo votar</h1>
 				</section>
 
-				<section id='preguntas-frecuentes'>
-					<h1>Preguntas frecuentes</h1>
-				</section>
-
 				<section id='noticias'>
 					<h1>Noticias</h1>
+				</section>
+
+				<section id='preguntas-frecuentes'>
+					<PreguntasFrecuentes />
 				</section>
 			</div>
 		</>
