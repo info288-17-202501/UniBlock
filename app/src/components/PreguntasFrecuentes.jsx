@@ -8,9 +8,9 @@ const preguntas = [
       'Blockchain es una tecnología que permite registrar información de manera segura, descentralizada e inalterable. Es como un libro contable público distribuido entre muchos nodos.',
   },
   {
-    pregunta: '¿Qué es el UniBlock?',
+    pregunta: '¿Qué es UniBlock?',
     respuesta:
-      'UniBlock es un proyecto universitario desarrollado en el contexto de un sistema distribuido. Su objetivo es modernizar los procesos de votación dentro de la comunidad universitaria.',
+      'UniBlock es un proyecto universitario desarrollado en el contexto del curso INFO288: Sistemas Distribuidos. Su objetivo es modernizar los procesos de votación dentro de la comunidad universitaria.',
   },
   {
     pregunta: '¿Cómo se garantiza la seguridad del voto?',
@@ -25,7 +25,7 @@ const preguntas = [
   {
     pregunta: '¿Quiénes somos?',
     respuesta:
-      'Somos estudiantes de 9no semestre de Ingeniería Civil Informática de la Universidad Austral de Chile.',
+      'Somos 5 estudiantes de 9no semestre de Ingeniería Civil en Informática de la Universidad Austral de Chile.',
   },
   {
     pregunta: '¿Cómo nace el proyecto?',
@@ -43,16 +43,13 @@ const PreguntasFrecuentes = () => {
 
   return (
     <section id="preguntas-frecuentes" className="py-10 px-5 lg:px-20">
-      <h2 className="text-3xl font-bold mb-6">Preguntas Frecuentes</h2>
-      <div className="space-y-4">
+      <h2 className="text-3xl font-bold mb-6">Preguntas frecuentes</h2>
+      <div className="space-y-2">
         {preguntas.map((item, index) => (
-          <div
-            key={index}
-            className="border rounded-lg shadow-sm bg-white"
-          >
+          <div key={index}>
             <button
               onClick={() => togglePregunta(index)}
-              className="w-full flex justify-between items-center px-4 py-3 text-left focus:outline-none hover:underline cursor-pointer"
+              className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer"
             >
               <span className="text-lg font-medium">{item.pregunta}</span>
               {activeIndex === index ? (
@@ -62,8 +59,9 @@ const PreguntasFrecuentes = () => {
               )}
             </button>
             {activeIndex === index && (
-              <div className="px-4 pb-4 text-gray-700">{item.respuesta}</div>
+              <div className="pl-1 pb-2 text-gray-700">{item.respuesta}</div>
             )}
+            <hr className="my-2 border-gray-300" />
           </div>
         ))}
       </div>
