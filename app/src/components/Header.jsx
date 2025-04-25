@@ -69,7 +69,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="logo">
-            <img src="/logo1.png" alt="Logo de la página" className="h-10 w-auto" />
+            <img src="/logo.png" alt="Logo de la página" className="h-10 w-auto" />
           </a>
 
           {/* Menú hamburguesa (solo en móvil) */}
