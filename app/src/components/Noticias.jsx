@@ -135,9 +135,8 @@ const Noticias = () => {
   const noticiasVisibles = noticias.slice((paginaActual - 1) * noticiasPorPagina, paginaActual * noticiasPorPagina);
 
   return (
-    <section id="noticias" className="py-10 px-5 lg:px-20">
+    <section id="noticias">
       <h2 className="text-3xl font-bold mb-6">Noticias</h2>
-
       {/* Noticias */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {noticiasVisibles.map((item, index) => (

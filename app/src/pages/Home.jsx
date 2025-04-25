@@ -11,7 +11,7 @@ const Home = () => {
 			<div className="home p-10 xl:p-20">
 				<section className='hero h-screen lg:h-[90vh] flex items-center'>
 					<div>
-						<h1 className='text-6xl xl:text-7xl'>UNIBLOCK</h1>
+						<h1 className='text-6xl xl:text-7xl'>UniBlock</h1>
 						<p className='py-10 xl:max-w-150'>Bienvenido al sistema de votación basado en blockchain. Aquí puedes participar en elecciones de manera segura y transparente.</p>
 						<div className='lg:py-10'>
 							<a href="/login" className="btn border-1 rounded-xl px-6 py-3 ">Votar</a>
