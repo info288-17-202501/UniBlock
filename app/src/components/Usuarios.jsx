@@ -7,9 +7,9 @@ const facultades = [
   { id: 4, imagen: '/facultades/medicina.png' },
 ];
 
-const Clientes = () => {
+const Usuarios = () => {
   return (
-    <section id="clientes" className="bg-gray-50 py-16 px-6 text-center">
+    <section id="usuarios" className="bg-gray-50 py-16 px-6 text-center">
       <h2 className="text-3xl font-bold mb-12 text-gray-800">Ellos confían en nosotros</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {facultades.map((facultad) => (
@@ -29,4 +29,4 @@ const Clientes = () => {
   );
 };
 
-export default Clientes;
+export default Usuarios;

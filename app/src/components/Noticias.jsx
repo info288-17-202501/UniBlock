@@ -11,16 +11,16 @@ const noticias = [
     descripcion: 'Los resultados de la última votación para el Centro de Alumnos se han procesado. A continuación, mostramos los resultados por facultad.',
     grafico: {
       type: 'pie',
-      labels: ['Ingeniería', 'Ciencias', 'Humanidades', 'Derecho', 'Medicina'],
+      labels: ['Ingeniería', 'Ciencias', 'Humanidades'],
       datasets: [
         {
           label: 'Votos',
-          data: [120, 90, 150, 80, 130],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#FF9F40'],
+          data: [120, 90, 150],
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
         },
       ],
     },
-  },
+  },  
   {
     titulo: 'Resultados de la Votación para Rector',
     descripcion: 'La votación para elegir al nuevo rector también se ha cerrado. Los resultados han sido procesados y aquí los mostramos.',
@@ -148,8 +148,10 @@ const Noticias = () => {
             <div className="py-4">
               {item.grafico.type === 'bar' && <Bar data={item.grafico} options={{ responsive: true }} />}
               {item.grafico.type === 'line' && <Line data={item.grafico} options={{ responsive: true }} />}
-              {item.grafico.type === 'pie' && <Pie data={item.grafico} options={{ responsive: true }} />}
-              {item.grafico.type === 'doughnut' && <Doughnut data={item.grafico} options={{ responsive: true }} />}
+              {item.grafico.type === 'pie' && <div className="w-full max-w-[300px] h-[300px] mx-auto"><Pie data={item.grafico} options={{ responsive: true, maintainAspectRatio: false }} /></div>}
+              {item.grafico.type === 'doughnut' && <div className="w-full max-w-[300px] h-[300px] mx-auto"><Doughnut data={item.grafico} options={{ responsive: true, maintainAspectRatio: false }} /></div>}
+              {/* {item.grafico.type === 'pie' && <Pie data={item.grafico} options={{ responsive: true }} />}
+              {item.grafico.type === 'doughnut' && <Doughnut data={item.grafico} options={{ responsive: true }} />} */}
             </div>
             <hr className="my-2 border-gray-300" />
           </div>

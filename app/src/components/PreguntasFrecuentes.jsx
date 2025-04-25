@@ -20,9 +20,20 @@ const preguntas = [
   },
   {
     pregunta: '¿Qué es UniBlock?',
-    respuesta:
-      'UniBlock es un proyecto universitario desarrollado en el contexto del curso INFO288: Sistemas Distribuidos. Su objetivo es modernizar los procesos de votación dentro de la comunidad universitaria.',
-  },
+    respuesta: (
+      <>
+        UniBlock es un proyecto universitario desarrollado en el contexto del curso INFO288: Sistemas Distribuidos. Su objetivo es modernizar los procesos de votación dentro de la comunidad universitaria y busca ser el futuro de las votaciones.{' '}
+        <a
+          href="https://builtin.com/blockchain/blockchain-voting-future-elections"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 underline hover:text-blue-800"
+        >
+          Leer más sobre votaciones con blockchain
+        </a>
+      </>
+    ),
+  },  
   {
     pregunta: '¿Cómo se garantiza la seguridad del voto?',
     respuesta:

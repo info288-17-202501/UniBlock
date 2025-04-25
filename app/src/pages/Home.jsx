@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '@components/Header';
 import PreguntasFrecuentes from '@components/PreguntasFrecuentes';
 import Noticias from '../components/Noticias';
-import Clientes from '../components/Clientes';
+import Usuarios from '../components/Usuarios';
 
 
 const Home = () => {
@@ -41,8 +41,8 @@ const Home = () => {
 					<PreguntasFrecuentes />
 				</section>
 
-				<section id='clientes'>
-					<Clientes />
+				<section id='usuarios'>
+					<Usuarios />
 				</section>
 			</div>
 		</>
