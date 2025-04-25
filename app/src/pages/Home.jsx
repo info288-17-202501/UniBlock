@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '@components/Header';
 import PreguntasFrecuentes from '@components/PreguntasFrecuentes';
 import Noticias from '../components/Noticias';
+import Clientes from '../components/Clientes';
 
 
 const Home = () => {
@@ -38,6 +39,10 @@ const Home = () => {
 
 				<section id='preguntas-frecuentes'>
 					<PreguntasFrecuentes />
+				</section>
+
+				<section id='clientes'>
+					<Clientes />
 				</section>
 			</div>
 		</>

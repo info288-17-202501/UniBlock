@@ -4,8 +4,19 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 const preguntas = [
   {
     pregunta: '¿Qué es Blockchain?',
-    respuesta:
-      'Blockchain es una tecnología que permite registrar información de manera segura, descentralizada e inalterable. Es como un libro contable público distribuido entre muchos nodos.',
+    respuesta: (
+      <>
+        Blockchain es una tecnología que permite registrar información de manera segura, descentralizada e inalterable.{' '}
+        <a
+          href="https://aws.amazon.com/what-is/blockchain/?aws-products-all.sort-by=item.additionalFields.productNameLowercase&aws-products-all.sort-order=asc"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 underline hover:text-blue-800"
+        >
+          Leer más
+        </a>
+      </>
+    ),
   },
   {
     pregunta: '¿Qué es UniBlock?',

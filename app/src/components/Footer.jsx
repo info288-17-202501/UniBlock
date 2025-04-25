@@ -8,7 +8,7 @@ const Footer = () => {
 
         {/* Centro */}
         <div className="text-center">
-          <p className="font-medium text-lg">&copy; {new Date().getFullYear()} UniBlock - Universidad Austral de Chile</p>
+          <p className="font-medium text-lg">&copy; {new Date().getFullYear()} UniBlock</p>
           <p className="text-sm">Todos los derechos reservados.</p>
         </div>
 

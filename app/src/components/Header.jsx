@@ -8,7 +8,10 @@ const Header = () => {
 
 	return (
 		<header>
-			<nav className="navbar bg-white p-5 xl:px-20 xl:py-5 fixed w-full">
+			{/* <nav className="navbar bg-white p-5 xl:px-20 xl:py-5 fixed w-full"> */}
+			{/* Es una linea para que se note el Nav*/}
+			<nav className="navbar bg-white p-5 xl:px-20 xl:py-5 fixed w-full border-b-2 border-gray-300">
+				
 				<div className="flex items-center justify-between">
 					<a href="/" className="logo">
 						<img src="/logo.png" alt="Logo de la página" className="h-10 w-auto" />
@@ -31,11 +34,8 @@ const Header = () => {
 						<li className="py-2 lg:py-0 text-center"><a href="#como-votar">Cómo votar</a></li>
 						<li className="py-2 lg:py-0 text-center"><a href="#noticias">Noticias</a></li>
 						<li className="py-2 lg:py-0 text-center"><a href="#preguntas-frecuentes">Preguntas frecuentes</a></li>
-						<li className="py-2 lg:py-0 text-center">
-							<a href="/login" className="flex items-center justify-center">
-								<User className="w-6 h-6" />
-							</a>
-						</li>
+						<li className="py-2 lg:py-0 text-center"><a href="#clientes">Clientes</a></li>
+						<li className="py-2 lg:py-0 text-center"><a href="/login" className="flex items-center justify-center"><User className="w-6 h-6" /></a></li>
 					</ul>
 				</div>
 			</nav>
