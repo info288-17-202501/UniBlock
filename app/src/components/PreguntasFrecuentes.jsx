@@ -29,7 +29,7 @@ const preguntas = [
           rel="noopener noreferrer"
           className="text-blue-600 underline hover:text-blue-800"
         >
-          Leer más sobre votaciones con blockchain
+          Leer más
         </a>
       </>
     ),
