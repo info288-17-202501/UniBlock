@@ -42,9 +42,9 @@ const PreguntasFrecuentes = () => {
   };
 
   return (
-    <section id="preguntas-frecuentes" className="py-10 px-5 lg:px-20">
-      <h2 className="text-3xl font-bold mb-6">Preguntas frecuentes</h2>
-      <div className="space-y-2">
+    <section id="preguntas-frecuentes">
+      <h2 className="text-3xl font-bold mb-6">Preguntas Frecuentes</h2>
+      <div className="space-y-4">
         {preguntas.map((item, index) => (
           <div key={index}>
             <button
