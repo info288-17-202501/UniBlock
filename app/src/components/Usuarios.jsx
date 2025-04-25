@@ -1,10 +1,10 @@
 import React from 'react';
 
 const facultades = [
-  { id: 1, imagen: '/facultades/ingenieria.jpg' },
-  { id: 2, imagen: '/facultades/ciencias.png' },
-  { id: 3, imagen: '/facultades/ciencias_sociales.jpg' },
-  { id: 4, imagen: '/facultades/medicina.png' },
+  { id: 1, imagen: '/Puerto_Montt/Escuelas/oscuro/N. Enfermería-C.png' },
+  { id: 2, imagen: '/Valdivia/Escuelas/oscuro/N. ESC. ING. INFORMATICA-C.png' },
+  { id: 3, imagen: '/Valdivia/Facultades/oscuro/N. MEDICINA-C.png' },
+  { id: 4, imagen: '/Puerto_Montt/Institutos/oscuro/N. Gestion e Industria-C.png' },
 ];
 
 const Usuarios = () => {
