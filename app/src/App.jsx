@@ -9,9 +9,10 @@ import ScrollToTopButton from './components/ScrollToTopButton';
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
+    {/* <Header /> Con o sin esto sigue funcionando el nav, no entiendo*/}
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
       <Footer />
       <ScrollToTopButton />
     </>
