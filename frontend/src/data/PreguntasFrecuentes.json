@@ -1,0 +1,31 @@
+[
+    {
+      "pregunta": "¿Qué es Blockchain?",
+      "respuesta": "Blockchain es una tecnología que permite registrar información de manera segura, descentralizada e inalterable.",
+      "link_texto": "Leer más",
+      "link_url": "https://aws.amazon.com/what-is/blockchain/?aws-products-all.sort-by=item.additionalFields.productNameLowercase&aws-products-all.sort-order=asc"
+    },
+    {
+      "pregunta": "¿Qué es UniBlock?",
+      "respuesta": "UniBlock es un proyecto universitario desarrollado en el contexto del curso INFO288: Sistemas Distribuidos. Su objetivo es modernizar los procesos de votación dentro de la comunidad universitaria y busca ser el futuro de las votaciones.",
+      "link_texto": "Leer más",
+      "link_url": "https://builtin.com/blockchain/blockchain-voting-future-elections"
+    },
+    {
+      "pregunta": "¿Cómo se garantiza la seguridad del voto?",
+      "respuesta": "El voto se almacena en una cadena de bloques, lo cual asegura que no pueda ser modificado una vez emitido, garantizando su integridad."
+    },
+    {
+      "pregunta": "¿Quiénes pueden votar?",
+      "respuesta": "Pueden votar estudiantes universitarios UACh, docentes y funcionarios, para elegir cargos internos como centro de alumnos, rector o en movilizaciones."
+    },
+    {
+      "pregunta": "¿Quiénes somos?",
+      "respuesta": "Somos 5 estudiantes de 9no semestre de Ingeniería Civil en Informática de la Universidad Austral de Chile."
+    },
+    {
+      "pregunta": "¿Cómo nace el proyecto?",
+      "respuesta": "Nace como una necesidad de validar votaciones y evitar las votaciones presenciales con baja participación. Además, busca reemplazar los formularios tipo Forms, que son fácilmente manipulables y poco profesionales."
+    }
+  ]
+  
