@@ -15,7 +15,7 @@ const Usuarios = () => {
         {facultades.map((facultad) => (
           <div
             key={facultad.id}
-            className="flex items-center justify-center bg-white py-4 px-2 shadow-md rounded-lg"
+            className="flex items-center justify-center bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition border"
           >
             <img
               src={facultad.imagen}
