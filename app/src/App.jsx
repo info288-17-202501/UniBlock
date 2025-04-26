@@ -2,17 +2,18 @@ import { Routes, Route } from 'react-router-dom'
 import Home from '@pages/Home'
 import Header from '@components/Header'
 import Footer from './components/Footer';
+import Auth from '@pages/Auth';
 import ScrollToTopButton from './components/ScrollToTopButton';
-
 
 
 function App() {
   return (
     <>
-    {/* <Header /> Con o sin esto sigue funcionando el nav, no entiendo*/}
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
+      {/* <Header /> Con o sin esto sigue funcionando el nav, no entiendo*/}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
       <Footer />
       <ScrollToTopButton />
     </>
