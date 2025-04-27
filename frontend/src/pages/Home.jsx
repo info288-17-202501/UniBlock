@@ -1,61 +1,39 @@
 import React from 'react';
-import Header from '@components/Header';
+
+import Hero from "../components/Hero";
+import AcercaDe from '@components/AcercaDe';
+import ComoVotar from '@components/ComoVotar';
+import ProximasVotaciones from '@components/ProximasVotaciones';
+import Noticias from '@components/Noticias';
 import PreguntasFrecuentes from '@components/PreguntasFrecuentes';
-import Noticias from '../components/Noticias';
-import Usuarios from '../components/Usuarios';
+import Usuarios from '@components/Usuarios';
 
 
 const Home = () => {
 	return (
 		<>
-			<Header />
 			<div className="home p-10 xl:p-20">
-				{/* <section className='hero h-screen lg:h-[90vh] flex items-center'>
-					<div>
-						<h1 className='text-6xl xl:text-7xl'>UniBlock</h1>
-						<p className='py-10 xl:max-w-150'>Bienvenido al sistema de votación basado en blockchain. Aquí puedes participar en elecciones de manera segura y transparente.</p>
-						<div className='lg:py-10'>
-							<a href="/login" className="btn border-1 rounded-xl px-6 py-3 ">Votar</a>
-						</div>
-					</div>
-				</section> */}
-				<section className='hero h-screen lg:h-[90vh] flex items-center'>
-					<div className='container mx-auto flex flex-col lg:flex-row items-center justify-between gap-10'>
-						<div className='max-w-xl'>
-						<h1 className='text-6xl xl:text-7xl'>UniBlock</h1>
-						<p className='py-10 xl:max-w-150'>
-							Bienvenido al sistema de votación basado en blockchain. Aquí puedes participar en elecciones de manera segura y transparente.
-						</p>
-						<div className='lg:py-10'>
-							<a href="/login" className="btn border-1 rounded-xl px-6 py-3 ">Votar</a>
-						</div>
-						</div>
-
-						<div className='w-full lg:w-1/2'>
-						<img src="/Fondos/fondo.avif" alt="Imagen votación blockchain" className="w-full h-auto" />
-						</div>
-					</div>
+				<section id="hero">
+					<Hero />
 				</section>
 
-				
-				<section id='acerca-de'>
-					<h1>Acerca de</h1>
+				<section id='acerca-de' className="mt-24">
+					<AcercaDe />
 				</section>
 
-				<section id='como-votar' className='my-10 lg:py-30'>
-					<h1>Cómo votar</h1>
-						<div className='flex flex-col justify-center items-center lg:flex-row gap-10 xl:gap-40'>
-						<div className='paso1 w-24 h-24  border-1 rounded-full p-10 flex items-center justify-center'>1</div>
-						<div className='paso2 w-24 h-24  border-1 rounded-full p-10 flex items-center justify-center'>2</div>
-						<div className='paso3 w-24 h-24  border-1 rounded-full p-10 flex items-center justify-center'>3</div>
-					</div>
+				<section id='como-votar' className="mt-24">
+					<ComoVotar />
 				</section>
 
-				<section id='noticias'>
+				<section id='proximas-votaciones' className="mt-24">
+					<ProximasVotaciones />
+				</section>
+
+				<section id='noticias' className="mt-24">
 					<Noticias />
 				</section>
 
-				<section id='preguntas-frecuentes'>
+				<section id='preguntas-frecuentes' className="mt-24">
 					<PreguntasFrecuentes />
 				</section>
 

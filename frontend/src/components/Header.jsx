@@ -53,6 +53,11 @@ const Header = () => {
               </a>
             </li>
             <li className="py-2 lg:py-0 text-center">
+              <a onClick={() => scrollToSection('proximas-votaciones')} className="cursor-pointer hover:text-gray-700">
+                Próximas votaciones
+              </a>
+            </li>
+            <li className="py-2 lg:py-0 text-center">
               <a onClick={() => scrollToSection('noticias')} className="cursor-pointer hover:text-gray-700">
                 Noticias
               </a>

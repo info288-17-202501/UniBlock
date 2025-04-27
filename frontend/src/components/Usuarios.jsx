@@ -4,7 +4,7 @@ import usuariosData from '../data/Usuarios.json';
 const Usuarios = () => {
   return (
     <section id="usuarios" className="bg-gray-50 py-16 px-6 text-center">
-      <h2 className="text-3xl font-bold mb-12 text-gray-800">Ellos confían en nosotros</h2>
+      <h2 className="text-2xl font-bold mb-6">Ellos confían en nosotros</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {usuariosData.map((item) => (
           <div

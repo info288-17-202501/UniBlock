@@ -3,7 +3,7 @@ import { HiOutlineShieldCheck, HiOutlineDocumentText } from 'react-icons/hi';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-200 text-gray-800 py-8 px-4">
+    <footer className="bg-gray-300 text-gray-800 py-8 px-4">
       <div className="flex flex-col items-center space-y-6">
 
         {/* Centro */}
