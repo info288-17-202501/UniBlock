@@ -1,0 +1,41 @@
+,,,,,,,,,,,,
+,Nombre de tabla:,Usuarios,,,,,,Nombre de tabla,Candidatos,,,
+,Descripción:,Almacena información de votantes y administradores.,,,,,,Descripción,Contiene los participantes en cada elección,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Nombre de campo,Tipo de dato,Tamaño,Descripción,Información adicional,,,Nombre de campo,Tipo de dato,Tamaño,Descripción,Información adicional
+,UUID,VARCHAR,36,Identificador único universal de la elección,"Generado automáticamente (ej: ""123e4567-e89b-12d3-a456-426614174000""",,,UUID,VARCHAR,36,Identificador único universal del candidato,Formato estándar UUID (ej: 550e8400-e29b-41d4-a716-446655440000)
+,RUT,VARCHAR,12,Identificación única del usuario,"Clave primaria, formato: 12.345.678-9",,,nombre,VARCHAR,100,Nombre completo del candidato,"Ej: ""María González Pérez"""
+,nombre,VARCHAR,100,Nombre completo del usuario,No nulo,,,descripción,text,-,"Biografía, propuestas o información relevante del candidato",
+,email,VARCHAR,255,Correo electrónico del usuario,"Único, no nulo",,,rut,VARCHAR,12,Rol Único Tributario (RUT) del candidato,
+,password,text,100,Contraseña encriptada,Debe almacenarse de forma segura (hash),,,email,VARCHAR,255,Correo electrónico institucional o de contacto,
+,rol,VARCHAR,20,"Rol del usuario (admin, cliente, etc.)",Valores predefinidos,,,,,,,
+,telefono,integer,12,Numero de telefono,123456789,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Nombre de tabla,Elecciones,,,,,,Nombre de tabla,Usuarios_permitidos,,,
+,Descripción,Registra los procesos electorales.,,,,,,Descripción,Controla acceso a elecciones específicas,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Nombre de campo,Tipo de dato,Tamaño,Descripción,Información adicional,,,Nombre de campo,Tipo de dato,Tamaño,Descripción,Información adicional
+,UUID,VARCHAR,36,Identificador único universal de la elección,"Generado automáticamente (ej: ""123e4567-e89b-12d3-a456-426614174000"")",,,UUID,VARCHAR,36,Identificador único universal de la elección,"Generado automáticamente (ej: ""123e4567-e89b-12d3-a456-426614174000"")"
+,titulo,VARCHAR,100,Nombre descriptivo de la elección,"Ej: ""Elecciones FEUACh 2025""",,,RUT,VARCHAR,12,Identificación única del usuario,"Clave primaria, formato: 12.345.678-9"
+,descripción,text,-,Detalles sobre el propósito y alcance de la elección,,,,nombre,VARCHAR,100,Nombre completo del usuario,No nulo
+,start_date,TIMESTAMP,-,Fecha y hora de inicio del proceso electoral,,,,email,VARCHAR,255,Correo electrónico del usuario,"Único, no nulo"
+,end_date,TIMESTAMP,-,Fecha y hora de cierre del proceso electoral,,,,,,,,
+,status,VARCHAR,20,Estado actual de la elección,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Nombre de tabla,Votos,,,,,,,,,,
+,Descripción,Guarda cada voto emitido con integridad blockchain,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,Nombre de campo,Tipo de dato,Tamaño,Descripción,Información adicional,,,,,,,
+,UUID,VARCHAR,36,Identificador único del voto,"Generado automáticamente (ej: ""123e4567-e89b-12d3-a456-426614174000"")",,,,,,,
+,date,TIMESTAMP,-,Fecha hora de inicio del voto,,,,,,,,
+,blockchain_hash,VARCHAR,100,Almacena el hash único de la transacción que registró el voto en la blockchain,,,,,,,,
