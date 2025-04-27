@@ -20,6 +20,67 @@ export function loginController(req, res) {
   res.status(200).json({ message: "Login successful" });
 }
 
+export function checkAuthController(req, res) {
+  // 1. Obtener el token de las cookies
+  const token = req.cookies.access_token; // Asegúrate que el nombre coincida con cómo guardas el token
+  
+  // 2. Verificar si el token existe
+  if (!token) {
+    return res.status(401).json({ 
+      authenticated: false,
+      message: "Acceso no autorizado - Token no proporcionado" 
+    });
+  }
+
+  try {
+    // 3. Verificar y decodificar el token JWT
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    
+    // 4. Responder con los datos del usuario autenticado
+    return res.status(200).json({
+      authenticated: true,
+      user: {
+        id: decoded.userId,
+        email: decoded.email,
+        // Agrega más datos del usuario según lo que incluyas en el token
+      }
+    });
+    
+  } catch (error) {
+    console.error('Error al verificar token:', error);
+    
+    // Manejar diferentes tipos de errores
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({ 
+        authenticated: false,
+        message: "Sesión expirada - Por favor inicie sesión nuevamente" 
+      });
+    }
+    
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({ 
+        authenticated: false,
+        message: "Token inválido - Acceso no autorizado" 
+      });
+    }
+    
+    return res.status(500).json({ 
+      authenticated: false,
+      message: "Error al verificar autenticación" 
+    });
+  }
+}
+
+
+export function logoutController(req, res) {
+  res.clearCookie('access_token', {
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  });
+  res.status(200).json({ message: 'Logout successful' });
+}
+
 export function registerController(req, res) {
   // const { name, email, password } = req.body;
 
