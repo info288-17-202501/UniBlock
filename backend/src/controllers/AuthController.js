@@ -1,8 +1,23 @@
-export function loginController(req, res) {
-  // const { email, password } = req.body;
+import jwt from 'jsonwebtoken';
 
+export function loginController(req, res) {
+  const { email } = req.body;
+
+  const userData = {
+    id: 123,
+    email,
+    role: "admin"
+  };
+
+  const token = jwt.sign(userData, process.env.SECRET_KEY, { expiresIn: "1h" });
+
+  res.cookie('access_token', token, {
+    httpOnly: true,
+    secure: false, // true solo si tienes HTTPS, false para localhost
+    sameSite: 'strict',
+    maxAge: 3600000
+  });
   res.status(200).json({ message: "Login successful" });
-  
 }
 
 export function registerController(req, res) {

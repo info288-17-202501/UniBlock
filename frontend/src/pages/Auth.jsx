@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useAuth from '../Hooks/useAuth'; // Asegúrate de importar el hook correctamente
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -8,6 +9,8 @@ const Auth = () => {
     password: '' 
   });
 
+  const { authenticate, loading, error, message } = useAuth(); // Usamos el hook
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -16,10 +19,10 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(isLogin ? 'Iniciando sesión...' : 'Registrando...', formData);
+    authenticate(formData.email, formData.password, isLogin); // Llamada al hook
   };
 
   const handleGoBack = () => {
-    // Lógica para volver atrás
     console.log('Volviendo atrás...');
     window.history.back();
   };

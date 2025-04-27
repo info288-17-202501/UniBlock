@@ -1,13 +1,23 @@
 import express from 'express';
 import cors from 'cors'; 
+import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 import { authRouter } from './src/routes/Auth.js'; 
 
 const app = express();
 const port = 3001;
+dotenv.config();
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:5173', // URL de tu frontend
+  credentials: true, // Permitir el uso de credenciales (como cookies)
+};
+
+app.use(cors(corsOptions)); // Usar CORS con las opciones configuradas
+
+
 app.use(express.json());
-
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
   res.send('Bienvenido a la página principal');
