@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 👈 importamos navigate
 
 const useAuth = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+  const navigate = useNavigate(); // 👈 lo usamos aquí
 
   const authenticate = async (email, password, isLogin) => {
     setLoading(true);
@@ -24,7 +26,13 @@ const useAuth = () => {
       const data = await response.json();
       if (response.ok) {
         setMessage(data.message);
-        console.log("Cookie set:", document.cookie); // Verifica si la cookie se guardó
+        console.log("Cookie set:", document.cookie);
+
+        // 👇 Redirigimos si el login fue correcto
+        if (isLogin) {
+          navigate('/admin/create-votation');
+          window.location.reload(); 
+        }
       } else {
         setError(data.message);
       }

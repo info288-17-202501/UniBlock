@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useAuth from '../Hooks/useAuth'; // Asegúrate de importar el hook correctamente
+import useAuth from '../Hooks/useAuth'; 
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -9,7 +9,7 @@ const Auth = () => {
     password: '' 
   });
 
-  const { authenticate, loading, error, message } = useAuth(); // Usamos el hook
+  const { authenticate, loading, error, message } = useAuth(); 
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,7 +19,7 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(isLogin ? 'Iniciando sesión...' : 'Registrando...', formData);
-    authenticate(formData.email, formData.password, isLogin); // Llamada al hook
+    authenticate(formData.email, formData.password, isLogin); 
   };
 
   const handleGoBack = () => {
@@ -29,7 +29,6 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
-      {/* Botón Volver con estilo atractivo */}
       <button 
         onClick={handleGoBack}
         className="absolute top-6 left-6 flex items-center space-x-1 py-2 px-4 rounded-md bg-white text-blue-600 hover:bg-blue-50 border border-blue-200 hover:border-blue-300 shadow-sm transition-all duration-200"
