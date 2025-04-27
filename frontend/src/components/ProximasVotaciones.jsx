@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
-
-// Simulamos que tienes un array de próximas votaciones
-const votaciones = [
-  {
-    titulo: 'Elección de Representantes 2025',
-    fechaInicio: new Date('2025-05-01T10:00:00'), // Puedes ajustar estas fechas
-  },
-  {
-    titulo: 'Votación Reforma de Estatutos',
-    fechaInicio: new Date('2025-06-15T12:00:00'),
-  },
-];
+import votacionesData from '../data/ProximasVotaciones.json'; // Ajusta el path según donde pongas el JSON
 
 const ProximasVotaciones = () => {
   const [tiemposRestantes, setTiemposRestantes] = useState([]);
-
+  
   useEffect(() => {
     const calcularTiempos = () => {
       const ahora = new Date().getTime();
-      const nuevosTiempos = votaciones.map((votacion) => {
-        const tiempoRestante = votacion.fechaInicio.getTime() - ahora;
-        return tiempoRestante;
+      const nuevosTiempos = votacionesData.map((votacion) => {
+        const fechaInicio = new Date(votacion.fechaInicio).getTime(); // Convertimos string a Date
+        return fechaInicio - ahora;
       });
       setTiemposRestantes(nuevosTiempos);
     };
@@ -46,9 +35,9 @@ const ProximasVotaciones = () => {
 
   return (
     <section id="proximas-votaciones">
-      <h2 className="text-3xl font-bold mb-6">Próximas votaciones</h2>
+      <h2 className="text-2xl font-bold mb-6">Próximas votaciones</h2>
       <div className="space-y-6">
-        {votaciones.map((votacion, index) => (
+        {votacionesData.map((votacion, index) => (
           <div key={index} className="p-4 border rounded-lg shadow-md">
             <h3 className="text-xl font-semibold mb-2">{votacion.titulo}</h3>
             <p className="text-gray-700">
