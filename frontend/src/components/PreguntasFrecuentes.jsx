@@ -17,7 +17,8 @@ const PreguntasFrecuentes = () => {
           <div key={index}>
             <button
               onClick={() => togglePregunta(index)}
-              className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer"
+              // className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer"
+              className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer text-[var(--color-text)]"
             >
               <span className="text-lg text-[var(--color-text)] font-medium">{item.pregunta}</span>
               {activeIndex === index ? (
