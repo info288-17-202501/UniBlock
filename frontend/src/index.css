@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&family=Merriweather:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 @import "tailwindcss";
 
 html {
@@ -9,20 +10,27 @@ body{
   transition: 300ms background-color ease-in-out;
 }
 
+@theme {
+  --font-title: 'Montserrat', serif;
+  --font-subtitle: 'Kanit', sans-serif;
+}
+
 :root {
   --color-background: #ffffff;
   --color-text: #111827;
   --color-text-secondary: #364153;
 
-  --button-background-color: #374151;
-  --button-border-color: #3b3b3b;
+  --button-background-color: #313131;
+  --button-background-color-hover: #494949;
+  --button-border-color: #4b4b4b;
   --button-text-color: #ffffff;
+
+  --navbar-border-color: #e5e7eb;
 
   --border-color: #374151;
 
   --footer-background-color: #212121;
   --footer-text-color: #eeeeee;
-  
 }
 
 .dark {
@@ -31,11 +39,15 @@ body{
   --color-text-secondary: #d1d1d1;
   
   --button-background-color: #f3f4f6;
+  --button-background-color-hover: #c8c8c8;
   --button-border-color: #eeeeee;
   --button-text-color: #111827;
   
+  --navbar-border-color: #374151;
+
   --border-color: #e5e7eb;
 
   --footer-background-color: #FFFFFF;
   --footer-text-color: #212121;
+
 }
