@@ -38,15 +38,27 @@ const Header = () => {
             <img src="/logo.png" alt="Logo de la página" className="h-10 w-auto" />
           </a>
 
-          {/* Menú hamburguesa (solo en móvil) */}
-          <div className="lg:hidden">
+          {/* Botones a la derecha */}
+          <div className="flex items-center gap-4">
+            {/* Botón modo oscuro (solo visible en móvil) */}
             <button
-              onClick={toggleMenu}
-              className="text-gray-700 focus:outline-none"
-              aria-label="Toggle menu"
+              onClick={toggleDarkMode}
+              className="text-gray-700 dark:text-gray-300 focus:outline-none lg:hidden"
+              aria-label="Toggle dark mode"
             >
-              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
             </button>
+
+            {/* Menú hamburguesa */}
+            <div className="lg:hidden">
+              <button
+                onClick={toggleMenu}
+                className="text-gray-700 dark:text-gray-300 focus:outline-none"
+                aria-label="Toggle menu"
+              >
+                {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
 
           {/* Menú de navegación */}
@@ -90,9 +102,18 @@ const Header = () => {
                 <User className="w-6 h-6" />
               </a>
             </li>
-            <li className="py-2 lg:py-0 text-center">
+            {/*<li className="py-2 lg:py-0 text-center">
               <button onClick={toggleDarkMode} className="flex w-full items-center justify-center cursor-pointer font-subtitle hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
                 {darkMode ? <Sun className="w-6 h-6" /> : <Moon  className="w-6 h-6" />}
+              </button>
+            </li> */}
+            
+            {/* Botón modo oscuro (solo visible en PC) */}
+            <li className="hidden lg:block">
+              <button
+                onClick={toggleDarkMode}
+                className="flex w-full items-center justify-center cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]" aria-label="Toggle dark mode">
+                {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
               </button>
             </li>
           </ul>
