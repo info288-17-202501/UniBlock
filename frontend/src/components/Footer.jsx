@@ -1,5 +1,5 @@
 import React from 'react';
-import { HiOutlineShieldCheck, HiOutlineDocumentText, HiOutlineMail, HiOutlineUserGroup } from 'react-icons/hi'; // <-- Agregamos el ícono de contacto (mail)
+import { HiOutlineShieldCheck, HiOutlineDocumentText, HiOutlineUserGroup } from 'react-icons/hi'; // <-- Agregamos el ícono de contacto (mail)
 
 const Footer = () => {
   return (
@@ -13,36 +13,23 @@ const Footer = () => {
         </div>
 
         {/* Lados */}
-        <div className="flex justify-around w-full max-w-4xl text-sm">
+        <div className="flex flex-col md:flex-row justify-around items-center w-full max-w-4xl text-sm space-y-4 md:space-y-0">
           {/* Izquierda */}
-          <div className="flex flex-col items-center space-y-2">
-            <div className="flex items-center gap-2 text-[var(--color-text)]">
-              <HiOutlineShieldCheck className="text-xl" />
-              <a href="#" className="hover:underline text-[var(--color-text)]">Políticas de privacidad</a>
-            </div>
+          <div className="flex items-center gap-2 text-[var(--color-text)]">
+            <HiOutlineShieldCheck className="text-xl" />
+            <a href="#" className="hover:underline text-[var(--color-text)]">Políticas de privacidad</a>
           </div>
 
           {/* Centro */}
-          <div className="flex flex-col items-center space-y-2">
-            <div className="flex items-center gap-2 text-[var(--color-text)]">
-              <HiOutlineDocumentText className="text-xl text-[var(--color-text)]" />
-              <a href="#" className="hover:underline text-[var(--color-text)]">Términos y condiciones</a>
-            </div>
+          <div className="flex items-center gap-2 text-[var(--color-text)]">
+            <HiOutlineDocumentText className="text-xl" />
+            <a href="#" className="hover:underline text-[var(--color-text)]">Términos y condiciones</a>
           </div>
-          {/* Nosotros - Centro */}
-          <div className="flex flex-col items-center space-y-2">
-            <div className="flex items-center gap-2 text-[var(--color-text)]">
-              <HiOutlineUserGroup className="text-xl" /> {/* Ícono de Nosotros */}
-              <a href="#" className="hover:underline text-[var(--color-text)]">Nosotros</a>
-            </div>
-          </div>
-          
+
           {/* Derecha */}
-          <div className="flex flex-col items-center space-y-2">
-            <div className="flex items-center gap-2 text-[var(--color-text)]">
-              <HiOutlineMail className="text-xl text-[var(--color-text)]" /> {/* Ícono de correo */}
-              <a href="#" className="hover:underline text-[var(--color-text)]">Contacto</a>
-            </div>
+          <div className="flex items-center gap-2 text-[var(--color-text)]">
+            <HiOutlineUserGroup className="text-xl" />
+            <a href="#" className="hover:underline text-[var(--color-text)]">Nosotros</a>
           </div>
         </div>
 
