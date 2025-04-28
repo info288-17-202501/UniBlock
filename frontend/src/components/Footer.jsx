@@ -1,10 +1,9 @@
 import React from 'react';
-import { HiOutlineShieldCheck, HiOutlineDocumentText } from 'react-icons/hi';
+import { HiOutlineShieldCheck, HiOutlineDocumentText, HiOutlineMail, HiOutlineUserGroup } from 'react-icons/hi'; // <-- Agregamos el ícono de contacto (mail)
 
 const Footer = () => {
   return (
-    <footer className="border-y text-gray-800 py-8 px-4">
-    
+    <footer className="border-t border-b border-[var(--color-border)] text-[var(--color-text)] py-8 px-4">
       <div className="flex flex-col items-center space-y-6">
 
         {/* Centro */}
@@ -23,14 +22,30 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Derecha */}
+          {/* Centro */}
           <div className="flex flex-col items-center space-y-2">
             <div className="flex items-center gap-2 text-[var(--color-text)]">
               <HiOutlineDocumentText className="text-xl text-[var(--color-text)]" />
-              <a href="#" className="hover:underline">Términos y condiciones</a>
+              <a href="#" className="hover:underline text-[var(--color-text)]">Términos y condiciones</a>
+            </div>
+          </div>
+          {/* Nosotros - Centro */}
+          <div className="flex flex-col items-center space-y-2">
+            <div className="flex items-center gap-2 text-[var(--color-text)]">
+              <HiOutlineUserGroup className="text-xl" /> {/* Ícono de Nosotros */}
+              <a href="#" className="hover:underline text-[var(--color-text)]">Nosotros</a>
+            </div>
+          </div>
+          
+          {/* Derecha */}
+          <div className="flex flex-col items-center space-y-2">
+            <div className="flex items-center gap-2 text-[var(--color-text)]">
+              <HiOutlineMail className="text-xl text-[var(--color-text)]" /> {/* Ícono de correo */}
+              <a href="#" className="hover:underline text-[var(--color-text)]">Contacto</a>
             </div>
           </div>
         </div>
+
       </div>
     </footer>
   );

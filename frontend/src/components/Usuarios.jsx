@@ -30,9 +30,9 @@ const Usuarios = () => {
   const usuariosFiltrados = usuariosData[modo];
 
   return (
-    <section id="usuarios" className="py-8 px-6 text-center">
-      <h2 className="text-2xl text-[var(--color-text)] font-bold mb-6">
-        Ellos confían en nosotros
+    <section id="usuarios" className="py-8 px-6 text-center mt-12">
+      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">
+        Ellos confían en UniBlock
       </h2>
       <div className="grid  grid-cols-2 md:grid-cols-4 gap-10">
         {usuariosFiltrados.map((item) => (

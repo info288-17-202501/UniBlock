@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { User, Menu, X } from 'lucide-react';
+import { User, Menu, X, Sun, Moon} from 'lucide-react';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -56,43 +56,43 @@ const Header = () => {
             } lg:flex`}
           >
             <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('acerca-de')} className="cursor-pointer hover:text-gray-700">
+              <a onClick={() => scrollToSection('acerca-de')} className="cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
                 Acerca de
               </a>
             </li>
             <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('como-votar')} className="cursor-pointer hover:text-gray-700">
+              <a onClick={() => scrollToSection('como-votar')} className="cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
                 Cómo votar
               </a>
             </li>
             <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('proximas-votaciones')} className="cursor-pointer hover:text-gray-700">
+              <a onClick={() => scrollToSection('proximas-votaciones')} className="cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
                 Próximas votaciones
               </a>
             </li>
             <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('noticias')} className="cursor-pointer hover:text-gray-700">
+              <a onClick={() => scrollToSection('noticias')} className="cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
                 Noticias
               </a>
             </li>
             <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('preguntas-frecuentes')} className="cursor-pointer hover:text-gray-700">
+              <a onClick={() => scrollToSection('preguntas-frecuentes')} className="cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
                 Preguntas frecuentes
               </a>
             </li>
             <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('usuarios')} className="cursor-pointer hover:text-gray-700">
+              <a onClick={() => scrollToSection('usuarios')} className="cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
                 Usuarios
               </a>
             </li>
             <li className="py-2 lg:py-0 text-center">
-              <a href="/auth" className="flex items-center justify-center cursor-pointer hover:text-gray-700">
+              <a href="/auth" className="flex items-center justify-center cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
                 <User className="w-6 h-6" />
               </a>
             </li>
             <li className="py-2 lg:py-0 text-center">
-              <button onClick={toggleDarkMode} className="flex w-full items-center justify-center cursor-pointer hover:text-gray-700">
-                {darkMode ? '☀️' : '🌙'}
+              <button onClick={toggleDarkMode} className="flex w-full items-center justify-center cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
+                {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
               </button>
             </li>
           </ul>
