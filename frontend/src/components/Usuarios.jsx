@@ -1,21 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import usuariosData from '../data/Usuarios.json';
 
+function useDarkClassListener() {
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains('dark')
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+
+    // Observa los cambios en la clase del documento
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+
+    // Cleanup
+    return () => observer.disconnect();
+  }, []);
+
+  return isDark;
+}
+
 const Usuarios = () => {
+  const isDark = useDarkClassListener();
+  const modo = isDark ? 'claro' : 'oscuro';
+  const usuariosFiltrados = usuariosData[modo];
+
   return (
-    <section id="usuarios" className="bg-gray-50 py-16 px-6 text-center">
-      <h2 className="text-2xl font-bold mb-6">Ellos confían en nosotros</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-        {usuariosData.map((item) => (
+    <section id="usuarios" className="py-8 px-6 text-center">
+      <h2 className="text-2xl text-[var(--color-text)] font-bold mb-6">
+        Ellos confían en nosotros
+      </h2>
+      <div className="grid  grid-cols-2 md:grid-cols-4 gap-10">
+        {usuariosFiltrados.map((item) => (
+          <div key={item.id}>
           <div
             key={item.id}
-            className="flex items-center justify-center bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition border"
+            className="flex items-center justify-center border-[var(--border-color)] p-4 rounded-lg shadow-lg hover:shadow-xl transition border"
           >
-            <img
-              src={item.imagen}
-              alt="Logo"
-              className="max-h-24 w-auto object-contain"
-            />
+              <img
+                src={item.imagen}
+                alt="Logo"
+                className="max-h-24 w-auto object-contain"
+              />
+            </div>
           </div>
         ))}
       </div>
@@ -24,4 +55,3 @@ const Usuarios = () => {
 };
 
 export default Usuarios;
-

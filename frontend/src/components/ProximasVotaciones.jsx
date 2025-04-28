@@ -35,12 +35,12 @@ const ProximasVotaciones = () => {
 
   return (
     <section id="proximas-votaciones">
-      <h2 className="text-2xl font-bold mb-6">Próximas votaciones</h2>
+      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">Próximas votaciones</h2>
       <div className="space-y-6">
         {votacionesData.map((votacion, index) => (
-          <div key={index} className="p-4 border rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-2">{votacion.titulo}</h3>
-            <p className="text-gray-700">
+          <div key={index} className="p-4 border border-[var(--border-color)] rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold text-[var(--color-text)] mb-2">{votacion.titulo}</h3>
+            <p className="text-[var(--color-text-secondary)] mb-2">
               Comienza en: <span className="font-mono">{formatearTiempo(tiemposRestantes[index])}</span>
             </p>
           </div>

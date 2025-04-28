@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { User, Menu, X } from 'lucide-react';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false); 
+
+  useEffect(() => {
+    if(darkMode){
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode])
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -18,7 +31,7 @@ const Header = () => {
   return (
     <header>
       {/* Nav con borde y fondo blanco */}
-      <nav className="navbar bg-white p-5 xl:px-20 xl:py-5 fixed w-full border-b-2 border-gray-300">
+      <nav className="navbar bg-[var(--color-background)] p-5 xl:px-20 xl:py-5 fixed w-full border-b-2 border-gray-300 transition-all duration-300 ease">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="logo">
@@ -38,7 +51,7 @@ const Header = () => {
 
           {/* Menú de navegación */}
           <ul
-            className={`flex flex-col lg:flex-row lg:space-x-10 absolute lg:static top-16 left-0 w-full lg:w-auto bg-white lg:bg-transparent transition-all duration-300 ease-in-out ${
+            className={`flex flex-col lg:flex-row lg:space-x-10 absolute lg:static top-16 left-0 w-full lg:w-auto bg-[var(--color-background)] text-[var(--color-text)] lg:bg-transparent transition-all duration-300 ease ${
               menuOpen ? 'block' : 'hidden'
             } lg:flex`}
           >
@@ -76,6 +89,11 @@ const Header = () => {
               <a href="/auth" className="flex items-center justify-center cursor-pointer hover:text-gray-700">
                 <User className="w-6 h-6" />
               </a>
+            </li>
+            <li className="py-2 lg:py-0 text-center">
+              <button onClick={toggleDarkMode} className="flex w-full items-center justify-center cursor-pointer hover:text-gray-700">
+                {darkMode ? '☀️' : '🌙'}
+              </button>
             </li>
           </ul>
         </div>
