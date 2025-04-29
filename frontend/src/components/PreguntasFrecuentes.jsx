@@ -10,7 +10,7 @@ const PreguntasFrecuentes = () => {
   };
 
   return (
-    <section id="preguntas-frecuentes">
+    <section id="preguntas-frecuentes" className='mt-24'>
       <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">Preguntas frecuentes</h2>
       <div className="space-y-4">
         {preguntas.map((item, index) => (

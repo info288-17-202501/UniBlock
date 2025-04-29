@@ -135,7 +135,7 @@ const Noticias = () => {
   const noticiasVisibles = noticias.slice((paginaActual - 1) * noticiasPorPagina, paginaActual * noticiasPorPagina);
 
   return (
-    <section id="noticias">
+    <section id="noticias" className='mt-24'>
       <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">Noticias</h2>
       {/* Noticias */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

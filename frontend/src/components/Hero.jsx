@@ -2,10 +2,10 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section className="hero h-screen lg:h-[90vh] flex items-center">
+    <section id="hero" className="hero h-screen lg:h-[90vh] flex items-center">
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
         <div className="max-w-xl">
-          <h1 className="text-6xl xl:text-7xl font-bold filter drop-shadow-[0_6px_6px_rgba(0,0,0,0.2)] text-[var(--color-text)] font-title ">UniBlock</h1>
+          <h1 className="text-6xl xl:text-7xl font-bold filter drop-shadow-[0_6px_6px_rgba(0,0,0,0.2)] z-0 text-[var(--color-text)] font-title ">UniBlock</h1>
           <p className="py-10 xl:max-w-[600px] text-[var(--color-text-secondary)] font-subtitle ">
             Bienvenido al sistema de votación basado en blockchain. Aquí puedes participar en elecciones de manera segura y transparente.
           </p>

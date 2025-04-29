@@ -22,6 +22,7 @@ const Header = () => {
   // Función para realizar el scroll con offset
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
+    setMenuOpen(false); // Cerrar el menú al hacer scroll
     window.scrollTo({
       top: element.offsetTop - 80, // Ajuste de offset según la altura del navbar
       behavior: 'smooth',
@@ -31,7 +32,7 @@ const Header = () => {
   return (
     <header>
       {/* Nav con borde y fondo blanco */}
-      <nav className="navbar bg-[var(--color-background)] p-5 xl:px-20 xl:py-5 fixed w-full border-b-2 border-[var(--navbar-border-color)] transition-all duration-300 ease">
+      <nav className="navbar bg-[var(--color-background)] p-5 xl:px-20 xl:py-5 fixed w-full border-b-2 border-[var(--navbar-border-color)] transition-transform-all duration-300 ease z-1">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="logo">
@@ -39,11 +40,11 @@ const Header = () => {
           </a>
 
           {/* Botones a la derecha */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             {/* Botón modo oscuro (solo visible en móvil) */}
             <button
               onClick={toggleDarkMode}
-              className="text-gray-700 dark:text-gray-300 focus:outline-none lg:hidden"
+              className="text-[var(--color-text)] focus:outline-none lg:hidden "
               aria-label="Toggle dark mode"
             >
               {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
@@ -53,7 +54,7 @@ const Header = () => {
             <div className="lg:hidden">
               <button
                 onClick={toggleMenu}
-                className="text-gray-700 dark:text-gray-300 focus:outline-none"
+                className="focus:outline-none text-[var(--color-text)] flex items-center"
                 aria-label="Toggle menu"
               >
                 {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -63,56 +64,59 @@ const Header = () => {
 
           {/* Menú de navegación */}
           <ul
-            className={`flex flex-col lg:flex-row lg:space-x-10 absolute lg:static top-16 left-0 w-full lg:w-auto bg-[var(--color-background)] text-[var(--color-text)] lg:bg-transparent transition-all duration-300 ease ${
-              menuOpen ? 'block' : 'hidden'
-            } lg:flex`}
+            className={`flex flex-col transition-[width] duration-300 h-[100dvh] 
+              lg:flex-row lg:space-x-10 absolute lg:static top-20.5 left-0 
+              overflow-hidden bg-[var(--color-background)] text-[var(--color-text)] 
+              lg:bg-transparent ease-in-out lg:h-auto
+              ${menuOpen ? 'w-full' : 'w-0'} 
+              lg:w-auto lg:overflow-visible`}
           >
-            <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('acerca-de')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
+            <li className="py-2 lg:py-0 text-center hover:scale-[1.1] will-change-transform transition-transform duration-200">
+              <a onClick={() => scrollToSection('acerca-de')} className="cursor-pointer font-subtitle">
                 Acerca de
               </a>
             </li>
-            <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('como-votar')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
+            <li className="py-2 lg:py-0 text-center  hover:scale-[1.1] will-change-transform transition-transform duration-200">
+              <a onClick={() => scrollToSection('como-votar')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] ">
                 Cómo votar
               </a>
             </li>
-            <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('proximas-votaciones')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
+            <li className="py-2 lg:py-0 text-center  hover:scale-[1.1] will-change-transform transition-transform duration-200">
+              <a onClick={() => scrollToSection('proximas-votaciones')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] ">
                 Próximas votaciones
               </a>
             </li>
-            <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('noticias')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
+            <li className="py-2 lg:py-0 text-center  hover:scale-[1.1] will-change-transform transition-transform duration-200">
+              <a onClick={() => scrollToSection('noticias')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] ">
                 Noticias
               </a>
             </li>
-            <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('preguntas-frecuentes')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
+            <li className="py-2 lg:py-0 text-center  hover:scale-[1.1] will-change-transform transition-transform duration-200">
+              <a onClick={() => scrollToSection('preguntas-frecuentes')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] ">
                 Preguntas frecuentes
               </a>
             </li>
-            <li className="py-2 lg:py-0 text-center">
-              <a onClick={() => scrollToSection('usuarios')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
+            <li className="py-2 lg:py-0 text-center  hover:scale-[1.1] will-change-transform transition-transform duration-200">
+              <a onClick={() => scrollToSection('usuarios')} className="cursor-pointer font-subtitle hover:text-[var(--color-text)] ">
                 Usuarios
               </a>
             </li>
-            <li className="py-2 lg:py-0 text-center">
-              <a href="/auth" className="flex items-center justify-center cursor-pointer font-subtitle hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
+            <li className="py-2 lg:py-0 text-center  hover:scale-[1.1] will-change-transform transition-transform duration-200">
+              <a href="/auth" className="flex items-center justify-center cursor-pointer font-subtitle hover:text-[var(--color-text)] ">
                 <User className="w-6 h-6" />
               </a>
             </li>
             {/*<li className="py-2 lg:py-0 text-center">
-              <button onClick={toggleDarkMode} className="flex w-full items-center justify-center cursor-pointer font-subtitle hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]">
+              <button onClick={toggleDarkMode} className="flex w-full items-center justify-center cursor-pointer font-subtitle hover:text-[var(--color-text)] ">
                 {darkMode ? <Sun className="w-6 h-6" /> : <Moon  className="w-6 h-6" />}
               </button>
             </li> */}
             
             {/* Botón modo oscuro (solo visible en PC) */}
-            <li className="hidden lg:block">
+            <li className="hidden lg:block  hover:scale-[1.1] will-change-transform transition-transform duration-200">
               <button
                 onClick={toggleDarkMode}
-                className="flex w-full items-center justify-center cursor-pointer hover:text-[var(--color-text)] dark:hover:text-[var(--color-text)]" aria-label="Toggle dark mode">
+                className="flex w-full items-center justify-center cursor-pointer hover:text-[var(--color-text)] " aria-label="Toggle dark mode">
                 {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
               </button>
             </li>

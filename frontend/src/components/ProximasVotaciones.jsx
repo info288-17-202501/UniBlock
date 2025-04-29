@@ -34,7 +34,7 @@ const ProximasVotaciones = () => {
   };
 
   return (
-    <section id="proximas-votaciones">
+    <section id="proximas-votaciones" className='mt-24'>
       <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">Próximas votaciones</h2>
       <div className="space-y-6">
         {votacionesData.map((votacion, index) => (

@@ -20,7 +20,6 @@ function useDarkClassListener() {
     // Cleanup
     return () => observer.disconnect();
   }, []);
-
   return isDark;
 }
 
