@@ -10,24 +10,25 @@ const PreguntasFrecuentes = () => {
   };
 
   return (
-    <section id="preguntas-frecuentes">
-      <h2 className="text-2xl font-bold mb-6">Preguntas frecuentes</h2>
+    <section id="preguntas-frecuentes" className='mt-24'>
+      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">Preguntas frecuentes</h2>
       <div className="space-y-4">
         {preguntas.map((item, index) => (
           <div key={index}>
             <button
               onClick={() => togglePregunta(index)}
-              className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer"
+              // className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer"
+              className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer text-[var(--color-text)]"
             >
-              <span className="text-lg font-medium">{item.pregunta}</span>
+              <span className="text-lg text-[var(--color-text)] font-medium">{item.pregunta}</span>
               {activeIndex === index ? (
-                <ChevronUp className="w-5 h-5" />
+                <ChevronUp className="w-5 h-5 text-[var(--color-text)]"/>
               ) : (
-                <ChevronDown className="w-5 h-5" />
+                <ChevronDown className="w-5 h-5 text-[var(--color-text)]"/>
               )}
             </button>
             {activeIndex === index && (
-              <div className="pl-1 pb-2 text-gray-700">
+              <div className="pl-1 pb-2 text-[var(--color-text-secondary)]">
                 {item.respuesta}
                 {item.link_url && item.link_texto && (
                   <>

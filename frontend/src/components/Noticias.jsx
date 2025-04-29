@@ -32,7 +32,7 @@ const noticias = [
           label: 'Votos',
           data: [250, 180, 120],
           borderColor: '#36A2EB',
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          backgroundColor: 'rgba(255, 255, 255, 0.2)',
           fill: true,
         },
       ],
@@ -135,16 +135,17 @@ const Noticias = () => {
   const noticiasVisibles = noticias.slice((paginaActual - 1) * noticiasPorPagina, paginaActual * noticiasPorPagina);
 
   return (
-    <section id="noticias">
-      <h2 className="text-2xl font-bold mb-6">Noticias</h2>
+    <section id="noticias" className='mt-24'>
+      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">Noticias</h2>
       {/* Noticias */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {noticiasVisibles.map((item, index) => (
-          <div key={index} className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition">
+          // <div key={index} className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition">
+          <div key={index} className="p-4 border border-[var(--border-color)] rounded-lg shadow-lg hover:shadow-xl transition">
             <div className="pb-4">
-              <h3 className="text-xl font-semibold">{item.titulo}</h3>
+              <h3 className="text-xl text-[var(--color-text)] font-semibold">{item.titulo}</h3>
             </div>
-            <p className="text-gray-700">{item.descripcion}</p>
+            <p className="text-[var(--color-text-secondary)]">{item.descripcion}</p>
             <div className="py-4">
               {item.grafico.type === 'bar' && <Bar data={item.grafico} options={{ responsive: true }} />}
               {item.grafico.type === 'line' && <Line data={item.grafico} options={{ responsive: true }} />}
@@ -168,7 +169,7 @@ const Noticias = () => {
           >
             Anterior
           </button>
-          <span className="text-lg font-semibold">{paginaActual} / {totalPaginas}</span>
+          <span className="text-lg text-[var(--color-text)] font-semibold">{paginaActual} / {totalPaginas}</span>
           <button
             onClick={() => cambiarPagina(paginaActual + 1)}
             className="btn border-2 border-gray-500 text-gray-500 rounded-full px-6 py-3 hover:bg-gray-500 hover:text-white"

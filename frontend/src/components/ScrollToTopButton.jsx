@@ -23,7 +23,7 @@ const ScrollToTopButton = () => {
     isVisible && (
       <button
         onClick={scrollToTop}
-        className="fixed bottom-4 right-4 bg-gray-700 text-white p-2 rounded-full shadow-md hover:bg-gray-900 transition-all z-50 flex items-center justify-center"
+        className="fixed bottom-4 right-4 bg-[var(--button-background-color)] text-[var(--button-text-color)] p-2 rounded-full shadow-md hover:bg-[var(--button-background-color-hover)] transform hover:scale-[1.1] will-change-transform transition-transform duration-200 transition-all z-50 flex items-center justify-center"
         style={{ width: '35px', height: '35px' }}
         aria-label="Subir"
       >

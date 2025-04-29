@@ -2,17 +2,17 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section className="hero h-screen lg:h-[90vh] flex items-center">
+    <section id="hero" className="hero h-screen lg:h-[90vh] flex items-center">
       <div className="container mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
         <div className="max-w-xl">
-          <h1 className="text-6xl xl:text-7xl font-bold">UniBlock</h1>
-          <p className="py-10 xl:max-w-[600px] text-gray-700">
+          <h1 className="text-6xl xl:text-7xl font-bold filter drop-shadow-[0_6px_6px_rgba(0,0,0,0.2)] z-0 text-[var(--color-text)] font-title ">UniBlock</h1>
+          <p className="py-10 xl:max-w-[600px] text-[var(--color-text-secondary)] font-subtitle ">
             Bienvenido al sistema de votación basado en blockchain. Aquí puedes participar en elecciones de manera segura y transparente.
           </p>
           <div className="lg:py-10">
             <a
-              href="/login"
-              className="btn border border-gray-300 rounded-xl px-6 py-3 hover:bg-gray-100 transition"
+              href="/auth"
+              className="btn border font-bold border-[var(--button-border-color)] bg-[var(--button-background-color)] text-[var(--button-text-color)] rounded-xl px-10 py-3 shadow-[0_4px_6px_rgba(0,0,0,0.7)] hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.9)] hover:bg-[var(--button-background-color-hover)] transition"
             >
               Votar
             </a>
