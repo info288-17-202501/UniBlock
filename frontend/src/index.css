@@ -7,7 +7,7 @@ html {
 
 body{
   background-color: var(--color-background);
-  transition: 300ms background-color ease-in-out;
+  transition: 300ms background-color ease;
 }
 
 @theme {

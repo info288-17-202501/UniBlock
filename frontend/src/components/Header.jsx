@@ -64,10 +64,10 @@ const Header = () => {
 
           {/* Menú de navegación */}
           <ul
-            className={`flex flex-col transition-[width] duration-300 h-[100dvh] 
+            className={`flex flex-col transition-[width_400ms_ease-in-out,background-color_300ms_ease] h-[100dvh] 
               lg:flex-row lg:space-x-10 absolute lg:static top-20.5 left-0 
               overflow-hidden bg-[var(--color-background)] text-[var(--color-text)] 
-              lg:bg-transparent ease-in-out lg:h-auto
+              lg:bg-transparent lg:h-auto
               ${menuOpen ? 'w-full' : 'w-0'} 
               lg:w-auto lg:overflow-visible`}
           >

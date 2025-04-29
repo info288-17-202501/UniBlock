@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Auth from '@pages/Auth';
 import ScrollToTopButton from './components/ScrollToTopButton';
 
+
 function App() {
   return (
     <>
