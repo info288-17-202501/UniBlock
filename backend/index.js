@@ -4,9 +4,9 @@ import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import { authRouter } from './src/routes/Auth.js'; 
 
+dotenv.config();
 const app = express();
 const port = 3001;
-dotenv.config();
 
 const corsOptions = {
   origin: 'http://localhost:5173', // URL de tu frontend
@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 });
 
 
+// ENDPOINTS
 app.use("/api/auth", authRouter);
 
 

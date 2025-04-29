@@ -1,4 +1,6 @@
 import jwt from 'jsonwebtoken';
+import { sendVerificationCode } from '../config/mailer.js';
+import redisClient  from '../config/redisConnect.js';
 
 export function loginController(req, res) {
   const { email } = req.body;
@@ -87,15 +89,31 @@ export function registerController(req, res) {
   res.status(201).json({ message: "User registered successfully" });
 }
 
-export function sendOTPController(req, res) {
-  // const { email } = req.body;
+export async function sendOTPController(req, res) {
+  const { email } = req.body;
+  const code = Math.floor(10000 + Math.random() * 90000).toString();
 
+  await redisClient.set(`otp:${email}`, code, 'EX', 300);
+
+  await sendVerificationCode(email, code);
+ 
+  const sent = sendVerificationCode(email, code);
+  if (!sent) {
+    return res.status(500).json({ message: "Error sending OTP" });
+  }
   res.status(200).json({ message: "OTP sent successfully" });
 }
 
 export function verifyOTPController(req, res) {
-  // const { email, otp } = req.body;
-
+  const { email, otp } = req.body;
+  const storedOTP = redisClient.get(`otp:${email}`);
+  if (!storedOTP) {
+    return res.status(400).json({ message: "OTP expired or not found" });
+  }
+  if (storedOTP !== otp) {
+    return res.status(400).json({ message: "Invalid OTP" });
+  }
+  redisClient.del(`otp:${email}`); 
   res.status(200).json({ message: "OTP verified successfully" });
 }
 
