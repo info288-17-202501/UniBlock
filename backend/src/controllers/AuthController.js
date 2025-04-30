@@ -1,25 +1,53 @@
 import jwt from 'jsonwebtoken';
 import { sendVerificationCode } from '../config/mailer.js';
 import redisClient  from '../config/redisConnect.js';
+import bcrypt from 'bcrypt';
+import pool from '../config/postgresConnect.js';
 
-export function loginController(req, res) {
-  const { email } = req.body;
+export async function loginController(req, res) {
+  const { email, password } = req.body;
 
-  const userData = {
-    id: 123,
-    email,
-    role: "admin"
-  };
+  try {
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email y contraseña son requeridos" });
+    }
 
-  const token = jwt.sign(userData, process.env.SECRET_KEY, { expiresIn: "1h" });
+    const userResult = await pool.query(
+      'SELECT * FROM users WHERE email = $1',
+      [email]
+    );
 
-  res.cookie('access_token', token, {
-    httpOnly: true,
-    secure: false, // true solo si tienes HTTPS, false para localhost
-    sameSite: 'strict',
-    maxAge: 3600000
-  });
-  res.status(200).json({ message: "Login successful" });
+    if (userResult.rows.length === 0) {
+      return res.status(401).json({ message: "Credenciales inválidas" });
+    }
+
+    const user = userResult.rows[0];
+
+    // 3. Comparar contraseña encriptada
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Credenciales inválidas" });
+    }
+
+    const userData = {
+      id: user.id,
+      email: user.email,
+      role: user.rol
+    };
+
+    const token = jwt.sign(userData, process.env.SECRET_KEY, { expiresIn: "1h" });
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      secure: false, // true solo si tienes HTTPS, false para localhost
+      sameSite: 'strict',
+      maxAge: 3600000
+    });
+    res.status(200).json({ message: "Login successful" });
+  } catch (error) {
+    console.error('Error en el login:', error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
 }
 
 export function checkAuthController(req, res) {
@@ -83,11 +111,50 @@ export function logoutController(req, res) {
   res.status(200).json({ message: 'Logout successful' });
 }
 
-export function registerController(req, res) {
-  // const { name, email, password } = req.body;
+export async function registerController(req, res) {
+  const { username, email, password } = req.body;
 
-  res.status(201).json({ message: "User registered successfully" });
+  try {
+    // 1. Validar formato de email
+    const regex = /^[a-zA-Z0-9._%+-]+@alumnos\.uach\.cl$/;
+    if (!regex.test(email)) {
+      return res.status(400).json({ message: "El email debe terminar con @alumnos.uach.cl" });
+    }
+
+    // 2. Verificar si el usuario ya existe
+    const userExists = await pool.query(
+      'SELECT * FROM users WHERE email = $1', 
+      [email]
+    );
+
+    if (userExists.rows.length > 0) {
+      return res.status(409).json({ message: "El usuario ya está registrado" });
+    }
+
+    // 3. Encriptar la contraseña
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    // 4. Insertar nuevo usuario en la base de datos
+    const newUser = await pool.query(
+      `INSERT INTO users (nombre, email, password) 
+       VALUES ($1, $2, $3) 
+       RETURNING id, nombre, email, rol, institucion`,
+      [username, email, hashedPassword]
+    );
+
+    // 5. Responder con los datos del usuario (sin la contraseña)
+    res.status(201).json({
+      message: "Usuario registrado exitosamente",
+      user: newUser.rows[0]
+    });
+
+  } catch (error) {
+    console.error('Error en el registro:', error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
 }
+
 
 export async function sendOTPController(req, res) {
   const { email } = req.body;
@@ -95,25 +162,28 @@ export async function sendOTPController(req, res) {
 
   await redisClient.set(`otp:${email}`, code, 'EX', 300);
 
-  await sendVerificationCode(email, code);
- 
-  const sent = sendVerificationCode(email, code);
+  const sent = await sendVerificationCode(email, code); 
   if (!sent) {
     return res.status(500).json({ message: "Error sending OTP" });
   }
+
   res.status(200).json({ message: "OTP sent successfully" });
 }
 
-export function verifyOTPController(req, res) {
+
+export async function verifyOTPController(req, res) {
   const { email, otp } = req.body;
-  const storedOTP = redisClient.get(`otp:${email}`);
+
+  const storedOTP = await redisClient.get(`otp:${email}`); // AÑADIR await
   if (!storedOTP) {
     return res.status(400).json({ message: "OTP expired or not found" });
   }
+
   if (storedOTP !== otp) {
     return res.status(400).json({ message: "Invalid OTP" });
   }
-  redisClient.del(`otp:${email}`); 
+
+  await redisClient.del(`otp:${email}`); 
   res.status(200).json({ message: "OTP verified successfully" });
 }
 
