@@ -28,7 +28,7 @@ const Header = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/auth/check', {
+        const res = await fetch('http://localhost:3000/api/auth/check', {
           credentials: 'include',
         });
         setIsAuthenticated(res.ok);

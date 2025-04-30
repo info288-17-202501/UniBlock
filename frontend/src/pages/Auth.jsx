@@ -43,7 +43,7 @@ const Auth = () => {
     }
 
     try {
-      await axios.post('http://localhost:3001/api/auth/otp-send', { email: formData.email });
+      await axios.post('http://localhost:3000/api/auth/otp-send', { email: formData.email });
       setOtpSent(true);
     } catch (err) {
       setLocalError('Error al enviar el OTP. Intenta nuevamente.');
@@ -52,7 +52,7 @@ const Auth = () => {
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await axios.post('http://localhost:3001/api/auth/otp-verify', {
+      const res = await axios.post('http://localhost:3000/api/auth/otp-verify', {
         email: formData.email,
         otp,
       });
