@@ -21,7 +21,7 @@ const Hero = () => {
 
         <div className="w-full lg:w-1/2">
           <img
-            src="/Fondos/fondo.avif"
+            src="/Fondos/fondo1.png"
             alt="Imagen votación blockchain"
             className="w-full h-auto rounded-2xl shadow-lg"
           />
