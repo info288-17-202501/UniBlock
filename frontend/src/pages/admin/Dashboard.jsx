@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 function Dashboard() {
   return (
-    <div>
+    <div className='xl:pt-20'>
       <h2>Dashboard - UniBlock</h2>
       <nav>
         <ul>

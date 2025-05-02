@@ -1,18 +1,13 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react';
-
 // Pagina Principal
 import Home from '@pages/Home'
-
 // Importacion Componentes
 import Header from '@components/Header'
-import Footer from '@components/Footer';
-
 // Importacion scroll suave
 import ScrollToTopButton from '@components/ScrollToTopButton';
-
+// Importacion para proteger rutas de admin
 import { ProtectedRoute } from '@pages/ProtectedRoute';
-
 import Auth from '@pages/Auth';
 // Paginas Admin
 import VotationForm from '@pages/admin/Votation';
@@ -20,19 +15,28 @@ import Dashboard from '@pages/admin/Dashboard';  // Nueva página Dashboard
 import AddUser from '@pages/admin/AddUser';    // Nueva página para agregar usuario
 
 
+const appName = 'UniBlock';
+
 function App() {
   const location = useLocation();
 
   useEffect(() => {
-    const titles = {
-      '/auth': 'Inicio de sesión - UniBlock',
-      '/admin/dashboard': 'Dashboard - UniBlock',
-      '/admin/create-votation': 'Crear Votación - UniBlock',
-      '/admin/add-user': 'Agregar Usuario - UniBlock',
+    const routeTitles = {
+      '/auth': `Inicio de sesión - ${appName}`,
+      '/admin/dashboard': `Dashboard - ${appName}`,
+      '/admin/create-votation': `Crear votación - ${appName}`,
+      '/admin/add-user': `Agregar usuario - ${appName}`,
     };
-    document.title = titles[location.pathname] || 'UniBlock';
+
+    const currentTitle = routeTitles[location.pathname];
+    if (currentTitle) {
+      document.title = currentTitle;
+    } else {
+      document.title = appName; // Título general si la ruta no está mapeada
+    }
   }, [location.pathname]);
 
+  
   return (
     <>
       <Header />
@@ -46,7 +50,6 @@ function App() {
             <Route path="/admin/add-user" element={<AddUser />} />
           </Route>
         </Routes>
-      <Footer />
       <ScrollToTopButton />
     </>
   );

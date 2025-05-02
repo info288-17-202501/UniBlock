@@ -1,0 +1,160 @@
+{
+    "universidad": {
+      "nombre": "Universidad Austral de Chile",
+      "sedes": [
+        {
+          "nombre": "Valdivia",
+          "facultades": [
+            {
+              "nombre": "Arquitectura y Artes",
+              "carreras": [
+                "Arquitectura",
+                "Diseño",
+                "Artes Musicales y Sonoras",
+                "Creación Audiovisual",
+                "Licenciatura en Artes Visuales",
+                "Interpretación Musical (Conservatorio de Música)"
+              ]
+            },
+            {
+              "nombre": "Ciencias",
+              "carreras": [
+                "Biología",
+                "Química",
+                "Bioquímica",
+                "Licenciatura en Ciencias con mención en: Biología, Física, Química y Matemáticas"
+              ]
+            },
+            {
+              "nombre": "Ciencias Agrarias y Alimentarias",
+              "carreras": [
+                "Agronomía"
+              ]
+            },
+            {
+              "nombre": "Cs. Económicas y Administrativas",
+              "carreras": [
+                "Auditoría",
+                "Ingeniería Comercial",
+                "Administración Pública"
+              ]
+            },
+            {
+              "nombre": "Cs. Forestales y Recursos Naturales",
+              "carreras": [
+                "Ingeniería en Conservación de Recursos Naturales-Ingeniería Forestal"
+              ]
+            },
+            {
+              "nombre": "Ciencias Jurídicas y Sociales",
+              "carreras": [
+                "Derecho"
+              ]
+            },
+            {
+              "nombre": "Ciencias Veterinarias",
+              "carreras": [
+                "Medicina Veterinaria"
+              ]
+            },
+            {
+              "nombre": "Ciencias de la Ingeniería",
+              "carreras": [
+                "Ingeniería Plan Común",
+                "Ingeniería Civil Acústica",
+                "Ingeniería Civil Electrónica",
+                "Ingeniería Civil Industrial",
+                "Ingeniería Civil en Informática",
+                "Ingeniería Civil en Obras Civiles",
+                "Ingeniería Civil Mecánica",
+                "Ingeniería en Construcción",
+                "Ingeniería Naval"
+              ]
+            },
+            {
+              "nombre": "Filosofía y Humanidades",
+              "carreras": [
+                "Antropología",
+                "Periodismo",
+                "Pedagogía en Comunicación en Lengua Inglesa",
+                "Pedagogía en Historia y Ciencias Sociales",
+                "Pedagogía en Lenguaje y Comunicación",
+                "Pedagogía en Educación Parvularia"
+              ]
+            },
+            {
+              "nombre": "Medicina",
+              "carreras": [
+                "Medicina",
+                "Odontología",
+                "Obstetricia y Puericultura",
+                "Kinesiología",
+                "Psicología",
+                "Tecnología Médica",
+                "Terapia Ocupacional",
+                "Enfermería"
+              ]
+            }
+          ]
+        },
+        {
+          "nombre": "Puerto Montt",
+          "facultades": [
+            {
+              "nombre": "Filosofía y Humanidades",
+              "carreras": [
+                "Arqueología",
+                "Psicología",
+                "Trabajo Social"
+              ]
+            },
+            {
+              "nombre": "Ciencias Jurídicas y Sociales",
+              "carreras": [
+                "Derecho"
+              ]
+            },
+            {
+              "nombre": "Medicina",
+              "carreras": [
+                "Enfermería",
+                "Fonoaudiología",
+                "Tecnología Médica",
+                "Terapia Ocupacional"
+              ]
+            },
+            {
+              "nombre": "Cs. Económicas y Administrativas",
+              "carreras": [
+                "Ingeniería Comercial",
+                "Ingeniería en Información y Control de Gestión",
+                "Administración Pública"
+              ]
+            },
+            {
+              "nombre": "Ciencias de la Ingeniería",
+              "carreras": [
+                "Ingeniería Ambiental",
+                "Ingeniería Civil Industrial"
+              ]
+            },
+            {
+              "nombre": "Educación",
+              "carreras": [
+                "Pedagogía en Educación Básica con Menciones",
+                "Pedagogía en Educación Diferencial con Mención",
+                "Pedagogía en Educación Parvularia",
+                "Pedagogía en Matemáticas"
+              ]
+            }
+          ]
+        },
+        {
+          "nombre": "Patagonia",
+          "facultades": [],
+          "nota": "No se encontraron carreras asociadas en los datos actuales"
+        }
+      ]
+    }
+  }
+  
