@@ -3,8 +3,8 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import { authRouter } from './src/routes/Auth.js'; 
-import pool from './src/config/postgresConnect.js'; // Asegúrate de que la ruta sea correcta
 import { loginRouter } from "./src/routes/microsoft.js";
+import  sequelize  from './src/config/sequalize.js'; // Asegúrate de que la ruta sea correcta
 import passport from "passport";
 import "./src/middlewares/microsoft.js";
 
@@ -34,20 +34,20 @@ app.use("/api/auth", authRouter); // uniblock
 app.use("/auth", loginRouter);  //microsoft
 
 
-app.use((req, res) => {
-  res.status(404).json({ message: "Ruta no encontrada" });
-});
-
-app.get('/api/test-db', async (req, res) => {
+app.get('/api/test-sequelize', async (_, res) => {
   try {
-    const result = await pool.query('SELECT NOW()');
-    res.json({ message: 'Conexión exitosa', time: result.rows[0] });
+    await sequelize.authenticate();
+    res.json({ message: 'Conexión exitosa a la base de datos con Sequelize' });
   } catch (error) {
-    console.error('Error al consultar la base de datos:', error);
-    res.status(500).json({ message: 'Error en la conexión a la base de datos', error });
+    console.error('Error al conectar a la base de datos con Sequelize:', error);
+    res.status(500).json({ message: 'Error en la conexión a la base de datos con Sequelize', error });
   }
 });
 
+
+app.use((req, res) => {
+  res.status(404).json({ message: "Ruta no encontrada" });
+});
 
 // app.listen(port, () => {
 //   console.log(`Servidor con CORS corriendo en http://localhost:${port}`);

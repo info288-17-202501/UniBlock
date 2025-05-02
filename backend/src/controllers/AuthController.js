@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { sendVerificationCode } from '../config/mailer.js';
 import redisClient  from '../config/redisConnect.js';
 import bcrypt from 'bcrypt';
-import pool from '../config/postgresConnect.js';
+import User from '../models/users.js';
 
 export async function loginController(req, res) {
   const { email, password } = req.body;
@@ -12,18 +12,14 @@ export async function loginController(req, res) {
       return res.status(400).json({ message: "Email y contraseña son requeridos" });
     }
 
-    const userResult = await pool.query(
-      'SELECT * FROM users WHERE email = $1',
-      [email]
-    );
+    // Buscar usuario con Sequelize
+    const user = await User.findOne({ where: { email } });
 
-    if (userResult.rows.length === 0) {
+    if (!user) {
       return res.status(401).json({ message: "Credenciales inválidas" });
     }
 
-    const user = userResult.rows[0];
-
-    // 3. Comparar contraseña encriptada
+    // Comparar la contraseña
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
@@ -37,18 +33,22 @@ export async function loginController(req, res) {
     };
 
     const token = jwt.sign(userData, process.env.SECRET_KEY, { expiresIn: "1h" });
+
     res.cookie('access_token', token, {
       httpOnly: true,
-      secure: false, // true solo si tienes HTTPS, false para localhost
+      secure: false, // true solo si usas HTTPS
       sameSite: 'strict',
       maxAge: 3600000
     });
-    res.status(200).json({ message: "Login successful" });
+
+    res.status(200).json({ message: "Login exitoso" });
+
   } catch (error) {
     console.error('Error en el login:', error);
     res.status(500).json({ message: "Error interno del servidor" });
   }
 }
+
 
 export function checkAuthController(req, res) {
   // 1. Obtener el token de las cookies
@@ -111,6 +111,7 @@ export function logoutController(req, res) {
   res.status(200).json({ message: 'Logout successful' });
 }
 
+
 export async function registerController(req, res) {
   const { username, email, password } = req.body;
 
@@ -122,12 +123,9 @@ export async function registerController(req, res) {
     }
 
     // 2. Verificar si el usuario ya existe
-    const userExists = await pool.query(
-      'SELECT * FROM users WHERE email = $1', 
-      [email]
-    );
+    const userExists = await User.findOne({ where: { email } });
 
-    if (userExists.rows.length > 0) {
+    if (userExists) {
       return res.status(409).json({ message: "El usuario ya está registrado" });
     }
 
@@ -135,18 +133,20 @@ export async function registerController(req, res) {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // 4. Insertar nuevo usuario en la base de datos
-    const newUser = await pool.query(
-      `INSERT INTO users (nombre, email, password) 
-       VALUES ($1, $2, $3) 
-       RETURNING id, nombre, email, rol, institucion`,
-      [username, email, hashedPassword]
-    );
+    // 4. Crear el nuevo usuario
+    const newUser = await User.create({
+      nombre: username,
+      email: email,
+      password: hashedPassword,
+      rol: 'alumno',
+    });
 
-    // 5. Responder con los datos del usuario (sin la contraseña)
+    // 5. Responder sin la contraseña
+    const { id, nombre, email: userEmail, rol, institucion } = newUser;
+
     res.status(201).json({
       message: "Usuario registrado exitosamente",
-      user: newUser.rows[0]
+      user: { id, nombre, email: userEmail, rol, institucion }
     });
 
   } catch (error) {
@@ -154,6 +154,7 @@ export async function registerController(req, res) {
     res.status(500).json({ message: "Error interno del servidor" });
   }
 }
+
 
 
 export async function sendOTPController(req, res) {
