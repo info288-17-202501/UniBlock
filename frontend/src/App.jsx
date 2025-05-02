@@ -14,7 +14,6 @@ function App() {
 
   useEffect(() => {
     const titles = {
-      // '/': 'UniBlock', --> Esta no es necesaria porque esta en el HTML
       '/auth': 'Inicio de sesión - UniBlock',
       '/admin/create-votation': 'Crear Votación - UniBlock',
     };
@@ -24,16 +23,16 @@ function App() {
   return (
     <>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<Auth />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/admin/create-votation" element={<VotationForm />} />
-        </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin/create-votation" element={<VotationForm />} />
+          </Route>
 
-        {/* <Route path="/admin/create-votation" element={<VotationForm />} /> */}
-      </Routes>
+          {/* <Route path="/admin/create-votation" element={<VotationForm />} /> */}
+        </Routes>
       <Footer />
       <ScrollToTopButton />
     </>

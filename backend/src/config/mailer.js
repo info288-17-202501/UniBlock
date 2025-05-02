@@ -23,7 +23,7 @@ export async function sendVerificationCode(email, code) {
         <div>
           <h2>¡Hola!</h2>
           <p>Tu código de verificación es:</p>
-          <h1 style="color: #2563eb;">${code}</h1>
+          <h1 style="color: #EF5218;">${code}</h1>
           <p>Válido por 5 minutos.</p>
         </div>
       `
