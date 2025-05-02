@@ -1,0 +1,21 @@
+{
+  "name": "proxy-server",
+  "version": "1.0.0",
+  "type":"module",
+  "description": "Nginx Proxy Server",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "author": "",
+  "license": "ISC"
+}
