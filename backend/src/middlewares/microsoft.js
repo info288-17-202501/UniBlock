@@ -11,7 +11,7 @@ passport.use(
       clientID: process.env.MICROSOFT_CLIENT_ID,
       //clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
       callbackURL: "http://localhost:3000/auth/microsoft/callback",
-      scope: ["user.read", "calendars.read", "mail.read", "offline_access"],
+      scope: ["user.read"],
       authorizationURL: `https://login.microsoftonline.com/${process.env.MICROSOFT_TENANT_ID}/oauth2/v2.0/authorize`,
       tokenURL: `https://login.microsoftonline.com/${process.env.MICROSOFT_TENANT_ID}/oauth2/v2.0/token`,
     },
