@@ -11,3 +11,8 @@
 2025/05/02 00:00:13 [error] 12568#3376: *11 connect() failed (10061: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:3002/", host: "localhost:4000"
 2025/05/02 00:00:15 [error] 12568#3376: *11 connect() failed (10061: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:3001/", host: "localhost:4000"
 2025/05/02 00:00:17 [error] 12568#3376: *11 connect() failed (10061: No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:3000/", host: "localhost:4000"
+2025/05/02 00:03:30 [notice] 15492#3548: signal process started
+2025/05/02 00:04:14 [notice] 16500#7064: signal process started
+2025/05/02 00:04:14 [error] 16500#7064: CreateFile() "D:\Sistema_de_Votacion_Blockchain\nginx\nginx-1.28.0/logs/nginx.pid" failed (2: El sistema no puede encontrar el archivo especificado)
+2025/05/02 00:04:36 [notice] 21940#2132: signal process started
+2025/05/02 00:04:46 [notice] 15820#14792: signal process started
