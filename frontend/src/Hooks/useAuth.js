@@ -30,7 +30,7 @@ const useAuth = () => {
         console.log("Cookie set:", document.cookie);
 
         if (isLogin) {
-          navigate('/admin/create-votation');
+          navigate('/admin/dashboard');
           window.location.reload(); 
         } else {
           navigate('/auth');
