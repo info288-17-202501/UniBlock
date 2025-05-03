@@ -75,6 +75,31 @@ const Auth = () => {
     window.location.reload();
     window.history.back();
   };
+  // Estas ultimas 2 funciones son de Microsoft
+  const handleMicrosoftLogin = () => {
+    const popup = window.open(
+      "http://localhost:3000/auth/microsoft",
+      "targetWindow",
+      `toolbar=no,
+      location=no,
+      status=no,
+      menubar=no,
+      scrollbars=yes,
+      resizable=yes,
+      width=620,
+      height=700`
+    );
+
+    const receiveMessage = (event) => {
+      if (event.origin === "http://localhost:3000" && event.data) {
+        sessionStorage.setItem("user", JSON.stringify(event.data));
+        popup.close();
+        window.removeEventListener("message", receiveMessage);
+      }
+    };
+
+    window.addEventListener("message", receiveMessage);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
@@ -225,32 +250,7 @@ const Auth = () => {
 
             <div className="mt-6">
               <button
-                onClick={() => {
-                  const popup = window.open(
-                    "http://localhost:3000/auth/microsoft",
-                    "targetWindow",
-                    `toolbar=no,
-                    location=no,
-                    status=no,
-                    menubar=no,
-                    scrollbars=yes,
-                    resizable=yes,
-                    width=620,
-                    height=700`
-                  );
-
-                  window.addEventListener("message", (event) => {
-                    if (event.origin === "http://localhost:3000") {
-                      if (event.data) {
-                        sessionStorage.setItem(
-                          "user",
-                          JSON.stringify(event.data)
-                        );
-                        popup.close();
-                      }
-                    }
-                  });
-                }}
+                onClick={handleMicrosoftLogin}
                 className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <img
