@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import usuariosData from '../data/Usuarios.json';
+import React, { useEffect, useState } from "react";
+import usuariosData from "../data/Usuarios.json";
 
 function useDarkClassListener() {
   const [isDark, setIsDark] = useState(() =>
-    document.documentElement.classList.contains('dark')
+    document.documentElement.classList.contains("dark")
   );
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains('dark'));
+      setIsDark(document.documentElement.classList.contains("dark"));
     });
 
     // Observa los cambios en la clase del documento
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class'],
+      attributeFilter: ["class"],
     });
 
     // Cleanup
@@ -25,7 +25,7 @@ function useDarkClassListener() {
 
 const Usuarios = () => {
   const isDark = useDarkClassListener();
-  const modo = isDark ? 'claro' : 'oscuro';
+  const modo = isDark ? "claro" : "oscuro";
   const usuariosFiltrados = usuariosData[modo];
 
   return (
@@ -36,10 +36,10 @@ const Usuarios = () => {
       <div className="grid  grid-cols-1 md:grid-cols-4 gap-10">
         {usuariosFiltrados.map((item) => (
           <div key={item.id}>
-          <div
-            key={item.id}
-            className="flex items-center justify-center border-[var(--border-color)] p-4 rounded-lg shadow-lg hover:shadow-xl transition border"
-          >
+            <div
+              key={item.id}
+              className="flex items-center justify-center border-[var(--border-color)] p-4 rounded-lg shadow-lg hover:shadow-xl transition border"
+            >
               <img
                 src={item.imagen}
                 alt="Logo"

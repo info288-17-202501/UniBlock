@@ -8,7 +8,6 @@ export function createVoteController(req, res) {
   res.status(201).json({ message: "Vote created successfully" });
 }
 
-
 export function getVotesController(req, res) {
   // Aquí iría la lógica para obtener los votos de la base de datos
   // Por ejemplo:
@@ -16,7 +15,6 @@ export function getVotesController(req, res) {
 
   res.status(200).json({ message: "Votes retrieved successfully" });
 }
-
 
 export function getVoteByIdController(req, res) {
   const { id } = req.params;
@@ -27,5 +25,3 @@ export function getVoteByIdController(req, res) {
 
   res.status(200).json({ message: "Vote retrieved successfully" });
 }
-
-

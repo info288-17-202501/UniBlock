@@ -1,5 +1,5 @@
-import { Sequelize } from 'sequelize';
-import dotenv from 'dotenv';
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 dotenv.config();
 
 const sequelize = new Sequelize(
@@ -9,21 +9,23 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    dialect: 'postgres',
+    dialect: "postgres",
     logging: false,
-    timezone: 'America/Santiago',
+    timezone: "America/Santiago",
     dialectOptions: {
       ssl: {
         require: true,
-        rejectUnauthorized: false
-      }
-    }
-    
+        rejectUnauthorized: false,
+      },
+    },
   }
 );
 
-sequelize.authenticate()
-  .then(() => console.log('[*] Conexión exitosa a la base de datos'))
-  .catch(err => console.error('[X]Error conectando a la base de datos:', err));
+sequelize
+  .authenticate()
+  .then(() => console.log("[*] Conexión exitosa a la base de datos"))
+  .catch((err) =>
+    console.error("[X]Error conectando a la base de datos:", err)
+  );
 
 export default sequelize;

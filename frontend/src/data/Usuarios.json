@@ -1,14 +1,38 @@
 {
   "oscuro": [
-    { "id": 1, "imagen": "/Sedes/Puerto Montt/Escuelas/oscuro/Enfermería.png" },
-    { "id": 2, "imagen": "/Sedes/Valdivia/Escuelas/oscuro/ESC. ING. INFORMATICA.png" },
-    { "id": 3, "imagen": "/Sedes/Valdivia/Facultades/oscuro/MEDICINA.png" },
-    { "id": 4, "imagen": "/Sedes/Puerto Montt/Institutos/oscuro/Gestion e Industria.png" }
+    {
+      "id": 1,
+      "imagen": "/Sedes/Puerto Montt/Escuelas/oscuro/Enfermería.png"
+    },
+    {
+      "id": 2,
+      "imagen": "/Sedes/Valdivia/Escuelas/oscuro/ESC. ING. INFORMATICA.png"
+    },
+    {
+      "id": 3,
+      "imagen": "/Sedes/Valdivia/Facultades/oscuro/MEDICINA.png"
+    },
+    {
+      "id": 4,
+      "imagen": "/Sedes/Puerto Montt/Institutos/oscuro/Gestion e Industria.png"
+    }
   ],
   "claro": [
-    { "id": 1, "imagen": "/Sedes/Puerto Montt/Escuelas/claro/Enfermería.png" },
-    { "id": 2, "imagen": "/Sedes/Valdivia/Escuelas/claro/ESC. ING. INFORMATICA.png" },
-    { "id": 3, "imagen": "/Sedes/Valdivia/Facultades/claro/MEDICINA.png" },
-    { "id": 4, "imagen": "/Sedes/Puerto Montt/Institutos/claro/Gestion e Industria.png" }
+    {
+      "id": 1,
+      "imagen": "/Sedes/Puerto Montt/Escuelas/claro/Enfermería.png"
+    },
+    {
+      "id": 2,
+      "imagen": "/Sedes/Valdivia/Escuelas/claro/ESC. ING. INFORMATICA.png"
+    },
+    {
+      "id": 3,
+      "imagen": "/Sedes/Valdivia/Facultades/claro/MEDICINA.png"
+    },
+    {
+      "id": 4,
+      "imagen": "/Sedes/Puerto Montt/Institutos/claro/Gestion e Industria.png"
+    }
   ]
 }

@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import useAuth from '../Hooks/useAuth';
-import axios from 'axios';
+import React, { useState } from "react";
+import useAuth from "../Hooks/useAuth";
+import axios from "axios";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({ username: '', email: '', password: '' });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [otpSent, setOtpSent] = useState(false);
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
   const [otpVerified, setOtpVerified] = useState(false);
-  const [localError, setLocalError] = useState('');
+  const [localError, setLocalError] = useState("");
 
   const { authenticate, loading, error, message } = useAuth();
 
@@ -19,15 +23,15 @@ const Auth = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLocalError('');
+    setLocalError("");
 
     if (!isLogin) {
-      if (!formData.email.endsWith('@alumnos.uach.cl')) {
-        setLocalError('Solo se permiten correos @uach.cl');
+      if (!formData.email.endsWith("@alumnos.uach.cl")) {
+        setLocalError("Solo se permiten correos @uach.cl");
         return;
       }
       if (!otpVerified) {
-        setLocalError('Debes verificar el código OTP antes de continuar.');
+        setLocalError("Debes verificar el código OTP antes de continuar.");
         return;
       }
     }
@@ -36,29 +40,34 @@ const Auth = () => {
   };
 
   const handleSendOtp = async () => {
-    setLocalError('');
+    setLocalError("");
     if (!/@(?:.*\.)?uach\.cl$/.test(formData.email)) {
-      setLocalError('Solo se permiten correos institucionales @uach.cl');
+      setLocalError("Solo se permiten correos institucionales @uach.cl");
       return;
     }
 
     try {
-      await axios.post('http://localhost:3000/api/auth/otp-send', { email: formData.email });
+      await axios.post("http://localhost:3000/api/auth/otp-send", {
+        email: formData.email,
+      });
       setOtpSent(true);
     } catch (err) {
-      setLocalError('Error al enviar el OTP. Intenta nuevamente.');
+      setLocalError("Error al enviar el OTP. Intenta nuevamente.");
     }
   };
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/api/auth/otp-verify', {
-        email: formData.email,
-        otp,
-      });
+      const res = await axios.post(
+        "http://localhost:3000/api/auth/otp-verify",
+        {
+          email: formData.email,
+          otp,
+        }
+      );
       setOtpVerified(true);
     } catch (err) {
-      setLocalError('OTP inválido o expirado.');
+      setLocalError("OTP inválido o expirado.");
     }
   };
 
@@ -78,9 +87,13 @@ const Auth = () => {
       </button>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <img src="/logo.png" alt="Logo de la página" className="mx-auto h-16 w-auto" />
+        <img
+          src="/logo.png"
+          alt="Logo de la página"
+          className="mx-auto h-16 w-auto"
+        />
         <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-900">
-          {isLogin ? 'Inicia sesión' : 'Crea una cuenta'}
+          {isLogin ? "Inicia sesión" : "Crea una cuenta"}
         </h2>
       </div>
 
@@ -89,7 +102,10 @@ const Auth = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {!isLogin && (
               <div>
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="username"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Nombre de usuario
                 </label>
                 <input
@@ -105,7 +121,10 @@ const Auth = () => {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Correo electrónico
               </label>
               <input
@@ -130,7 +149,10 @@ const Auth = () => {
 
             {!isLogin && otpSent && !otpVerified && (
               <div>
-                <label htmlFor="otp" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="otp"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Código OTP
                 </label>
                 <input
@@ -152,14 +174,17 @@ const Auth = () => {
             )}
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Contraseña
               </label>
               <input
                 id="password"
                 name="password"
                 type="password"
-                autoComplete={isLogin ? 'current-password' : 'new-password'}
+                autoComplete={isLogin ? "current-password" : "new-password"}
                 required
                 value={formData.password}
                 onChange={handleInputChange}
@@ -177,7 +202,11 @@ const Auth = () => {
                 disabled={loading}
                 className="w-full flex justify-center py-2 px-4 rounded-md text-white bg-blue-600 hover:bg-blue-700 sm:text-sm"
               >
-                {loading ? 'Procesando...' : isLogin ? 'Iniciar sesión' : 'Registrarse'}
+                {loading
+                  ? "Procesando..."
+                  : isLogin
+                  ? "Iniciar sesión"
+                  : "Registrarse"}
               </button>
             </div>
           </form>
@@ -213,7 +242,10 @@ const Auth = () => {
                   window.addEventListener("message", (event) => {
                     if (event.origin === "http://localhost:3000") {
                       if (event.data) {
-                        sessionStorage.setItem("user", JSON.stringify(event.data));
+                        sessionStorage.setItem(
+                          "user",
+                          JSON.stringify(event.data)
+                        );
                         popup.close();
                       }
                     }
@@ -234,19 +266,19 @@ const Auth = () => {
 
             <div className="mt-6 text-center">
               <p className="text-sm">
-                {isLogin ? '¿No tienes cuenta?' : '¿Ya tienes cuenta?'}
+                {isLogin ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?"}
               </p>
               <button
                 onClick={() => {
                   setIsLogin(!isLogin);
                   setOtpSent(false);
                   setOtpVerified(false);
-                  setOtp('');
-                  setLocalError('');
+                  setOtp("");
+                  setLocalError("");
                 }}
                 className="mt-2 text-blue-600 hover:underline text-sm"
               >
-                {isLogin ? 'Regístrate aquí' : 'Inicia sesión aquí'}
+                {isLogin ? "Regístrate aquí" : "Inicia sesión aquí"}
               </button>
             </div>
           </div>

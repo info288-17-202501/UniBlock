@@ -26,6 +26,7 @@ export async function createVotationController(req, res) {
       error: err.message 
     });
   }
+
 }
 
 export async function getVotationsController(req, res) {
@@ -48,4 +49,3 @@ export function getVotationByIdController(req, res) {
   //   .findById(id)
   res.status(200).json({ message: "Votation retrieved successfully" });
 }
-
