@@ -37,7 +37,12 @@ const User = sequelize.define('User', {
   updated_at: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
-  }
+  },
+  isAdmin: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+    field: 'isAdmin' // Esto fuerza a Sequelize a usar exactamente este nombre
+  },
 }, {
   tableName: 'users',
   timestamps: false, 
