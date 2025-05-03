@@ -34,7 +34,6 @@
 //   }
 // }
 
-
 // import * as React from 'react';
 // import TextField from '@mui/material/TextField';
 // import Stack from '@mui/material/Stack';
@@ -122,13 +121,13 @@
 //   );
 // }
 
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import Stack from '@mui/material/Stack';
-import Autocomplete from '@mui/material/Autocomplete';
-import Button from '@mui/material/Button';
+import * as React from "react";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Autocomplete from "@mui/material/Autocomplete";
+import Button from "@mui/material/Button";
 
-import data from '../../data/U.json';
+import data from "../../data/U.json";
 
 function extraerNombresUnicos(rutaObj) {
   if (!rutaObj) return [];
@@ -138,7 +137,7 @@ function extraerNombresUnicos(rutaObj) {
 
   const todas = [...claro, ...oscuro];
   const nombresUnicos = Array.from(
-    new Set(todas.map((ruta) => ruta.split('/').pop()?.replace('.png', '')))
+    new Set(todas.map((ruta) => ruta.split("/").pop()?.replace(".png", "")))
   );
 
   return nombresUnicos;
@@ -146,22 +145,26 @@ function extraerNombresUnicos(rutaObj) {
 
 export default function FiltrosCarreras() {
   const [sedeSeleccionada, setSedeSeleccionada] = React.useState(null);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = React.useState(null);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] =
+    React.useState(null);
   const [unidadSeleccionada, setUnidadSeleccionada] = React.useState(null);
 
   const sedes = data.Sedes ? Object.keys(data.Sedes) : [];
 
   const categorias = sedeSeleccionada
-    ? Object.keys(data.Sedes[sedeSeleccionada]).filter((k) => k !== 'Carreras')
+    ? Object.keys(data.Sedes[sedeSeleccionada]).filter((k) => k !== "Carreras")
     : [];
 
-  const unidades = sedeSeleccionada && categoriaSeleccionada
-    ? extraerNombresUnicos(data.Sedes[sedeSeleccionada][categoriaSeleccionada])
-    : [];
+  const unidades =
+    sedeSeleccionada && categoriaSeleccionada
+      ? extraerNombresUnicos(
+          data.Sedes[sedeSeleccionada][categoriaSeleccionada]
+        )
+      : [];
 
   const handleSubir = async () => {
     if (!sedeSeleccionada || !categoriaSeleccionada || !unidadSeleccionada) {
-      alert('Por favor selecciona sede, categoría y nombre.');
+      alert("Por favor selecciona sede, categoría y nombre.");
       return;
     }
 
@@ -174,7 +177,7 @@ export default function FiltrosCarreras() {
       claro: { imagen: rutaClaro },
     };
 
-    console.log('Subiendo objeto:', nuevoObjeto);
+    console.log("Subiendo objeto:", nuevoObjeto);
 
     // Aquí deberías hacer un fetch a tu backend para actualizar el archivo Usuarios.json
     /*
@@ -185,7 +188,7 @@ export default function FiltrosCarreras() {
     });
     */
 
-    alert('Selección enviada correctamente (ver consola).');
+    alert("Selección enviada correctamente (ver consola).");
   };
 
   return (
@@ -193,10 +196,10 @@ export default function FiltrosCarreras() {
       direction="column"
       spacing={4}
       sx={{
-        width: '100%',
-        height: '100vh',
-        justifyContent: 'center',
-        alignItems: 'center',
+        width: "100%",
+        height: "100vh",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Stack direction="row" spacing={2}>
@@ -209,7 +212,9 @@ export default function FiltrosCarreras() {
             setCategoriaSeleccionada(null);
             setUnidadSeleccionada(null);
           }}
-          renderInput={(params) => <TextField {...params} label="Sede" sx={{ width: 250 }} />}
+          renderInput={(params) => (
+            <TextField {...params} label="Sede" sx={{ width: 250 }} />
+          )}
         />
         <Autocomplete
           id="categoria-autocomplete"
@@ -220,7 +225,9 @@ export default function FiltrosCarreras() {
             setUnidadSeleccionada(null);
           }}
           disabled={!sedeSeleccionada}
-          renderInput={(params) => <TextField {...params} label="Categoría" sx={{ width: 200 }} />}
+          renderInput={(params) => (
+            <TextField {...params} label="Categoría" sx={{ width: 200 }} />
+          )}
         />
         <Autocomplete
           id="unidad-autocomplete"
@@ -230,17 +237,21 @@ export default function FiltrosCarreras() {
             setUnidadSeleccionada(newValue);
           }}
           disabled={!categoriaSeleccionada}
-          renderInput={(params) => <TextField {...params} label="Nombre" sx={{ width: 300 }} />}
+          renderInput={(params) => (
+            <TextField {...params} label="Nombre" sx={{ width: 300 }} />
+          )}
         />
       </Stack>
       <Button
-          variant="contained"
-          onClick={handleSubir}
-          sx={{ backgroundColor: '#EF5218', '&:hover': { backgroundColor: '#c94010' } }}
-        >
-          Subir
+        variant="contained"
+        onClick={handleSubir}
+        sx={{
+          backgroundColor: "#EF5218",
+          "&:hover": { backgroundColor: "#c94010" },
+        }}
+      >
+        Subir
       </Button>
-
     </Stack>
   );
 }

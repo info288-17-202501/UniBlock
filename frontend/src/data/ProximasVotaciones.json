@@ -1,11 +1,10 @@
 [
-    {
-      "titulo": "Elección de Representantes 2025",
-      "fechaInicio": "2025-05-01T10:00:00"
-    },
-    {
-      "titulo": "Votación Reforma de Estatutos",
-      "fechaInicio": "2025-06-15T12:00:00"
-    }
-  ]
-  
+  {
+    "titulo": "Elección de Representantes 2025",
+    "fechaInicio": "2025-05-01T10:00:00"
+  },
+  {
+    "titulo": "Votación Reforma de Estatutos",
+    "fechaInicio": "2025-06-15T12:00:00"
+  }
+]

@@ -20,7 +20,7 @@
 //         },
 //       ],
 //     },
-//   },  
+//   },
 //   {
 //     titulo: 'Resultados de la Votación para Rector',
 //     descripcion: 'La votación para elegir al nuevo rector también se ha cerrado. Los resultados han sido procesados y aquí los mostramos.',
@@ -185,126 +185,152 @@
 
 // export default Noticias;
 
-
-
-import React, { useState } from 'react';
-import { Bar, Line, Pie, Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement, PointElement, ArcElement } from 'chart.js';
-import MobileStepper from '@mui/material/MobileStepper';
-import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import React, { useState } from "react";
+import { Bar, Line, Pie, Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+  ArcElement,
+} from "chart.js";
+import MobileStepper from "@mui/material/MobileStepper";
+import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 
 // Registra los componentes de Chart.js
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement, PointElement, ArcElement);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+  ArcElement
+);
 
 const noticias = [
   {
-    titulo: 'Resultados de la Votación para Centro de Alumnos',
-    descripcion: 'Los resultados de la última votación para el Centro de Alumnos se han procesado. A continuación, mostramos los resultados por facultad.',
+    titulo: "Resultados de la Votación para Centro de Alumnos",
+    descripcion:
+      "Los resultados de la última votación para el Centro de Alumnos se han procesado. A continuación, mostramos los resultados por facultad.",
     grafico: {
-      type: 'pie',
-      labels: ['Ingeniería', 'Ciencias', 'Humanidades'],
+      type: "pie",
+      labels: ["Ingeniería", "Ciencias", "Humanidades"],
       datasets: [
         {
-          label: 'Votos',
+          label: "Votos",
           data: [120, 90, 150],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         },
       ],
     },
-  },  
+  },
   {
-    titulo: 'Resultados de la Votación para Rector',
-    descripcion: 'La votación para elegir al nuevo rector también se ha cerrado. Los resultados han sido procesados y aquí los mostramos.',
+    titulo: "Resultados de la Votación para Rector",
+    descripcion:
+      "La votación para elegir al nuevo rector también se ha cerrado. Los resultados han sido procesados y aquí los mostramos.",
     grafico: {
-      type: 'line',
-      labels: ['Candidato A', 'Candidato B', 'Candidato C'],
+      type: "line",
+      labels: ["Candidato A", "Candidato B", "Candidato C"],
       datasets: [
         {
-          label: 'Votos',
+          label: "Votos",
           data: [250, 180, 120],
-          borderColor: '#36A2EB',
-          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          borderColor: "#36A2EB",
+          backgroundColor: "rgba(255, 255, 255, 0.2)",
           fill: true,
         },
       ],
     },
   },
   {
-    titulo: 'Movilización Estudiantil: ¿Qué opina la comunidad?',
-    descripcion: 'En esta noticia se presenta la votación sobre la movilización estudiantil. Los resultados muestran un fuerte apoyo a la movilización.',
+    titulo: "Movilización Estudiantil: ¿Qué opina la comunidad?",
+    descripcion:
+      "En esta noticia se presenta la votación sobre la movilización estudiantil. Los resultados muestran un fuerte apoyo a la movilización.",
     grafico: {
-      type: 'bar',
-      labels: ['Sí', 'No'],
+      type: "bar",
+      labels: ["Sí", "No"],
       datasets: [
         {
-          label: 'Votos',
+          label: "Votos",
           data: [400, 50],
-          backgroundColor: '#FF9F40',
+          backgroundColor: "#FF9F40",
         },
       ],
     },
   },
   {
-    titulo: 'Resultados de la Votación para Dirección de Escuela',
-    descripcion: 'Los resultados de la votación para la Dirección de Escuela también han sido procesados. Aquí están los detalles.',
+    titulo: "Resultados de la Votación para Dirección de Escuela",
+    descripcion:
+      "Los resultados de la votación para la Dirección de Escuela también han sido procesados. Aquí están los detalles.",
     grafico: {
-      type: 'doughnut',
-      labels: ['Candidato A', 'Candidato B', 'Candidato C'],
+      type: "doughnut",
+      labels: ["Candidato A", "Candidato B", "Candidato C"],
       datasets: [
         {
-          label: 'Votos',
+          label: "Votos",
           data: [200, 170, 110],
-          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         },
       ],
     },
   },
   {
-    titulo: 'Resultados de la Votación para Movimiento Social Estudiantil',
-    descripcion: 'Esta noticia presenta los resultados de la votación sobre un importante movimiento social que involucra a estudiantes.',
+    titulo: "Resultados de la Votación para Movimiento Social Estudiantil",
+    descripcion:
+      "Esta noticia presenta los resultados de la votación sobre un importante movimiento social que involucra a estudiantes.",
     grafico: {
-      type: 'line',
-      labels: ['Sí', 'No'],
+      type: "line",
+      labels: ["Sí", "No"],
       datasets: [
         {
-          label: 'Votos',
+          label: "Votos",
           data: [350, 90],
-          borderColor: '#4BC0C0',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: "#4BC0C0",
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
           fill: true,
         },
       ],
     },
   },
   {
-    titulo: 'Análisis de Participación Estudiantil en Votaciones Recientes',
-    descripcion: 'En este artículo se analizan las tendencias y la participación en las votaciones más recientes en la universidad.',
+    titulo: "Análisis de Participación Estudiantil en Votaciones Recientes",
+    descripcion:
+      "En este artículo se analizan las tendencias y la participación en las votaciones más recientes en la universidad.",
     grafico: {
-      type: 'bar',
-      labels: ['Ingeniería', 'Ciencias', 'Humanidades', 'Medicina'],
+      type: "bar",
+      labels: ["Ingeniería", "Ciencias", "Humanidades", "Medicina"],
       datasets: [
         {
-          label: 'Votos',
+          label: "Votos",
           data: [300, 250, 150, 100],
-          backgroundColor: '#FFCE56',
+          backgroundColor: "#FFCE56",
         },
       ],
     },
   },
   {
-    titulo: 'Votación sobre Reglas de Participación',
-    descripcion: 'Los resultados de la votación acerca de las nuevas reglas para las elecciones internas han sido analizados y compartidos.',
+    titulo: "Votación sobre Reglas de Participación",
+    descripcion:
+      "Los resultados de la votación acerca de las nuevas reglas para las elecciones internas han sido analizados y compartidos.",
     grafico: {
-      type: 'pie',
-      labels: ['Aprobado', 'Rechazado'],
+      type: "pie",
+      labels: ["Aprobado", "Rechazado"],
       datasets: [
         {
-          label: 'Resultados',
+          label: "Resultados",
           data: [320, 80],
-          backgroundColor: ['#FF6384', '#36A2EB'],
+          backgroundColor: ["#FF6384", "#36A2EB"],
         },
       ],
     },
@@ -333,24 +359,54 @@ const Noticias = () => {
   const totalPaginas = Math.ceil(noticias.length / noticiasPorPagina);
 
   // Noticias a mostrar en la página actual
-  const noticiasVisibles = noticias.slice(paginaActual * noticiasPorPagina, (paginaActual + 1) * noticiasPorPagina);
+  const noticiasVisibles = noticias.slice(
+    paginaActual * noticiasPorPagina,
+    (paginaActual + 1) * noticiasPorPagina
+  );
 
   return (
-    <section id="noticias" className='mt-24'>
-      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">Noticias</h2>
+    <section id="noticias" className="mt-24">
+      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">
+        Noticias
+      </h2>
       {/* Noticias */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {noticiasVisibles.map((item, index) => (
-          <div key={index} className="p-4 border border-[var(--border-color)] rounded-lg shadow-lg hover:shadow-xl transition">
+          <div
+            key={index}
+            className="p-4 border border-[var(--border-color)] rounded-lg shadow-lg hover:shadow-xl transition"
+          >
             <div className="pb-4">
-              <h3 className="text-xl text-[var(--color-text)] font-semibold">{item.titulo}</h3>
+              <h3 className="text-xl text-[var(--color-text)] font-semibold">
+                {item.titulo}
+              </h3>
             </div>
-            <p className="text-[var(--color-text-secondary)]">{item.descripcion}</p>
+            <p className="text-[var(--color-text-secondary)]">
+              {item.descripcion}
+            </p>
             <div className="py-4">
-              {item.grafico.type === 'bar' && <Bar data={item.grafico} options={{ responsive: true }} />}
-              {item.grafico.type === 'line' && <Line data={item.grafico} options={{ responsive: true }} />}
-              {item.grafico.type === 'pie' && <div className="w-full max-w-[300px] h-[300px] mx-auto"><Pie data={item.grafico} options={{ responsive: true, maintainAspectRatio: false }} /></div>}
-              {item.grafico.type === 'doughnut' && <div className="w-full max-w-[300px] h-[300px] mx-auto"><Doughnut data={item.grafico} options={{ responsive: true, maintainAspectRatio: false }} /></div>}
+              {item.grafico.type === "bar" && (
+                <Bar data={item.grafico} options={{ responsive: true }} />
+              )}
+              {item.grafico.type === "line" && (
+                <Line data={item.grafico} options={{ responsive: true }} />
+              )}
+              {item.grafico.type === "pie" && (
+                <div className="w-full max-w-[300px] h-[300px] mx-auto">
+                  <Pie
+                    data={item.grafico}
+                    options={{ responsive: true, maintainAspectRatio: false }}
+                  />
+                </div>
+              )}
+              {item.grafico.type === "doughnut" && (
+                <div className="w-full max-w-[300px] h-[300px] mx-auto">
+                  <Doughnut
+                    data={item.grafico}
+                    options={{ responsive: true, maintainAspectRatio: false }}
+                  />
+                </div>
+              )}
             </div>
             <hr className="my-2 border-gray-300" />
           </div>
@@ -368,29 +424,45 @@ const Noticias = () => {
             sx={{
               maxWidth: 400,
               flexGrow: 1,
-              backgroundColor: 'transparent',
-              '.MuiMobileStepper-dot': {
-                backgroundColor: '#ccc', // color de los dots inactivos
+              backgroundColor: "transparent",
+              ".MuiMobileStepper-dot": {
+                backgroundColor: "#ccc", // color de los dots inactivos
               },
-              '.MuiMobileStepper-dotActive': {
-                backgroundColor: '#EF5218', // dot activo
+              ".MuiMobileStepper-dotActive": {
+                backgroundColor: "#EF5218", // dot activo
               },
-              '.MuiButton-root': {
-                color: '#EF5218', // color del texto del botón
+              ".MuiButton-root": {
+                color: "#EF5218", // color del texto del botón
               },
-              '.MuiSvgIcon-root': {
-                color: '#EF5218', // color de las flechitas
+              ".MuiSvgIcon-root": {
+                color: "#EF5218", // color de las flechitas
               },
             }}
             nextButton={
-              <Button size="small" onClick={handleNext} disabled={paginaActual === totalPaginas - 1}>
+              <Button
+                size="small"
+                onClick={handleNext}
+                disabled={paginaActual === totalPaginas - 1}
+              >
                 Siguiente
-                {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                {theme.direction === "rtl" ? (
+                  <KeyboardArrowLeft />
+                ) : (
+                  <KeyboardArrowRight />
+                )}
               </Button>
             }
             backButton={
-              <Button size="small" onClick={handleBack} disabled={paginaActual === 0}>
-                {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+              <Button
+                size="small"
+                onClick={handleBack}
+                disabled={paginaActual === 0}
+              >
+                {theme.direction === "rtl" ? (
+                  <KeyboardArrowRight />
+                ) : (
+                  <KeyboardArrowLeft />
+                )}
                 Anterior
               </Button>
             }

@@ -18,7 +18,7 @@ loginRouter.get(
     session: false,
   }),
   (req, res) => {
-    const userString = JSON.stringify(req.user)
+    const userString = JSON.stringify(req.user);
     res.send(`<!DOCTYPE html>
     <html lang="en">
       <body>
@@ -26,7 +26,7 @@ loginRouter.get(
       <script>
         window.opener.postMessage(${userString}, 'http://localhost:5173')
       </script>
-    </html>`)
+    </html>`);
   }
 );
 

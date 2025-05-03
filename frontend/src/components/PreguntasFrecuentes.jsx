@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import preguntas from '../data/PreguntasFrecuentes.json';
+import React, { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import preguntas from "../data/PreguntasFrecuentes.json";
 
 const PreguntasFrecuentes = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -10,8 +10,10 @@ const PreguntasFrecuentes = () => {
   };
 
   return (
-    <section id="preguntas-frecuentes" className='mt-24'>
-      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">Preguntas frecuentes</h2>
+    <section id="preguntas-frecuentes" className="mt-24">
+      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">
+        Preguntas frecuentes
+      </h2>
       <div className="space-y-4">
         {preguntas.map((item, index) => (
           <div key={index}>
@@ -20,11 +22,13 @@ const PreguntasFrecuentes = () => {
               // className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer"
               className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer text-[var(--color-text)]"
             >
-              <span className="text-lg text-[var(--color-text)] font-medium">{item.pregunta}</span>
+              <span className="text-lg text-[var(--color-text)] font-medium">
+                {item.pregunta}
+              </span>
               {activeIndex === index ? (
-                <ChevronUp className="w-5 h-5 text-[var(--color-text)]"/>
+                <ChevronUp className="w-5 h-5 text-[var(--color-text)]" />
               ) : (
-                <ChevronDown className="w-5 h-5 text-[var(--color-text)]"/>
+                <ChevronDown className="w-5 h-5 text-[var(--color-text)]" />
               )}
             </button>
             {activeIndex === index && (
@@ -32,7 +36,7 @@ const PreguntasFrecuentes = () => {
                 {item.respuesta}
                 {item.link_url && item.link_texto && (
                   <>
-                    {' '}
+                    {" "}
                     <a
                       href={item.link_url}
                       target="_blank"

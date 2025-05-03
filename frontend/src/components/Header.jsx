@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { User, Menu, X, Sun, Moon, LogOut } from 'lucide-react';
-import { useLocation } from 'react-router-dom';
-import useLogout from '../Hooks/useLogout';
+import React, { useState, useEffect } from "react";
+import { User, Menu, X, Sun, Moon, LogOut } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import useLogout from "../Hooks/useLogout";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,17 +19,17 @@ const Header = () => {
 
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove("dark");
     }
   }, [darkMode]);
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/auth/check', {
-          credentials: 'include',
+        const res = await fetch("http://localhost:3000/api/auth/check", {
+          credentials: "include",
         });
         setIsAuthenticated(res.ok);
       } catch (err) {
@@ -40,11 +40,11 @@ const Header = () => {
     checkAuth();
   }, []);
 
-  if (location.pathname === '/auth') {
+  if (location.pathname === "/auth") {
     return null;
   }
 
-  const isHomePage = location.pathname === '/';
+  const isHomePage = location.pathname === "/";
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
@@ -52,7 +52,7 @@ const Header = () => {
       setMenuOpen(false); // cerrar menú después de click
       window.scrollTo({
         top: element.offsetTop - 80,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   };
@@ -63,7 +63,11 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="logo">
-            <img src="/logo.png" alt="Logo de la página" className="h-10 w-auto" />
+            <img
+              src="/logo.png"
+              alt="Logo de la página"
+              className="h-10 w-auto"
+            />
           </a>
 
           {/* Botones a la derecha */}
@@ -74,7 +78,11 @@ const Header = () => {
               className="text-[var(--color-text)] focus:outline-none lg:hidden"
               aria-label="Toggle dark mode"
             >
-              {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+              {darkMode ? (
+                <Sun className="w-6 h-6" />
+              ) : (
+                <Moon className="w-6 h-6" />
+              )}
             </button>
 
             {/* Menú hamburguesa */}
@@ -84,7 +92,11 @@ const Header = () => {
                 className="text-[var(--color-text)] flex items-center"
                 aria-label="Toggle menu"
               >
-                {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {menuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
               </button>
             </div>
           </div>
@@ -95,15 +107,30 @@ const Header = () => {
             lg:flex-row lg:space-x-10 absolute lg:static top-20 left-0 
             overflow-hidden bg-[var(--color-background)] text-[var(--color-text)] 
             lg:bg-transparent lg:h-auto
-            ${menuOpen ? 'w-full' : 'w-0'}
+            ${menuOpen ? "w-full" : "w-0"}
             lg:w-auto lg:overflow-visible`}
           >
             {isHomePage && (
               <>
-                {['acerca-de', 'como-votar', 'proximas-votaciones', 'noticias', 'preguntas-frecuentes', 'usuarios'].map((section) => (
-                  <li key={section} className="py-2 lg:py-0 text-center hover:scale-110 transition-transform duration-200">
-                    <a onClick={() => scrollToSection(section)} className="cursor-pointer font-subtitle">
-                      {section.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                {[
+                  "acerca-de",
+                  "como-votar",
+                  "proximas-votaciones",
+                  "noticias",
+                  "preguntas-frecuentes",
+                  "usuarios",
+                ].map((section) => (
+                  <li
+                    key={section}
+                    className="py-2 lg:py-0 text-center hover:scale-110 transition-transform duration-200"
+                  >
+                    <a
+                      onClick={() => scrollToSection(section)}
+                      className="cursor-pointer font-subtitle"
+                    >
+                      {section
+                        .replace("-", " ")
+                        .replace(/\b\w/g, (l) => l.toUpperCase())}
                     </a>
                   </li>
                 ))}
@@ -121,7 +148,10 @@ const Header = () => {
                   <span className="ml-2">Salir</span>
                 </button>
               ) : (
-                <a href="/auth" className="flex items-center justify-center cursor-pointer font-subtitle">
+                <a
+                  href="/auth"
+                  className="flex items-center justify-center cursor-pointer font-subtitle"
+                >
                   <User className="w-6 h-6" />
                 </a>
               )}
@@ -134,7 +164,11 @@ const Header = () => {
                 className="flex w-full items-center justify-center cursor-pointer"
                 aria-label="Toggle dark mode"
               >
-                {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+                {darkMode ? (
+                  <Sun className="w-6 h-6" />
+                ) : (
+                  <Moon className="w-6 h-6" />
+                )}
               </button>
             </li>
           </ul>

@@ -1,6 +1,6 @@
-
 export function createVotationController(req, res) {
-  const { title, description, startDate, endDate, candidates, users} = req.body;
+  const { title, description, startDate, endDate, candidates, users } =
+    req.body;
 
   // Aquí iría la lógica para crear una votación en la base de datos
   // Por ejemplo:
@@ -26,4 +26,3 @@ export function getVotationByIdController(req, res) {
   //   .findById(id)
   res.status(200).json({ message: "Votation retrieved successfully" });
 }
-

@@ -18,10 +18,15 @@ passport.use(
     function (accessToken, refreshToken, profile, done) {
       // Verifica que el dominio del correo electrónico sea 'alumnos.uach.cl'
       const email = profile.emails[0].value;
-      if (email.endsWith('@alumnos.uach.cl')) {
-        return done(null, profile);  // Autenticación exitosa
+      if (email.endsWith("@alumnos.uach.cl")) {
+        return done(null, profile); // Autenticación exitosa
       } else {
-        return done(new Error('Solo los usuarios de la Universidad Austral de Chile pueden acceder.'), null);
+        return done(
+          new Error(
+            "Solo los usuarios de la Universidad Austral de Chile pueden acceder."
+          ),
+          null
+        );
       }
     }
   )
