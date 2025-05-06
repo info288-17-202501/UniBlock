@@ -4,7 +4,6 @@ import axios from "axios";
 
 import Turnstile from "react-turnstile";
 
-
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
@@ -14,6 +13,7 @@ const Auth = () => {
   });
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
+  const [otpDigits, setOtpDigits] = useState(["", "", "", "", ""]);
   const [otpVerified, setOtpVerified] = useState(false);
   const [localError, setLocalError] = useState("");
 
@@ -23,6 +23,8 @@ const Auth = () => {
   const [acceptPrivacy, setAcceptPrivacy] = useState(false);
 
   const [captchaToken, setCaptchaToken] = useState(null);
+
+  const [otpSentMessage, setOtpSentMessage] = useState(false); // Estado para el mensaje de OTP enviado
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,15 +43,17 @@ const Auth = () => {
       if (!captchaToken) {
         setLocalError("Por favor, completa el captcha.");
         return;
-      }      
+      }
       if (!otpVerified) {
         setLocalError("Debes verificar el código OTP antes de continuar.");
         return;
       }
       if (!isAdult || !acceptPrivacy) {
-        setLocalError("Debes aceptar los términos y condiciones para continuar.");
+        setLocalError(
+          "Debes aceptar los términos y condiciones para continuar."
+        );
         return;
-      }      
+      }
     }
 
     authenticate(formData.email, formData.password, formData.username, isLogin);
@@ -70,6 +74,8 @@ const Auth = () => {
     } catch (err) {
       setLocalError("Error al enviar el OTP. Intenta nuevamente.");
     }
+
+    setOtpSentMessage(true);
   };
 
   const handleVerifyOtp = async () => {
@@ -84,6 +90,14 @@ const Auth = () => {
       setOtpVerified(true);
     } catch (err) {
       setLocalError("OTP inválido o expirado.");
+    }
+  };
+
+  // Al presionar Enter, hacer el mismo trabajo que presionar el boton de 'verificar OTP'
+  const handleKeyDownOtp = (e) => {
+    // Si la tecla presionada es Enter
+    if (e.key === "Enter") {
+      handleVerifyOtp();
     }
   };
 
@@ -177,17 +191,6 @@ const Auth = () => {
                 onChange={handleInputChange}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
               />
-            
-            {/* Captcha */}
-              {!isLogin && (
-                <div className="w-full mt-4">
-                  <Turnstile
-                    sitekey={import.meta.env.VITE_SITE_KEY}
-                    onVerify={(token) => setCaptchaToken(token)}
-                    className="w-full rounded-md shadow-sm"
-                  />
-                </div>
-              )}
 
               {!isLogin && !otpSent && (
                 <button
@@ -197,6 +200,12 @@ const Auth = () => {
                 >
                   Enviar OTP al correo
                 </button>
+              )}
+              {/* Mensaje de OTP enviado */}
+              {otpSentMessage && (
+                <p className="text-green-500 text-sm mt-2">
+                  ¡El OTP ha sido enviado al correo!
+                </p>
               )}
             </div>
 
@@ -208,14 +217,43 @@ const Auth = () => {
                 >
                   Código OTP
                 </label>
-                <input
-                  id="otp"
-                  name="otp"
-                  type="text"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
-                />
+
+                <div className="flex space-x-2 mt-2">
+                  {otpDigits.map((digit, idx) => (
+                    <input
+                      key={idx}
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={1}
+                      className="w-12 h-12 text-center border border-gray-300 rounded-md text-xl"
+                      value={digit}
+                      onChange={(e) => {
+                        const val = e.target.value.replace(/[^0-9]/g, "");
+                        if (val.length <= 1) {
+                          const newOtp = [...otpDigits];
+                          newOtp[idx] = val;
+                          setOtpDigits(newOtp);
+                          setOtp(newOtp.join(""));
+                          if (val && idx < 4) {
+                            document.getElementById(`otp-${idx + 1}`)?.focus();
+                          }
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (
+                          e.key === "Backspace" &&
+                          !otpDigits[idx] &&
+                          idx > 0
+                        ) {
+                          document.getElementById(`otp-${idx - 1}`)?.focus();
+                        }
+                        handleKeyDownOtp(e);
+                      }}
+                      id={`otp-${idx}`}
+                    />
+                  ))}
+                </div>
+
                 <button
                   type="button"
                   onClick={handleVerifyOtp}
@@ -245,6 +283,16 @@ const Auth = () => {
               />
             </div>
 
+            {/* Captcha */}
+            {!isLogin && otpSent && (
+              <Turnstile
+                sitekey={import.meta.env.VITE_SITE_KEY}
+                onVerify={(token) => setCaptchaToken(token)}
+                className="w-full"
+                theme="light"
+              />
+            )}
+
             {!isLogin && (
               <div className="space-y-2">
                 <div className="flex items-start">
@@ -267,7 +315,10 @@ const Auth = () => {
                     onChange={() => setAcceptPrivacy(!acceptPrivacy)}
                     className="mr-2 mt-1"
                   />
-                  <label htmlFor="acceptPrivacy" className="text-sm text-gray-700">
+                  <label
+                    htmlFor="acceptPrivacy"
+                    className="text-sm text-gray-700"
+                  >
                     Acepto los{" "}
                     <a
                       href="/#"
@@ -281,7 +332,6 @@ const Auth = () => {
                 </div>
               </div>
             )}
-
 
             {localError && <p className="text-red-500 text-sm">{localError}</p>}
             {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -301,7 +351,7 @@ const Auth = () => {
               </button>
             </div>
           </form>
-      
+
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -313,7 +363,7 @@ const Auth = () => {
                 </span>
               </div>
             </div>
-          
+
             {isLogin && (
               <div className="mt-6">
                 <button
