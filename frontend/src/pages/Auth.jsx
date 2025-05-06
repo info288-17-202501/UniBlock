@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import axios from "axios";
 
+import Turnstile from "react-turnstile";
+
+
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
@@ -15,6 +18,11 @@ const Auth = () => {
   const [localError, setLocalError] = useState("");
 
   const { authenticate, loading, error, message } = useAuth();
+
+  const [isAdult, setIsAdult] = useState(false);
+  const [acceptPrivacy, setAcceptPrivacy] = useState(false);
+
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,10 +38,18 @@ const Auth = () => {
         setLocalError("Solo se permiten correos @uach.cl");
         return;
       }
+      if (!captchaToken) {
+        setLocalError("Por favor, completa el captcha.");
+        return;
+      }      
       if (!otpVerified) {
         setLocalError("Debes verificar el código OTP antes de continuar.");
         return;
       }
+      if (!isAdult || !acceptPrivacy) {
+        setLocalError("Debes aceptar los términos y condiciones para continuar.");
+        return;
+      }      
     }
 
     authenticate(formData.email, formData.password, formData.username, isLogin);
@@ -131,7 +147,7 @@ const Auth = () => {
                   htmlFor="username"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Nombre de usuario
+                  Ingresa tu nombre
                 </label>
                 <input
                   id="username"
@@ -161,6 +177,18 @@ const Auth = () => {
                 onChange={handleInputChange}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
               />
+            
+            {/* Captcha */}
+              {!isLogin && (
+                <div className="w-full mt-4">
+                  <Turnstile
+                    sitekey={import.meta.env.VITE_SITE_KEY}
+                    onVerify={(token) => setCaptchaToken(token)}
+                    className="w-full rounded-md shadow-sm"
+                  />
+                </div>
+              )}
+
               {!isLogin && !otpSent && (
                 <button
                   type="button"
@@ -217,6 +245,44 @@ const Auth = () => {
               />
             </div>
 
+            {!isLogin && (
+              <div className="space-y-2">
+                <div className="flex items-start">
+                  <input
+                    type="checkbox"
+                    id="isAdult"
+                    checked={isAdult}
+                    onChange={() => setIsAdult(!isAdult)}
+                    className="mr-2 mt-1"
+                  />
+                  <label htmlFor="isAdult" className="text-sm text-gray-700">
+                    Acepto que soy mayor de 18 años
+                  </label>
+                </div>
+                <div className="flex items-start">
+                  <input
+                    type="checkbox"
+                    id="acceptPrivacy"
+                    checked={acceptPrivacy}
+                    onChange={() => setAcceptPrivacy(!acceptPrivacy)}
+                    className="mr-2 mt-1"
+                  />
+                  <label htmlFor="acceptPrivacy" className="text-sm text-gray-700">
+                    Acepto los{" "}
+                    <a
+                      href="/#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >
+                      términos y condiciones de UniBlock
+                    </a>
+                  </label>
+                </div>
+              </div>
+            )}
+
+
             {localError && <p className="text-red-500 text-sm">{localError}</p>}
             {error && <p className="text-red-500 text-sm">{error}</p>}
             {message && <p className="text-green-500 text-sm">{message}</p>}
@@ -235,7 +301,7 @@ const Auth = () => {
               </button>
             </div>
           </form>
-
+      
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -247,22 +313,24 @@ const Auth = () => {
                 </span>
               </div>
             </div>
-
-            <div className="mt-6">
-              <button
-                onClick={handleMicrosoftLogin}
-                className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
-                  alt="Microsoft logo"
-                  className="w-5 h-5 mr-2"
-                />
-                <span className="text-sm text-center leading-tight">
-                  Continuar con cuenta Microsoft UACh
-                </span>
-              </button>
-            </div>
+          
+            {isLogin && (
+              <div className="mt-6">
+                <button
+                  onClick={handleMicrosoftLogin}
+                  className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+                    alt="Microsoft logo"
+                    className="w-5 h-5 mr-2"
+                  />
+                  <span className="text-sm text-center leading-tight">
+                    Continuar con cuenta Microsoft UACh
+                  </span>
+                </button>
+              </div>
+            )}
 
             <div className="mt-6 text-center">
               <p className="text-sm">
