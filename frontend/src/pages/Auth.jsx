@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import axios from "axios";
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Turnstile from "react-turnstile";
 
 const Auth = () => {
@@ -25,6 +25,8 @@ const Auth = () => {
   const [captchaToken, setCaptchaToken] = useState(null);
 
   const [otpSentMessage, setOtpSentMessage] = useState(false); // Estado para el mensaje de OTP enviado
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -202,9 +204,14 @@ const Auth = () => {
                 </button>
               )}
               {/* Mensaje de OTP enviado */}
-              {otpSentMessage && (
-                <p className="text-green-500 text-sm mt-2">
+              {otpSentMessage && !otpVerified && (
+                <p className="text-green-500 text-sm mt-4">
                   ¡El OTP ha sido enviado al correo!
+                </p>
+              )}
+              {otpVerified && (
+                <p className="text-green-500 text-sm mt-2">
+                  OTP verificado exitosamente.
                 </p>
               )}
             </div>
@@ -261,6 +268,9 @@ const Auth = () => {
                 >
                   Verificar OTP
                 </button>
+                {localError && (
+                  <p className="text-red-500 text-sm">{localError}</p>
+                )}
               </div>
             )}
 
@@ -271,16 +281,33 @@ const Auth = () => {
               >
                 Contraseña
               </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete={isLogin ? "current-password" : "new-password"}
-                required
-                value={formData.password}
-                onChange={handleInputChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete={isLogin ? "current-password" : "new-password"}
+                  required
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  disabled={!isLogin && !otpVerified}
+                  className={`mt-1 block w-full px-3 py-2 border ${
+                    !isLogin && !otpVerified
+                      ? "bg-gray-100 cursor-not-allowed"
+                      : "border-gray-300"
+                  } rounded-md shadow-sm sm:text-sm`}
+                />
+                {formData.password.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute inset-y-0 right-0 px-3 flex items-center text-gray-500"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Captcha */}
@@ -333,7 +360,12 @@ const Auth = () => {
               </div>
             )}
 
-            {localError && <p className="text-red-500 text-sm">{localError}</p>}
+            {/* Aqui se esta mostrando 2 veces los mensajes de error, deberia ser
+              1. Mostrar error de otp deberia ir abajo del boton 'Verificar OTP', tambien en 
+              2. Error al no aceptar nuestras condiciones de registro 
+              3. Cuando ingresar un OTP invalido y apreta Enter tambien se alcanza a ver otro mensaje de 
+                'Debes verificar el código OTP antes de continuar.'*/}
+            {/* {localError && <p className="text-red-500 text-sm">{localError}</p>} */}
             {error && <p className="text-red-500 text-sm">{error}</p>}
             {message && <p className="text-green-500 text-sm">{message}</p>}
 
