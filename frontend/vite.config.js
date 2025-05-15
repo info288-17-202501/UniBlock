@@ -16,6 +16,7 @@ export default defineConfig({
       "@components": "/src/components",
       "@hooks": "/src/hooks",
       "@admin": "/src/pages/admin",
+      "@user": "/src/pages/user",
     },
   },
 });

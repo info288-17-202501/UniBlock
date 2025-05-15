@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import useAuth from "../Hooks/useAuth";
 import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Turnstile from "react-turnstile";
+import useLogin from "../Hooks/useLogin";
+import useRegister from "../Hooks/useRegister";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,21 +12,24 @@ const Auth = () => {
     email: "",
     password: "",
   });
+  
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpDigits, setOtpDigits] = useState(["", "", "", "", ""]);
   const [otpVerified, setOtpVerified] = useState(false);
   const [localError, setLocalError] = useState("");
 
-  const { authenticate, loading, error, message } = useAuth();
+  const { login, loading: loginLoading, error: loginError, message: loginMessage } = useLogin();
+  const { register, loading: registerLoading, error: registerError, message: registerMessage } = useRegister();
+
+  const loading = isLogin ? loginLoading : registerLoading;
+  const error = isLogin ? loginError : registerError;
+  const message = isLogin ? loginMessage : registerMessage;
 
   const [isAdult, setIsAdult] = useState(false);
   const [acceptPrivacy, setAcceptPrivacy] = useState(false);
-
   const [captchaToken, setCaptchaToken] = useState(null);
-
-  const [otpSentMessage, setOtpSentMessage] = useState(false); // Estado para el mensaje de OTP enviado
-
+  const [otpSentMessage, setOtpSentMessage] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (e) => {
@@ -51,14 +55,13 @@ const Auth = () => {
         return;
       }
       if (!isAdult || !acceptPrivacy) {
-        setLocalError(
-          "Debes aceptar los términos y condiciones para continuar."
-        );
+        setLocalError("Debes aceptar los términos y condiciones para continuar.");
         return;
       }
+      await register(formData.email, formData.password, formData.username);
+    } else {
+      await login(formData.email, formData.password);
     }
-
-    authenticate(formData.email, formData.password, formData.username, isLogin);
   };
 
   const handleSendOtp = async () => {
@@ -82,22 +85,17 @@ const Auth = () => {
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/otp-verify",
-        {
-          email: formData.email,
-          otp,
-        }
-      );
+      const res = await axios.post("http://localhost:3000/api/auth/otp-verify", {
+        email: formData.email,
+        otp,
+      });
       setOtpVerified(true);
     } catch (err) {
       setLocalError("OTP inválido o expirado.");
     }
   };
 
-  // Al presionar Enter, hacer el mismo trabajo que presionar el boton de 'verificar OTP'
   const handleKeyDownOtp = (e) => {
-    // Si la tecla presionada es Enter
     if (e.key === "Enter") {
       handleVerifyOtp();
     }
@@ -107,7 +105,7 @@ const Auth = () => {
     window.location.reload();
     window.history.back();
   };
-  // Estas ultimas 2 funciones son de Microsoft
+
   const handleMicrosoftLogin = () => {
     const popup = window.open(
       "http://localhost:3000/auth/microsoft",
@@ -159,10 +157,7 @@ const Auth = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {!isLogin && (
               <div>
-                <label
-                  htmlFor="username"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                   Ingresa tu nombre
                 </label>
                 <input
@@ -178,10 +173,7 @@ const Auth = () => {
             )}
 
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Correo electrónico
               </label>
               <input
@@ -203,7 +195,6 @@ const Auth = () => {
                   Enviar OTP al correo
                 </button>
               )}
-              {/* Mensaje de OTP enviado */}
               {otpSentMessage && !otpVerified && (
                 <p className="text-green-500 text-sm mt-4">
                   ¡El OTP ha sido enviado al correo!
@@ -218,10 +209,7 @@ const Auth = () => {
 
             {!isLogin && otpSent && !otpVerified && (
               <div>
-                <label
-                  htmlFor="otp"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="otp" className="block text-sm font-medium text-gray-700">
                   Código OTP
                 </label>
 
@@ -247,11 +235,7 @@ const Auth = () => {
                         }
                       }}
                       onKeyDown={(e) => {
-                        if (
-                          e.key === "Backspace" &&
-                          !otpDigits[idx] &&
-                          idx > 0
-                        ) {
+                        if (e.key === "Backspace" && !otpDigits[idx] && idx > 0) {
                           document.getElementById(`otp-${idx - 1}`)?.focus();
                         }
                         handleKeyDownOtp(e);
@@ -268,17 +252,12 @@ const Auth = () => {
                 >
                   Verificar OTP
                 </button>
-                {localError && (
-                  <p className="text-red-500 text-sm">{localError}</p>
-                )}
+                {localError && <p className="text-red-500 text-sm">{localError}</p>}
               </div>
             )}
 
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Contraseña
               </label>
               <div className="relative">
@@ -310,7 +289,6 @@ const Auth = () => {
               </div>
             </div>
 
-            {/* Captcha */}
             {!isLogin && otpSent && (
               <Turnstile
                 sitekey={import.meta.env.VITE_SITE_KEY}
@@ -342,10 +320,7 @@ const Auth = () => {
                     onChange={() => setAcceptPrivacy(!acceptPrivacy)}
                     className="mr-2 mt-1"
                   />
-                  <label
-                    htmlFor="acceptPrivacy"
-                    className="text-sm text-gray-700"
-                  >
+                  <label htmlFor="acceptPrivacy" className="text-sm text-gray-700">
                     Acepto los{" "}
                     <a
                       href="/#"
@@ -360,12 +335,6 @@ const Auth = () => {
               </div>
             )}
 
-            {/* Aqui se esta mostrando 2 veces los mensajes de error, deberia ser
-              1. Mostrar error de otp deberia ir abajo del boton 'Verificar OTP', tambien en 
-              2. Error al no aceptar nuestras condiciones de registro 
-              3. Cuando ingresar un OTP invalido y apreta Enter tambien se alcanza a ver otro mensaje de 
-                'Debes verificar el código OTP antes de continuar.'*/}
-            {/* {localError && <p className="text-red-500 text-sm">{localError}</p>} */}
             {error && <p className="text-red-500 text-sm">{error}</p>}
             {message && <p className="text-green-500 text-sm">{message}</p>}
 

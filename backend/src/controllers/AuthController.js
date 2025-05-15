@@ -44,8 +44,8 @@ export async function loginController(req, res) {
       sameSite: "strict",
       maxAge: 3600000,
     });
-
-    res.status(200).json({ message: "Login exitoso" });
+    
+    res.status(200).json({ message: "Login exitoso", user: userData });
   } catch (error) {
     console.error("Error en el login:", error);
     res.status(500).json({ message: "Error interno del servidor" });

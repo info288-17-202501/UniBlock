@@ -10,9 +10,10 @@ import ScrollToTopButton from "@components/ScrollToTopButton";
 import { ProtectedRoute } from "@pages/ProtectedRoute";
 import Auth from "@pages/Auth";
 // Paginas Admin
-import VotationForm from "@pages/admin/Votation";
-import Dashboard from "@pages/admin/Dashboard"; // Nueva página Dashboard
-import AddUser from "@pages/admin/AddUser"; // Nueva página para agregar usuario
+import VotationForm from "@admin/Votation";
+import Dashboard from "@admin/Dashboard"; 
+import AddUser from "@admin/AddUser"; 
+import UserDashboard from "@user/Dashboard";
 
 const appName = "UniBlock";
 
@@ -25,6 +26,7 @@ function App() {
       "/admin/dashboard": `Dashboard - ${appName}`,
       "/admin/create-votation": `Crear votación - ${appName}`,
       "/admin/add-user": `Agregar usuario - ${appName}`,
+      "/user/dashboard": `Dashboard - ${appName}`,
     };
 
     const currentTitle = routeTitles[location.pathname];
@@ -41,12 +43,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
-
         <Route element={<ProtectedRoute />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/create-votation" element={<VotationForm />} />
           <Route path="/admin/add-user" element={<AddUser />} />
         </Route>
+        <Route path="/user/dashboard" element={<UserDashboard />} />
       </Routes>
       <ScrollToTopButton />
     </>
