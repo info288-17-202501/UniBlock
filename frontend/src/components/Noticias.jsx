@@ -374,7 +374,7 @@ const Noticias = () => {
         {noticiasVisibles.map((item, index) => (
           <div
             key={index}
-            className="p-4 border border-[var(--border-color)] rounded-lg shadow-lg hover:shadow-xl transition"
+            className="p-4 border flex flex-col h-full border-[var(--border-color)] rounded-lg shadow-lg hover:shadow-xl transition"
           >
             <div className="pb-4">
               <h3 className="text-xl text-[var(--color-text)] font-semibold">
@@ -384,7 +384,7 @@ const Noticias = () => {
             <p className="text-[var(--color-text-secondary)]">
               {item.descripcion}
             </p>
-            <div className="py-4">
+            <div className="py-4 flex-grow">
               {item.grafico.type === "bar" && (
                 <Bar data={item.grafico} options={{ responsive: true }} />
               )}
@@ -432,10 +432,19 @@ const Noticias = () => {
                 backgroundColor: "#EF5218", // dot activo
               },
               ".MuiButton-root": {
-                color: "#EF5218", // color del texto del botón
+                color: "#EF5218", // botones activos
+                display: "flex",
+                alignItems: "end",   // centra verticalmente
+                "&.Mui-disabled": {
+                  color: "#63230b", // color cuando el botón está deshabilitado
+                },
+                // íconos dentro del botón deshabilitado
+                "&.Mui-disabled .MuiSvgIcon-root": {
+                  color: "#63230b", // flecha deshabilitada
+                },
               },
               ".MuiSvgIcon-root": {
-                color: "#EF5218", // color de las flechitas
+                color: "#EF5218", // flechas activas
               },
             }}
             nextButton={

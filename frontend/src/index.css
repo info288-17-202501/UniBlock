@@ -17,6 +17,7 @@ body {
 
 :root {
   --color-background: #ffffff;
+  --color-background-secondary: #f0f0f0;
   --color-text: #111827;
   --color-text-secondary: #364153;
 
@@ -35,6 +36,7 @@ body {
 
 .dark {
   --color-background: #212121;
+  --color-background-secondary: #2b2b2b;
   --color-text: #f9fafb;
   --color-text-secondary: #d1d1d1;
 

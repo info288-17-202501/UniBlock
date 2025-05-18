@@ -1,31 +1,9 @@
-import React, { useEffect, useState } from "react";
 import usuariosData from "../data/Usuarios.json";
-
-function useDarkClassListener() {
-  const [isDark, setIsDark] = useState(() =>
-    document.documentElement.classList.contains("dark")
-  );
-
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    });
-
-    // Observa los cambios en la clase del documento
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    // Cleanup
-    return () => observer.disconnect();
-  }, []);
-  return isDark;
-}
+import { useDarkMode } from "@context/darkModeContext"; 
 
 const Usuarios = () => {
-  const isDark = useDarkClassListener();
-  const modo = isDark ? "claro" : "oscuro";
+  const { darkMode } = useDarkMode();
+  const modo = darkMode ? "claro" : "oscuro";
   const usuariosFiltrados = usuariosData[modo];
 
   return (

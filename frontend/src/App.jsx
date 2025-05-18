@@ -19,7 +19,9 @@ const appName = "UniBlock";
 
 function App() {
   const location = useLocation();
-
+  if (localStorage.getItem("darkMode") === "true") {
+    document.documentElement.classList.add("dark");
+  }
   useEffect(() => {
     const routeTitles = {
       "/auth": `Inicio de sesión - ${appName}`,

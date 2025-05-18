@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 const Home = () => {
   return (
     <>
-      <div className="home p-10 xl:p-20">
+      <div className="home p-10 xl:p-20 bg-[var(--color-background)] transition-all duration-300 ease">
         <Hero />
         <AcercaDe />
         <ComoVotar />

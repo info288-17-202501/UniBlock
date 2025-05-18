@@ -132,12 +132,12 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
+    <div className="min-h-screen bg-[var(--color-background-secondary)] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
       <button
         onClick={handleGoBack}
-        className="absolute top-6 left-6 flex items-center space-x-1 py-2 px-4 rounded-md bg-white text-blue-600 hover:bg-blue-50 border border-blue-200 hover:border-blue-300 shadow-sm transition-all duration-200"
+        className="absolute top-6 left-6 flex items-center space-x-1 py-2 px-6 rounded-md bg-white text-blue-600 hover:bg-blue-50 border border-blue-200 hover:border-blue-300 shadow-sm transition-all duration-200 cursor-pointer "
       >
-        <span className="text-lg">←</span>
+        <span className="text-lg ">←</span>
         <span className="font-medium">Volver</span>
       </button>
 
@@ -147,17 +147,17 @@ const Auth = () => {
           alt="Logo de la página"
           className="mx-auto h-16 w-auto"
         />
-        <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-900">
+        <h2 className="mt-6 text-center text-2xl font-extrabold text-[var(--color-text)] font-title">
           {isLogin ? "Inicia sesión" : "Crea una cuenta"}
         </h2>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-[var(--color-background)] py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {!isLogin && (
               <div>
-                <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="username" className="block text-sm font-medium font-subtitle text-[--color-text]">
                   Ingresa tu nombre
                 </label>
                 <input
@@ -173,7 +173,7 @@ const Auth = () => {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-medium font-subtitle text-[var(--color-text)]">
                 Correo electrónico
               </label>
               <input
@@ -209,7 +209,7 @@ const Auth = () => {
 
             {!isLogin && otpSent && !otpVerified && (
               <div>
-                <label htmlFor="otp" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="otp" className="block text-sm font-medium text-[var(--color-text)]">
                   Código OTP
                 </label>
 
@@ -257,7 +257,7 @@ const Auth = () => {
             )}
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-medium font-subtitle text-[var(--color-text)]">
                 Contraseña
               </label>
               <div className="relative">
@@ -308,7 +308,7 @@ const Auth = () => {
                     onChange={() => setIsAdult(!isAdult)}
                     className="mr-2 mt-1"
                   />
-                  <label htmlFor="isAdult" className="text-sm text-gray-700">
+                  <label htmlFor="isAdult" className="text-sm text-[var(--color-text)]">
                     Acepto que soy mayor de 18 años
                   </label>
                 </div>
@@ -320,7 +320,7 @@ const Auth = () => {
                     onChange={() => setAcceptPrivacy(!acceptPrivacy)}
                     className="mr-2 mt-1"
                   />
-                  <label htmlFor="acceptPrivacy" className="text-sm text-gray-700">
+                  <label htmlFor="acceptPrivacy" className="text-sm text-[var(--color-text)]">
                     Acepto los{" "}
                     <a
                       href="/#"
@@ -342,7 +342,7 @@ const Auth = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex justify-center py-2 px-4 rounded-md text-white bg-blue-600 hover:bg-blue-700 sm:text-sm"
+                className="w-full flex justify-center py-2 px-4 rounded-md text-white bg-blue-600 hover:bg-blue-700 sm:text-sm cursor-pointer "
               >
                 {loading
                   ? "Procesando..."
@@ -359,7 +359,7 @@ const Auth = () => {
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
+                <span className="px-2 bg-[var(--color-background)] text-[var(--color-text-secondary)]">
                   O continuar con
                 </span>
               </div>
@@ -369,14 +369,14 @@ const Auth = () => {
               <div className="mt-6">
                 <button
                   onClick={handleMicrosoftLogin}
-                  className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center py-2 px-4 border border-[var(--button-border-color)] rounded-md shadow-sm text-sm font-medium text-[var(--button-text-color)] bg-[var(--button-background-color)] cursor-pointer hover:bg-[var(--button-background-color-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
                     alt="Microsoft logo"
                     className="w-5 h-5 mr-2"
                   />
-                  <span className="text-sm text-center leading-tight">
+                  <span className="text-sm flex items-center text-center leading-tight">
                     Continuar con cuenta Microsoft UACh
                   </span>
                 </button>
@@ -384,7 +384,7 @@ const Auth = () => {
             )}
 
             <div className="mt-6 text-center">
-              <p className="text-sm">
+              <p className="text-sm text-[var(--color-text)] font-subtitle">
                 {isLogin ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?"}
               </p>
               <button
@@ -395,7 +395,7 @@ const Auth = () => {
                   setOtp("");
                   setLocalError("");
                 }}
-                className="mt-2 text-blue-600 hover:underline text-sm"
+                className="mt-2 text-blue-600 cursor-pointer  hover:underline text-sm"
               >
                 {isLogin ? "Regístrate aquí" : "Inicia sesión aquí"}
               </button>

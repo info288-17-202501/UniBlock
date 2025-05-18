@@ -2,29 +2,20 @@ import React, { useState, useEffect } from "react";
 import { User, Menu, X, Sun, Moon, LogOut } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import useLogout from "../Hooks/useLogout";
+import { useDarkMode } from "@context/darkModeContext"; 
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const { darkMode, setDarkMode } = useDarkMode();
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const location = useLocation();
   const { logout } = useLogout();
-
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
-
+  
   useEffect(() => {
     const checkAuth = async () => {
       try {

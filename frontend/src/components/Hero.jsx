@@ -15,7 +15,7 @@ const Hero = () => {
           <div className="lg:py-10">
             <a
               href="/auth"
-              className="btn border font-bold border-[var(--button-border-color)] bg-[var(--button-background-color)] text-[var(--button-text-color)] rounded-xl px-10 py-3 shadow-[0_4px_6px_rgba(0,0,0,0.7)] hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.9)] hover:bg-[var(--button-background-color-hover)] transition"
+              className="btn border font-bold border-[var(--button-border-color)] bg-[var(--button-background-color)] text-[var(--button-text-color)] rounded-xl px-10 py-3 shadow-[0_4px_6px_rgba(0,0,0,0.7)] hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.9)] hover:bg-[var(--button-background-color-hover)] transition-all duration-300 ease-in-out"
             >
               Votar
             </a>
