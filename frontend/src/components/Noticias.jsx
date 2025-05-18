@@ -366,7 +366,7 @@ const Noticias = () => {
 
   return (
     <section id="noticias" className="mt-24">
-      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">
+      <h2 className="text-3xl font-bold text-[var(--color-text)] mb-6">
         Noticias
       </h2>
       {/* Noticias */}

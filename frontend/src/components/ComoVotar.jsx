@@ -3,7 +3,7 @@ import React from "react";
 const ComoVotar = () => {
   return (
     <section id="como-votar" className="mt-24">
-      <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">
+      <h2 className="text-3xl font-bold text-[var(--color-text)] mb-6">
         Cómo votar
       </h2>
       <div className="flex flex-col justify-center items-center lg:flex-row gap-10 xl:gap-40">

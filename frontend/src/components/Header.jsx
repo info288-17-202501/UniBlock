@@ -50,7 +50,7 @@ const Header = () => {
 
   return (
     <header>
-      <nav className="navbar bg-[var(--color-background)] p-5 xl:px-20 xl:py-5 fixed w-full border-b-2 border-[var(--navbar-border-color)] transition-all duration-300 ease z-50">
+      <nav className="navbar bg-[var(--color-background)] py-5 px-5 xl:px-20 fixed w-full border-b-2 border-[var(--navbar-border-color)] transition-all duration-300 ease z-50">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="logo">
@@ -95,11 +95,11 @@ const Header = () => {
           {/* Menú de navegación */}
           <ul
             className={`flex flex-col transition-all h-[100dvh]
-            lg:flex-row lg:space-x-10 absolute lg:static top-20 left-0 
+            lg:flex-row lg:space-x-8 absolute lg:static top-20 left-0 
             overflow-hidden bg-[var(--color-background)] text-[var(--color-text)] 
             lg:bg-transparent lg:h-auto
             ${menuOpen ? "w-full" : "w-0"}
-            lg:w-auto lg:overflow-visible`}
+            lg:w-auto`}
           >
             {isHomePage && (
               <>
