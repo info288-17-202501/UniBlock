@@ -7,12 +7,16 @@ function VotationForm() {
     description: "",
     startDate: "",
     endDate: "",
+    startTime: "",
+    endTime: "",
     candidates: [],
-    users: "todos",
+    isPublic: true,
   });
 
   const nextStep = () => setCurrentStep((prev) => prev + 1);
   const prevStep = () => setCurrentStep((prev) => prev - 1);
+
+  
 
   return (
     <div className="min-h-screen lg:pt-30 bg-white p-8">
@@ -63,11 +67,10 @@ function ProgressBar({ currentStep }) {
         {[1, 2, 3, 4].map((step) => (
           <div key={step} className="flex flex-col items-center z-10">
             <div
-              className={`w-8 h-8 flex items-center justify-center rounded-full ${
-                currentStep >= step
+              className={`w-8 h-8 flex items-center justify-center rounded-full ${currentStep >= step
                   ? "bg-blue-600 text-white"
                   : "bg-gray-200 text-gray-600"
-              } font-medium`}
+                } font-medium`}
             >
               {step}
             </div>
@@ -81,19 +84,16 @@ function ProgressBar({ currentStep }) {
       </div>
       <div className="absolute top-4 left-0 right-0 flex px-8">
         <div
-          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${
-            currentStep >= 2 ? "bg-blue-600" : "bg-transparent"
-          }`}
+          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${currentStep >= 2 ? "bg-blue-600" : "bg-transparent"
+            }`}
         ></div>
         <div
-          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${
-            currentStep >= 3 ? "bg-blue-600" : "bg-transparent"
-          }`}
+          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${currentStep >= 3 ? "bg-blue-600" : "bg-transparent"
+            }`}
         ></div>
         <div
-          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${
-            currentStep >= 4 ? "bg-blue-600" : "bg-transparent"
-          }`}
+          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${currentStep >= 4 ? "bg-blue-600" : "bg-transparent"
+            }`}
         ></div>
       </div>
     </div>
@@ -103,6 +103,7 @@ function ProgressBar({ currentStep }) {
 function Step1({ nextStep, formData, setFormData }) {
   return (
     <div className="flex flex-col gap-4">
+      {/* Campos de título y descripción (se mantienen igual) */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
           Título
@@ -127,35 +128,88 @@ function Step1({ nextStep, formData, setFormData }) {
           }
         />
       </div>
+
+      {/* Sección de Fechas y Horas */}
       <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Fecha de inicio
-          </label>
-          <input
-            type="date"
-            className="input"
-            value={formData.startDate}
-            onChange={(e) =>
-              setFormData({ ...formData, startDate: e.target.value })
-            }
-          />
+        {/* Fecha y Hora de Inicio */}
+        <div className="space-y-2">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Fecha de inicio
+            </label>
+            <input
+              type="date"
+              className="input w-full"
+              value={formData.startDate}
+              onChange={(e) =>
+                setFormData({ ...formData, startDate: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Hora de inicio
+            </label>
+            <input
+              type="time"
+              className="input w-full"
+              value={formData.startTime}
+              onChange={(e) =>
+                setFormData({ ...formData, startTime: e.target.value })
+              }
+            />
+          </div>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Fecha de fin
-          </label>
-          <input
-            type="date"
-            className="input"
-            value={formData.endDate}
-            onChange={(e) =>
-              setFormData({ ...formData, endDate: e.target.value })
-            }
-          />
+
+        {/* Fecha y Hora de Fin */}
+        <div className="space-y-2">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Fecha de fin
+            </label>
+            <input
+              type="date"
+              className="input w-full"
+              value={formData.endDate}
+              onChange={(e) =>
+                setFormData({ ...formData, endDate: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Hora de fin
+            </label>
+            <input
+              type="time"
+              className="input w-full"
+              value={formData.endTime}
+              onChange={(e) =>
+                setFormData({ ...formData, endTime: e.target.value })
+              }
+            />
+          </div>
         </div>
       </div>
-      <button className="btn-primary mt-4" onClick={nextStep}>
+
+      {/* Validación básica de fechas */}
+      {formData.startDate && formData.endDate && 
+        new Date(formData.endDate) < new Date(formData.startDate) && (
+          <p className="text-red-500 text-sm">
+            La fecha de fin no puede ser anterior a la fecha de inicio
+          </p>
+      )}
+
+      <button 
+        className="btn-primary mt-4" 
+        onClick={nextStep}
+        disabled={
+          !formData.title || 
+          !formData.startDate || 
+          !formData.endDate ||
+          (new Date(formData.endDate) < new Date(formData.startDate))
+        }
+      >
         Siguiente
       </button>
     </div>
@@ -166,10 +220,13 @@ function Step2({ nextStep, prevStep, formData, setFormData }) {
   const addCandidate = () => {
     const name = prompt("Nombre del candidato:");
     if (name) {
-      setFormData((prev) => ({
-        ...prev,
-        candidates: [...prev.candidates, name],
-      }));
+      const email = prompt("Email del candidato:");
+      if (email) {
+        setFormData((prev) => ({
+          ...prev,
+          candidates: [...prev.candidates, { name, email }],
+        }));
+      }
     }
   };
 
@@ -190,7 +247,9 @@ function Step2({ nextStep, prevStep, formData, setFormData }) {
         <ul className="border rounded-lg divide-y">
           {formData.candidates.map((c, i) => (
             <li key={i} className="p-3 flex justify-between items-center">
-              <span>{c}</span>
+              <span>
+                {c.name} ({c.email})
+              </span>
               <button
                 onClick={() => removeCandidate(i)}
                 className="text-red-500 hover:text-red-700"
@@ -230,8 +289,8 @@ function Step3({ nextStep, prevStep, formData, setFormData }) {
               type="radio"
               name="usuarios"
               className="h-4 w-4 text-blue-600"
-              checked={formData.users === "todos"}
-              onChange={() => setFormData({ ...formData, users: "todos" })}
+              checked={formData.isPublic === true}
+              onChange={() => setFormData({ ...formData, isPublic: true })}
             />
             <div>
               <span className="block text-sm font-medium">
@@ -247,10 +306,8 @@ function Step3({ nextStep, prevStep, formData, setFormData }) {
               type="radio"
               name="usuarios"
               className="h-4 w-4 text-blue-600"
-              checked={formData.users === "restringido"}
-              onChange={() =>
-                setFormData({ ...formData, users: "restringido" })
-              }
+              checked={formData.isPublic === false}
+              onChange={() => setFormData({ ...formData, isPublic: false })}
             />
             <div>
               <span className="block text-sm font-medium">
@@ -276,6 +333,32 @@ function Step3({ nextStep, prevStep, formData, setFormData }) {
 }
 
 function Step4({ prevStep, formData }) {
+
+  const handleCreateElection = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/api/votations/create-votation", {
+        method: "POST",
+        credentials: "include", // importante para enviar cookies (token de sesión)
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Elección creada con éxito");
+        console.log("Respuesta del backend:", data);
+        // puedes redirigir a otra página o limpiar el formulario
+      } else {
+        console.error("Error al crear la elección:", data.message);
+      }
+    } catch (error) {
+      console.error("Error en la petición:", error);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <h3 className="text-lg font-medium text-gray-900 mb-2">
@@ -318,10 +401,11 @@ function Step4({ prevStep, formData }) {
         <div className="border-b pb-4">
           <h4 className="text-sm font-medium text-gray-700 mb-2">Candidatos</h4>
           <div className="space-y-2">
-            {formData.candidates.length > 0 ? (
+            {formData.candidates && formData.candidates.length > 0 ? (
               formData.candidates.map((c, i) => (
                 <p key={i} className="text-sm font-medium">
-                  {c}
+                  {/* Mostrar el nombre si es un objeto, o el string directamente */}
+                  {typeof c === 'object' ? c.name : c}
                 </p>
               ))
             ) : (
@@ -334,7 +418,9 @@ function Step4({ prevStep, formData }) {
           <h4 className="text-sm font-medium text-gray-700 mb-2">
             Participantes
           </h4>
-          <p className="text-sm font-medium capitalize">{formData.users}</p>
+          <p className="text-sm font-medium capitalize">
+            {formData.isPublic ? "Todos los usuarios" : "Usuarios restringidos"}
+          </p>
         </div>
       </div>
 
@@ -342,7 +428,7 @@ function Step4({ prevStep, formData }) {
         <button className="btn-outline" onClick={prevStep} type="button">
           Volver
         </button>
-        <button className="btn-success" type="button">
+        <button className="btn-success" type="button" onClick={handleCreateElection}>
           Confirmar y crear elección
         </button>
       </div>

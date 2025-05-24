@@ -1,19 +1,36 @@
 import Votation from "../models/votations.js";
+import Candidate from "../models/candidates.js";
 
 export async function createVotationController(req, res) {
   try {
-    const { user_id, title, description, Ispublic } = req.body;
+    const { title, description, isPublic, candidates, startDate, endDate, startTime, endTime} = req.body;
+    const user_id = req.user.id;
+
+
+    const startDateTime = new Date(`${startDate}T${startTime}:00`);
+    const endDateTime = new Date(`${endDate}T${endTime}:00`);
 
     const savedVotation = await Votation.create({
       title,
       description,
-      start_date: new Date(),
-      end_date: new Date(),
-      start_time: new Date(),
-      end_time: new Date(),
-      public: Ispublic,
+      start_date: startDate,
+      end_date: endDate,
+      start_time: startDateTime,
+      end_time: endDateTime,
+      public: isPublic,
       UUID_user: user_id
     });
+
+    if (Array.isArray(candidates) && candidates.length > 0) {
+      const candidateEntries = candidates.map((candidate) => ({
+        name: candidate.name,
+        email: candidate.email,
+        id_votation: savedVotation.id
+      }));
+
+      await Candidate.bulkCreate(candidateEntries);
+    }
+
 
     res.status(201).json({ 
       message: "Votation created successfully",
@@ -30,22 +47,10 @@ export async function createVotationController(req, res) {
 }
 
 export async function getVotationsController(req, res) {
-  const votation = await Votation.findByPk(req.params.id);
-  const status = votation.getStatus(); 
-
-  res.json({
-    ...votation.toJSON(),
-    status, 
-  });
-}
-
-
-export function getVotationByIdController(req, res) {
-  const { id } = req.params;
-
-  // Aquí iría la lógica para obtener una votación por ID de la base de datos
-  // Por ejemplo:
-  // const votation = await VotationModel
-  //   .findById(id)
-  res.status(200).json({ message: "Votation retrieved successfully" });
+  try {
+    const votations = await Votation.findAll();
+    res.status(200).json({ votations });
+  } catch (err) {
+    res.status(500).json({ message: "Error retrieving votations", error: err.message });
+  }
 }

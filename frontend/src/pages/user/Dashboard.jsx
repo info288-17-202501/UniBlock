@@ -1,19 +1,106 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const UserDashboard = () => {
+  const [votations, setVotations] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const fetchVotations = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/votations/get-votations', {
+          credentials: 'include'
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al obtener las votaciones');
+        }
+
+        const { votations } = await response.json();
+        setVotations(votations);
+
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchVotations();
+  }, []);
+
+  const handleVoteClick = (votationId) => {
+    navigate(`/vote/${votationId}`);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="p-8">
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-8">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+          <p>Error: {error}</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="p-8">
+    <div className="pt-30 p-8">
       <h1 className="text-3xl font-bold mb-4">Panel de Usuario</h1>
       <p className="mb-8 text-gray-700">
-        Bienvenido a tu panel de usuario. Aquí puedes ver el estado de tus votaciones y tu información personal.
+        Bienvenido a tu panel de usuario. Aquí puedes ver todas las votaciones disponibles.
       </p>
+
+      {/* Listado de todas las votaciones */}
       <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-2">Votaciones Activas</h2>
-        <p className="text-gray-600">No tienes votaciones activas en este momento.</p>
-      </div>
-      <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-2">Historial de Votaciones</h2>
-        <p className="text-gray-600">No hay historial disponible.</p>
+        <h2 className="text-2xl font-semibold mb-4">Todas las votaciones</h2>
+
+        {votations.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {votations.map((votation) => (
+              <div
+                key={votation.id}
+                onClick={() => handleVoteClick(votation.id)}
+                className="border rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
+              >
+                <h3 className="text-xl font-semibold mb-2">{votation.title}</h3>
+                <p className="text-gray-600 mb-4 line-clamp-2">{votation.description}</p>
+                <div className="flex justify-between text-sm text-gray-500">
+                  <span>Inicia: {new Date(votation.start_date).toLocaleDateString()}</span>
+                  <span>
+                    {new Date(votation.start_time).toLocaleTimeString([], {hour: '2-digit',minute: '2-digit', hour12: false })}
+                  </span>
+                  <span>Finaliza: {new Date(votation.end_date).toLocaleDateString()}</span>
+                  <span>
+                    {new Date(votation.end_time).toLocaleTimeString([], {hour: '2-digit',minute: '2-digit', hour12: false })}
+                  </span>
+                </div>
+                <div className="mt-2 text-sm space-x-2">
+                  <span className={`px-2 py-1 rounded ${new Date(votation.end_date) < new Date() ? 'bg-gray-200 text-gray-700' : 'bg-green-100 text-green-700'}`}>
+                    {new Date(votation.end_date) < new Date() ? 'Finalizada' : 'Activa'}
+                  </span>
+                  <span className={`px-2 py-1 rounded ${votation.public ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                    {votation.public ? 'Pública' : 'Privada'}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-600">No hay votaciones disponibles en este momento.</p>
+        )}
       </div>
     </div>
   );

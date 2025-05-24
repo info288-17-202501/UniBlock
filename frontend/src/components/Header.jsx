@@ -94,7 +94,7 @@ const Header = () => {
 
           {/* Menú de navegación */}
           <ul
-            className={`flex flex-col transition-all h-[100dvh]
+            className={`flex flex-col transition-all h-[100dvh] px-5
             lg:flex-row lg:space-x-8 absolute lg:static top-20 left-0 
             overflow-hidden bg-[var(--color-background)] text-[var(--color-text)] 
             lg:bg-transparent lg:h-auto
