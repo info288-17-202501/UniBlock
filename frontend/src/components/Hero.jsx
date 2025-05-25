@@ -1,5 +1,10 @@
 import React from "react";
 
+const funcionPiola = () => {
+  
+  return "/auth"
+};
+
 const Hero = () => {
   return (
     <section id="hero" className="hero  h-screen  flex items-center">
@@ -14,7 +19,7 @@ const Hero = () => {
           </p>
           <div className="lg:py-10">
             <a
-              href="/auth"
+              href={funcionPiola()}
               className="btn border font-bold border-[var(--button-border-color)] bg-[var(--button-background-color)] text-[var(--button-text-color)] rounded-xl px-10 py-3 shadow-[0_4px_6px_rgba(0,0,0,0.7)] hover:shadow-[inset_0_4px_8px_rgba(0,0,0,0.9)] hover:bg-[var(--button-background-color-hover)] transition-all duration-300 ease-in-out"
             >
               Votar

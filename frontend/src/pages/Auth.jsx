@@ -4,8 +4,10 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Turnstile from "react-turnstile";
 import useLogin from "../Hooks/useLogin";
 import useRegister from "../Hooks/useRegister";
+import { useDarkMode } from "@context/darkModeContext"; 
 
 const Auth = () => {
+  const { darkMode } = useDarkMode();
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
     username: "",
@@ -135,7 +137,7 @@ const Auth = () => {
     <div className="min-h-screen bg-[var(--color-background-secondary)] flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative">
       <button
         onClick={handleGoBack}
-        className="absolute top-6 left-6 flex items-center space-x-1 py-2 px-6 rounded-md bg-white text-blue-600 hover:bg-blue-50 border border-blue-200 hover:border-blue-300 shadow-sm transition-all duration-200 cursor-pointer "
+        className="absolute top-6 left-6 flex items-center  space-x-1 py-2 px-6 rounded-md bg-[var(--button-background-color)] text-[var(--button-text-color)] hover:bg-[var(--button-background-color-hover)] border border-[var(--button-background-color)] hover:border-[var(--button-background-color-hover)]  shadow-sm transition-all duration-200 cursor-pointer "
       >
         <span className="text-lg ">←</span>
         <span className="font-medium">Volver</span>
@@ -294,7 +296,7 @@ const Auth = () => {
                 sitekey={import.meta.env.VITE_SITE_KEY}
                 onVerify={(token) => setCaptchaToken(token)}
                 className="w-full"
-                theme="light"
+                theme={darkMode ? "dark" : "light"}
               />
             )}
 
