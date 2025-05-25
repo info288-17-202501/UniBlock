@@ -157,7 +157,7 @@ const Auth = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {!isLogin && (
               <div>
-                <label htmlFor="username" className="block text-sm font-medium font-subtitle text-[--color-text]">
+                <label htmlFor="username" className="block text-sm text-[var(--color-text)] font-medium font-subtitle text-[--color-text]">
                   Ingresa tu nombre
                 </label>
                 <input
@@ -167,7 +167,7 @@ const Auth = () => {
                   required
                   value={formData.username}
                   onChange={handleInputChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
+                  className="mt-1 block w-full px-3 py-2 text-[var(--color-text)] border border-gray-300 rounded-md shadow-sm sm:text-sm"
                 />
               </div>
             )}
@@ -183,14 +183,14 @@ const Auth = () => {
                 required
                 value={formData.email}
                 onChange={handleInputChange}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 text-[var(--color-text)] border border-gray-300 rounded-md shadow-sm sm:text-sm"
               />
 
               {!isLogin && !otpSent && (
                 <button
                   type="button"
                   onClick={handleSendOtp}
-                  className="mt-2 text-blue-600 hover:underline text-sm"
+                  className="mt-2 text-blue-600 cursor-pointer hover:underline text-sm"
                 >
                   Enviar OTP al correo
                 </button>
@@ -220,7 +220,7 @@ const Auth = () => {
                       type="text"
                       inputMode="numeric"
                       maxLength={1}
-                      className="w-12 h-12 text-center border border-gray-300 rounded-md text-xl"
+                      className="w-12 h-12 text-center text-[var(--color-text)] border border-gray-300 rounded-md text-xl"
                       value={digit}
                       onChange={(e) => {
                         const val = e.target.value.replace(/[^0-9]/g, "");
@@ -248,7 +248,7 @@ const Auth = () => {
                 <button
                   type="button"
                   onClick={handleVerifyOtp}
-                  className="mt-2 text-blue-600 hover:underline text-sm"
+                  className="mt-2 text-blue-600 cursor-pointer hover:underline text-sm"
                 >
                   Verificar OTP
                 </button>
@@ -270,7 +270,7 @@ const Auth = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                   disabled={!isLogin && !otpVerified}
-                  className={`mt-1 block w-full px-3 py-2 border ${
+                  className={`mt-1 block w-full text-[var(--color-text)] px-3 py-2 border ${
                     !isLogin && !otpVerified
                       ? "bg-gray-100 cursor-not-allowed"
                       : "border-gray-300"
