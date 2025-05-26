@@ -306,7 +306,7 @@ const Auth = () => {
 
             {!isLogin && otpSent && (
               <Turnstile
-                sitekey={import.meta.env.CAPTCHA_SITE_KEY}
+                sitekey={import.meta.env.VITE_CAPTCHA_SITE_KEY}
                 onVerify={(token) => setCaptchaToken(token)}
                 className="w-full"
                 theme={darkMode ? "dark" : "light"}
