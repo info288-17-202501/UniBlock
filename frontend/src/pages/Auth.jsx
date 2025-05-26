@@ -16,6 +16,7 @@ const Auth = () => {
   });
   
   const [otpSent, setOtpSent] = useState(false);
+  const [otpLoading, setOtpLoading] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpDigits, setOtpDigits] = useState(["", "", "", "", ""]);
   const [otpVerified, setOtpVerified] = useState(false);
@@ -74,15 +75,17 @@ const Auth = () => {
     }
 
     try {
+      setOtpLoading(true);
       await axios.post("http://localhost:3000/api/auth/otp-send", {
         email: formData.email,
       });
       setOtpSent(true);
+      setOtpSentMessage(true);
     } catch (err) {
       setLocalError("Error al enviar el OTP. Intenta nuevamente.");
+    } finally {
+      setOtpLoading(false);
     }
-
-    setOtpSentMessage(true);
   };
 
   const handleVerifyOtp = async () => {
@@ -109,6 +112,13 @@ const Auth = () => {
   };
 
   const handleMicrosoftLogin = () => {
+    const width = 620;
+    const height = 700;
+
+    // Calcula la posición centrada
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2;
+
     const popup = window.open(
       "http://localhost:3000/auth/microsoft",
       "targetWindow",
@@ -118,14 +128,16 @@ const Auth = () => {
       menubar=no,
       scrollbars=yes,
       resizable=yes,
-      width=620,
-      height=700`
+      width=${width},
+      height=${height},
+      top=${top},
+      left=${left}`
     );
 
     const receiveMessage = (event) => {
       if (event.origin === "http://localhost:3000" && event.data) {
         sessionStorage.setItem("user", JSON.stringify(event.data));
-        popup.close();
+        popup?.close();
         window.removeEventListener("message", receiveMessage);
       }
     };
@@ -150,7 +162,7 @@ const Auth = () => {
           className="mx-auto h-16 w-auto"
         />
         <h2 className="mt-6 text-center text-2xl font-extrabold text-[var(--color-text)] font-title">
-          {isLogin ? "Inicia sesión" : "Crea una cuenta"}
+          {isLogin ? "Iniciar sesión" : "Crear una cuenta"}
         </h2>
       </div>
 
@@ -193,8 +205,9 @@ const Auth = () => {
                   type="button"
                   onClick={handleSendOtp}
                   className="mt-2 text-blue-600 cursor-pointer hover:underline text-sm"
+                  disabled={otpLoading}
                 >
-                  Enviar OTP al correo
+                  {otpLoading ? "Enviando..." : "Enviar OTP al correo"}
                 </button>
               )}
               {otpSentMessage && !otpVerified && (
@@ -293,7 +306,7 @@ const Auth = () => {
 
             {!isLogin && otpSent && (
               <Turnstile
-                sitekey={import.meta.env.VITE_SITE_KEY}
+                sitekey={import.meta.env.CAPTCHA_SITE_KEY}
                 onVerify={(token) => setCaptchaToken(token)}
                 className="w-full"
                 theme={darkMode ? "dark" : "light"}
