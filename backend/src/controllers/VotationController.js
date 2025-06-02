@@ -1,5 +1,4 @@
-import Votation from "../models/votations.js";
-import Candidate from "../models/candidates.js";
+import { Votation, Candidate } from '../models/index.js';
 
 export async function createVotationController(req, res) {
   try {
@@ -52,5 +51,24 @@ export async function getVotationsController(req, res) {
     res.status(200).json({ votations });
   } catch (err) {
     res.status(500).json({ message: "Error retrieving votations", error: err.message });
+  }
+}
+
+export async function getVotationControllerID(req, res) {
+  const { id } = req.params;
+
+  try {
+    const votation = await Votation.findByPk(id, {
+      include: [{ model: Candidate, as: 'candidates' }]
+    });
+
+    if (!votation) {
+      return res.status(404).json({ message: "Votation not found" });
+    }
+
+    res.status(200).json({ votation });
+  } catch (err) {
+    console.error("Error retrieving votation:", err);
+    res.status(500).json({ message: "Error retrieving votation", error: err.message });
   }
 }

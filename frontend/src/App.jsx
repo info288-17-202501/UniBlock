@@ -14,6 +14,7 @@ import VotationForm from "@admin/Votation";
 import Dashboard from "@admin/Dashboard"; 
 import AddUser from "@admin/AddUser"; 
 import UserDashboard from "@user/Dashboard";
+import Votation from "@user/Votation";
 
 const appName = "UniBlock";
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/admin/add-user" element={<AddUser />} />
         </Route>
         <Route path="/user/dashboard" element={<UserDashboard />} />
+        <Route path="/vote/:votationId" element={<Votation />} />
       </Routes>
       <ScrollToTopButton />
     </>
