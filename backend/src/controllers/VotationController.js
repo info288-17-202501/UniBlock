@@ -2,20 +2,26 @@ import { Votation, Candidate } from '../models/index.js';
 
 export async function createVotationController(req, res) {
   try {
-    const { title, description, isPublic, candidates, startDate, endDate, startTime, endTime} = req.body;
+    const { title, description, isPublic, candidates, startDate, endDate, startTime, endTime } = req.body;
     const user_id = req.user.id;
 
+    // Convertir startTime y endTime a formato HH:MM:SS
+    function formatTimeToHHMMSS(timeString) {
+      if (!timeString) return null; 
+      const date = new Date(`1970-01-01T${timeString}:00Z`);
+      return date.toISOString().substring(11, 19);
+    }
 
-    const startDateTime = new Date(`${startDate}T${startTime}:00`);
-    const endDateTime = new Date(`${endDate}T${endTime}:00`);
+    const formattedStartTime = formatTimeToHHMMSS(startTime);
+    const formattedEndTime = formatTimeToHHMMSS(endTime);
 
     const savedVotation = await Votation.create({
       title,
       description,
       start_date: startDate,
       end_date: endDate,
-      start_time: startDateTime,
-      end_time: endDateTime,
+      start_time: formattedStartTime,
+      end_time: formattedEndTime,
       public: isPublic,
       UUID_user: user_id
     });
@@ -31,15 +37,15 @@ export async function createVotationController(req, res) {
     }
 
 
-    res.status(201).json({ 
+    res.status(201).json({
       message: "Votation created successfully",
-      votation: savedVotation 
+      votation: savedVotation
     });
   } catch (err) {
     console.error("Error al crear la votación:", err);
-    res.status(500).json({ 
+    res.status(500).json({
       message: "Error al crear la votación",
-      error: err.message 
+      error: err.message
     });
   }
 

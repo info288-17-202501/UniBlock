@@ -7,7 +7,6 @@ const UserDashboard = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-
   useEffect(() => {
     const fetchVotations = async () => {
       try {
@@ -20,6 +19,7 @@ const UserDashboard = () => {
         }
 
         const { votations } = await response.json();
+        console.log("Votations fetched:", votations);
         setVotations(votations);
 
       } catch (err) {
@@ -69,34 +69,41 @@ const UserDashboard = () => {
 
         {votations.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {votations.map((votation) => (
-              <div
-                key={votation.id}
-                onClick={() => handleVoteClick(votation.id)}
-                className="border rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
-              >
-                <h3 className="text-xl font-semibold mb-2">{votation.title}</h3>
-                <p className="text-gray-600 mb-4 line-clamp-2">{votation.description}</p>
-                <div className="flex justify-between text-sm text-gray-500">
-                  <span>Inicia: {new Date(votation.start_date).toLocaleDateString()}</span>
-                  <span>
-                    {new Date(votation.start_time).toLocaleTimeString([], {hour: '2-digit',minute: '2-digit', hour12: false })}
-                  </span>
-                  <span>Finaliza: {new Date(votation.end_date).toLocaleDateString()}</span>
-                  <span>
-                    {new Date(votation.end_time).toLocaleTimeString([], {hour: '2-digit',minute: '2-digit', hour12: false })}
-                  </span>
+            {votations.map((votation) => {
+              // Combina la fecha de inicio con la hora de inicio para crear un objeto Date válido
+              const startDateTime = new Date(`${votation.start_date.split('T')[0]}T${votation.start_time}`);
+              // Combina la fecha de fin con la hora de fin para crear un objeto Date válido
+              const endDateTime = new Date(`${votation.end_date.split('T')[0]}T${votation.end_time}`);
+
+              return (
+                <div
+                  key={votation.id}
+                  onClick={() => handleVoteClick(votation.id)}
+                  className="border rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
+                >
+                  <h3 className="text-xl font-semibold mb-2">{votation.title}</h3>
+                  <p className="text-gray-600 mb-4 line-clamp-2">{votation.description}</p>
+                  <div className="flex justify-between text-sm text-gray-500">
+                    <span>Inicia: {new Date(votation.start_date).toLocaleDateString()}</span>
+                    <span>
+                      {startDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
+                    </span>
+                    <span>Finaliza: {new Date(votation.end_date).toLocaleDateString()}</span>
+                    <span>
+                      {endDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
+                    </span>
+                  </div>
+                  <div className="mt-2 text-sm space-x-2">
+                    <span className={`px-2 py-1 rounded ${new Date(votation.end_date) < new Date() ? 'bg-gray-200 text-gray-700' : 'bg-green-100 text-green-700'}`}>
+                      {new Date(votation.end_date) < new Date() ? 'Finalizada' : 'Activa'}
+                    </span>
+                    <span className={`px-2 py-1 rounded ${votation.public ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'}`}>
+                      {votation.public ? 'Pública' : 'Privada'}
+                    </span>
+                  </div>
                 </div>
-                <div className="mt-2 text-sm space-x-2">
-                  <span className={`px-2 py-1 rounded ${new Date(votation.end_date) < new Date() ? 'bg-gray-200 text-gray-700' : 'bg-green-100 text-green-700'}`}>
-                    {new Date(votation.end_date) < new Date() ? 'Finalizada' : 'Activa'}
-                  </span>
-                  <span className={`px-2 py-1 rounded ${votation.public ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                    {votation.public ? 'Pública' : 'Privada'}
-                  </span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <p className="text-gray-600">No hay votaciones disponibles en este momento.</p>
