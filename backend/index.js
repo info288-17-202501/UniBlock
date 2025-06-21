@@ -11,7 +11,8 @@ import "./src/middlewares/microsoft.js";
 
 dotenv.config();
 const app = express();
-const port = 3000;
+const ip = process.env.IP;
+const port = process.env.PORT;
 
 const corsOptions = {
   origin: "http://localhost:5173", // URL de tu frontend
@@ -54,8 +55,5 @@ app.use((req, res) => {
   res.status(404).json({ message: "Ruta no encontrada" });
 });
 
-// app.listen(port, () => {
-//   console.log(`Servidor con CORS corriendo en http://localhost:${port}`);
-// });
 
-app.listen(3000, () => console.log("http://localhost:3000"));
+app.listen(port, () => console.log(`Servidor corriendo en http://${ip}:${port}`));

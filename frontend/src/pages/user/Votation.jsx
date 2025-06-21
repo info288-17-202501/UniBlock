@@ -14,7 +14,7 @@ const Votation = () => {
   useEffect(() => {
     const fetchVotationData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/votations/get-votation/${votationId}`);
+        const response = await fetch(`http://localhost/api/votations/get-votation/${votationId}`);
         if (!response.ok) {
           throw new Error('No se pudo obtener la información de la votación');
         }

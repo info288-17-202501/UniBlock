@@ -3,6 +3,7 @@ import { sendVerificationCode } from "../config/mailer.js";
 import redisClient from "../config/redisConnect.js";
 import bcrypt from "bcrypt";
 import User from "../models/users.js";
+import { generateKeyPair, encryptData  } from "../services/cryptoService.js";
 
 export async function loginController(req, res) {
   const { email, password } = req.body;
@@ -32,6 +33,7 @@ export async function loginController(req, res) {
       id: user.id,
       email: user.email,
       role: user.rol,
+      isAdmin: user.isAdmin
     };
 
     const token = jwt.sign(userData, process.env.SECRET_KEY, {
@@ -111,6 +113,7 @@ export function logoutController(req, res) {
   res.status(200).json({ message: "Logout successful" });
 }
 
+
 export async function registerController(req, res) {
   const { username, email, password } = req.body;
 
@@ -131,15 +134,22 @@ export async function registerController(req, res) {
     }
 
     // 3. Encriptar la contraseña
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+     // Generar claves
+    const { publicKey, privateKey } = generateKeyPair();
+    // Cifrar clave privada
+    const { encryptedData: privateKeyEncrypted, iv: ivPriv } = encryptData(privateKey);
 
     // 4. Crear el nuevo usuario
     const newUser = await User.create({
       nombre: username,
       email: email,
-      password: hashedPassword,
+      password: hashedPassword, 
       rol: "alumno",
+      publicKey: publicKey,
+      privateKey: privateKeyEncrypted,
+      ivPriv: ivPriv,
     });
 
     // 5. Responder sin la contraseña
@@ -155,6 +165,7 @@ export async function registerController(req, res) {
   }
 }
 
+
 export async function sendOTPController(req, res) {
   const { email } = req.body;
   const code = Math.floor(10000 + Math.random() * 90000).toString();
@@ -169,9 +180,9 @@ export async function sendOTPController(req, res) {
   res.status(200).json({ message: "OTP sent successfully" });
 }
 
+
 export async function verifyOTPController(req, res) {
   const { email, otp } = req.body;
-
   const storedOTP = await redisClient.get(`otp:${email}`); // AÑADIR await
   if (!storedOTP) {
     return res.status(400).json({ message: "OTP expired or not found" });
@@ -184,6 +195,7 @@ export async function verifyOTPController(req, res) {
   await redisClient.del(`otp:${email}`);
   res.status(200).json({ message: "OTP verified successfully" });
 }
+
 
 export function recoverPasswordController(req, res) {
   // const { email, newPassword } = req.body;

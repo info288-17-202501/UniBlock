@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function VotationForm() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -333,10 +334,11 @@ function Step3({ nextStep, prevStep, formData, setFormData }) {
 }
 
 function Step4({ prevStep, formData }) {
+   const navigate = useNavigate();
 
   const handleCreateElection = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/votations/create-votation", {
+      const response = await fetch("http://localhost/api/votations/create-votation", {
         method: "POST",
         credentials: "include", // importante para enviar cookies (token de sesión)
         headers: {
@@ -346,11 +348,14 @@ function Step4({ prevStep, formData }) {
       });
 
       const data = await response.json();
+      
 
       if (response.ok) {
         alert("Elección creada con éxito");
         console.log("Respuesta del backend:", data);
         // puedes redirigir a otra página o limpiar el formulario
+        navigate("/user/dashboard"); // redirigir al listado de votaciones
+        
       } else {
         console.error("Error al crear la elección:", data.message);
       }

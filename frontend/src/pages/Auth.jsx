@@ -120,7 +120,7 @@ const Auth = () => {
     const top = window.screenY + (window.outerHeight - height) / 2;
 
     const popup = window.open(
-      "http://localhost:3000/auth/microsoft",
+      "http://localhost/auth/microsoft",
       "targetWindow",
       `toolbar=no,
       location=no,
@@ -135,7 +135,7 @@ const Auth = () => {
     );
 
     const receiveMessage = (event) => {
-      if (event.origin === "http://localhost:3000" && event.data) {
+      if (event.origin === "http://localhost" && event.data) {
         sessionStorage.setItem("user", JSON.stringify(event.data));
         popup?.close();
         window.removeEventListener("message", receiveMessage);

@@ -10,7 +10,7 @@ const UserDashboard = () => {
   useEffect(() => {
     const fetchVotations = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/votations/get-votations', {
+        const response = await fetch('http://localhost/api/votations/get-votations', {
           credentials: 'include'
         });
 

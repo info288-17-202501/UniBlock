@@ -41,8 +41,23 @@ const User = sequelize.define('User', {
   isAdmin: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
-    field: 'isAdmin' // Esto fuerza a Sequelize a usar exactamente este nombre
+    field: 'isAdmin' 
   },
+  publicKey: {
+  type: DataTypes.TEXT, 
+  allowNull: false,
+  field: 'publicKey' 
+  },
+  privateKey: {
+    type: DataTypes.TEXT, 
+    allowNull: false,
+    field: 'privateKey' 
+  },
+  ivPriv: {
+    type: DataTypes.STRING(24), // 16 bytes para AES-256-CBC, pero puedes ajustar según tu necesidad
+    allowNull: false,
+    field: 'ivPriv'    
+  }
 }, {
   tableName: 'users',
   timestamps: false, 
