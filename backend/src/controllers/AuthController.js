@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { sendVerificationCode } from "../config/mailer.js";
+import { sendVerificationCode , sendPasswordResetLink} from "../config/mailer.js";
 import redisClient from "../config/redisConnect.js";
 import bcrypt from "bcrypt";
 import User from "../models/users.js";
@@ -197,8 +197,30 @@ export async function verifyOTPController(req, res) {
 }
 
 
-export function recoverPasswordController(req, res) {
-  // const { email, newPassword } = req.body;
+export async function recoverPasswordController(req, res) {
+  const { email } = req.body;
+  if (!email) {
+    return res.status(400).json({ message: "Email is required" });
+  }
 
-  res.status(200).json({ message: "Password recovered successfully" });
+  // Verifica si el usuario existe
+  const user = await User.findOne({ where: { email } });
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  // Genera el token de recuperación
+  const token = jwt.sign({ email }, process.env.SECRET_KEY, {
+    expiresIn: "1h",
+  });
+
+  const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
+
+  // Envía el correo con el link de recuperación
+  const sent = await sendPasswordResetLink(email, resetLink);
+  if (!sent) {
+    return res.status(500).json({ message: "Error sending recovery email" });
+  }
+
+  res.status(200).json({ message: "Recovery email sent successfully" });
 }
