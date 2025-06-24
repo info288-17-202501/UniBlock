@@ -135,7 +135,7 @@ const Auth = () => {
     );
 
     const receiveMessage = (event) => {
-      if (event.origin === "http://localhost" && event.data) {
+      if (event.origin === "http://localhost:3000" && event.data) {
         sessionStorage.setItem("user", JSON.stringify(event.data));
         popup?.close();
         window.removeEventListener("message", receiveMessage);
