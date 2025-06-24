@@ -224,3 +224,42 @@ export async function recoverPasswordController(req, res) {
 
   res.status(200).json({ message: "Recovery email sent successfully" });
 }
+
+
+// Cambio de contraseña
+export async function changePasswordContoller(req, res) {
+  const { token, password } = req.body;
+
+  if (!token || !password) {
+    return res.status(400).json({ message: "Token y nueva contraseña son requeridos" });
+  }
+
+  try {
+    // Verifica y decodifica el token
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const email = decoded.email;
+
+    // Busca el usuario por email
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    // Hashea la nueva contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Actualiza la contraseña
+    await user.update({ password: hashedPassword });
+
+    res.status(200).json({ message: "Cambio de contraseña correcto" });
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(400).json({ message: "El token ha expirado" });
+    }
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(400).json({ message: "Token inválido" });
+    }
+    console.error("Error al cambiar la contraseña:", error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+}
