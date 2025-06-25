@@ -1,0 +1,31 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2025-06-24T18:56:58.771Z",
+    "idVotacion": "GENESIS",
+    "votos": [],
+    "hashAnterior": "0",
+    "hashPropio": "69fd8f0b6c7f65a506cc7cc38bbc43dc2c24fbcf439223358b5720e85f8e93b6",
+    "firmaDigital": "305fc4fb0786189f6e68a99b05fdb554bcffad516239465ebc97d9cedf8447e47b2b59cad5d9ca43157d961ac04a37f097595b6d08b21ff5f29f8f29fa0ef345a24c433787c87cdcb0694684da87d7721f998771fa3bbd385892149aed2be692e5c178e5a297ef087052d90b8c5e4cd1a3eb20f7b40e4baec97724a6f3abce8288224251cabc14e58ff5dd8023bebe5eea2de029c8fda799884205cd4c5727af2042102ef42adc954decdb6a81f08978ce03412bc90e65da1a814c95a4a70032b41962d47f64b74f998bbefaa87612218a1ed7d74a47d47cb73947cbf4b0e3416e677f4a93f86f67b74b3054ba78fdab99817c37c162990387428258fcf49136",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAunQqfE1yGEbKr8w9iamZbAfCkTDbXLuG49pm9YrQlPZ+A+5uphO1\neXd5lMqFra2WmqlwvD/qVTiP6SL1nZg75wiZLZjRbxRnKqBDLmHnozkaRsPhW9zE\nfAb4doPERZuAl7bcAX/L7vsX0FSN+ajYqzVsFqoi8Sv59ifM1xjPD6NjlzYpiLaz\necR03ipWg0+QVQcUhxwyegFWf/iAPVwoHm0hN6GDZ9kxmIt+6cy4yNLCGIol8gJ1\nbB+rRjkTcLBcoZzF4rGetAB/BbRr0GbVttDIi9F7TGpsqkF9dXsqxwMNEUSPzsQO\nTpqVAdOb/EExkq1f0IvWU/ik7d635RuiCQIDAQAB\n-----END RSA PUBLIC KEY-----\n"
+  },
+  {
+    "index": 1,
+    "timestamp": "2025-06-24T19:18:20.525Z",
+    "idVotacion": "VOTACION001",
+    "votos": [
+      {
+        "opcion": "A",
+        "timestamp": "2025-06-24T19:18:20.371Z"
+      },
+      {
+        "opcion": "B",
+        "timestamp": "2025-06-24T19:18:20.371Z"
+      }
+    ],
+    "hashAnterior": "69fd8f0b6c7f65a506cc7cc38bbc43dc2c24fbcf439223358b5720e85f8e93b6",
+    "hashPropio": "7df34e4f098ce6ce236476024baa030255ab5e20b0d04a3fe2eb092e5e416e04",
+    "firmaDigital": "48b0c17a8277869a2c4662798683bf5b0b930fb9c307d633c775c8afa4e04a620acedf7830193ed24e0a093008a3cbaac44dd8182c5b4505fbc0b41a52e8408bd09b69b2e22854f1366c512db5ae0f4edf22043bfd757281bbe07b15054ef4b0218b998482f1c01128237ed12ec3b023f400efc705f71d4fe801997c82a99ef8dc1e1a4df5fee8d5ded174e7d60790f8037cf6abc32873365e766d422fa9b0452566419566ea1a20a877aad0fb97d4f0576c959d9f41035f9e102f0b7075ca7001170185ed074ef67f485c66896b1423e1bbb9dea7ba74edc163d5a83d8103e18ca365beb28a7cc889baf666fc667a9d2c3a9aa1d18e2c6c42037558805270fe",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAunQqfE1yGEbKr8w9iamZbAfCkTDbXLuG49pm9YrQlPZ+A+5uphO1\neXd5lMqFra2WmqlwvD/qVTiP6SL1nZg75wiZLZjRbxRnKqBDLmHnozkaRsPhW9zE\nfAb4doPERZuAl7bcAX/L7vsX0FSN+ajYqzVsFqoi8Sv59ifM1xjPD6NjlzYpiLaz\necR03ipWg0+QVQcUhxwyegFWf/iAPVwoHm0hN6GDZ9kxmIt+6cy4yNLCGIol8gJ1\nbB+rRjkTcLBcoZzF4rGetAB/BbRr0GbVttDIi9F7TGpsqkF9dXsqxwMNEUSPzsQO\nTpqVAdOb/EExkq1f0IvWU/ik7d635RuiCQIDAQAB\n-----END RSA PUBLIC KEY-----\n"
+  }
+]
