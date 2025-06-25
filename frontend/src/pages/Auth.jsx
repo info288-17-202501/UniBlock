@@ -120,7 +120,7 @@ const Auth = () => {
     const top = window.screenY + (window.outerHeight - height) / 2;
 
     const popup = window.open(
-      "http://localhost/auth/microsoft",
+      "http://localhost:3000/auth/microsoft",
       "targetWindow",
       `toolbar=no,
       location=no,

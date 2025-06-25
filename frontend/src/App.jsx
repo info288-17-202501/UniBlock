@@ -18,6 +18,11 @@ import Votation from "@user/Votation";
 import ResetPassword from "@pages/ResetPassword";
 import RequestPasswordReset from "@pages/RequestPasswordReset";
 
+
+import TerminosCondiciones from "./pages/TerminosCondiciones";
+import PoliticasPrivacidad from "./pages/PoliticasPrivacidad";
+import Nosotros from "./pages/Nosotros";
+
 const appName = "UniBlock";
 
 function App() {
@@ -57,6 +62,10 @@ function App() {
         <Route path="/vote/:votationId" element={<Votation />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/request-password-reset" element={<RequestPasswordReset />} />
+        
+        <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
+        <Route path="/privacidad" element={<PoliticasPrivacidad />} />
+        <Route path="/nosotros" element={<Nosotros />} />
       </Routes>
       <ScrollToTopButton />
     </>
