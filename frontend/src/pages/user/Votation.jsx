@@ -80,7 +80,7 @@ const Votation = () => {
 
   if (error) {
     return (
-      <div className="text-center py-8 text-red-500">
+      <div className="text-center py-20 text-red-500">
         Error: {error}
         <button 
           onClick={() => navigate('/')}
@@ -103,22 +103,22 @@ const Votation = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-4  lg:pt-30">
-      <h1 className="text-2xl font-bold mb-4">{votationData.title}</h1>
-      <p className="mb-6">{votationData.description}</p>
+      <h1 className="text-2xl text-[var(--color-text)] font-bold mb-4">{votationData.title}</h1>
+      <p className="mb-6 text-[var(--color-text-secondary)]">{votationData.description}</p>
       
       <div className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Detalles de la votación:</h2>
-        <p><strong>Fecha de inicio:</strong> {new Date(votationData.start_time).toLocaleString()}</p>
-        <p><strong>Fecha de cierre:</strong> {new Date(votationData.end_time).toLocaleString()}</p>
+        <h2 className="text-xl text-[var(--color-text)] font-semibold mb-2">Detalles de la votación:</h2>
+        <p className='text-[var(--color-text)]'><strong>Fecha de cierre:</strong> {new Date(votationData.end_time).toLocaleString()}</p>
+        <p className='text-[var(--color-text)]'><strong>Fecha de inicio:</strong> {new Date(votationData.start_time).toLocaleString()}</p>
       </div>
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">Candidatos:</h2>
+        <h2 className="text-xl text-[var(--color-text)] font-semibold mb-4">Candidatos:</h2>
         <div className="space-y-4">
           {votationData.candidates.map((candidate) => (
             <div 
               key={candidate.id}
-              className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+              className={`p-4 border text-[var(--color-text)] rounded-lg cursor-pointer transition-colors ${
                 selectedCandidate === candidate.id 
                   ? 'bg-blue-100 border-blue-500' 
                   : 'hover:bg-gray-50'

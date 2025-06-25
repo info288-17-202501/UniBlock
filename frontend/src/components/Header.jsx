@@ -19,7 +19,7 @@ const Header = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost/api/auth/check", {
+        const res = await fetch("http://localhost:3000/api/auth/check", {
           credentials: "include",
         });
         setIsAuthenticated(res.ok);
@@ -113,11 +113,11 @@ const Header = () => {
                 ].map((section) => (
                   <li
                     key={section}
-                    className="py-2 lg:py-0 text-center hover:scale-110 transition-transform duration-200"
+                    className="text-center hover:scale-110 transition-transform duration-200"
                   >
                     <a
                       onClick={() => scrollToSection(section)}
-                      className="cursor-pointer font-subtitle"
+                      className="block py-2 cursor-pointer font-subtitle"
                     >
                       {section
                         .replace("-", " ")
@@ -129,11 +129,11 @@ const Header = () => {
             )}
 
             {/* Autenticación */}
-            <li className="py-2 lg:py-0 text-center hover:scale-110 transition-transform duration-200">
+            <li className="hover:scale-110 transition-transform duration-200">
               {isAuthenticated ? (
                 <button
                   onClick={logout}
-                  className="flex items-center justify-center cursor-pointer font-subtitle"
+                  className="py-2 flex items-center w-full justify-center cursor-pointer font-subtitle"
                 >
                   <LogOut className="w-6 h-6" />
                   <span className="ml-2">Salir</span>
@@ -141,7 +141,7 @@ const Header = () => {
               ) : (
                 <a
                   href="/auth"
-                  className="flex items-center justify-center cursor-pointer font-subtitle"
+                  className="block py-2 flex items-center justify-center cursor-pointer font-subtitle"
                 >
                   <User className="w-6 h-6" />
                 </a>
@@ -152,7 +152,7 @@ const Header = () => {
             <li className="hidden lg:block hover:scale-110 transition-transform duration-200">
               <button
                 onClick={toggleDarkMode}
-                className="flex w-full items-center justify-center cursor-pointer"
+                className="flex w-full h-full items-center justify-center cursor-pointer"
                 aria-label="Toggle dark mode"
               >
                 {darkMode ? (
