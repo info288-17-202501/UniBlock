@@ -139,6 +139,7 @@ const Auth = () => {
         sessionStorage.setItem("user", JSON.stringify(event.data));
         popup?.close();
         window.removeEventListener("message", receiveMessage);
+        window.location.href = "/user/dashboard"; // Redirige a la página de usuario
       }
     };
 
