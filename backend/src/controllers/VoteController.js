@@ -1,10 +1,29 @@
 import User from "../models/users.js";
 import crypto from 'crypto';
 import { decryptData } from "../services/cryptoService.js";
+import jwt from "jsonwebtoken";
 const { constants } = crypto;
 
 export async function createVoteController(req, res) {
-  const { votationId, candidateId, email } = req.body;
+  const { votationId, candidateId } = req.body;
+  // 1. Obtener el token de la cookie
+  const token = req.cookies.access_token; // El nombre de tu cookie es 'access_token'
+
+  if (!token) {
+    return res.status(401).json({ message: "No autorizado: No se encontró token de acceso" });
+  }
+
+  let email;
+  try {
+    // 2. Verificar y decodificar el token JWT
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    // Extraer el email del payload del token decodificado
+    email = decodedToken.email; 
+
+  } catch (error) {
+    console.error("Error al verificar o decodificar el token:", error);
+    return res.status(401).json({ message: "No autorizado: Token inválido o expirado" });
+  }
 
   if (!votationId || !candidateId || !email) {
     return res.status(400).json({ message: "Faltan datos" });

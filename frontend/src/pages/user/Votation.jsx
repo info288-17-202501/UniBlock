@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import useVote from '../../Hooks/useVote';
 
 const Votation = () => {
   const { votationId } = useParams();
@@ -8,8 +9,9 @@ const Votation = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  // Eliminamos el estado voterEmail
+
+  const { sendVote, loading: submitting, error: submitError, success: submitSuccess } = useVote();
 
   useEffect(() => {
     const fetchVotationData = async () => {
@@ -30,6 +32,12 @@ const Votation = () => {
     fetchVotationData();
   }, [votationId]);
 
+  useEffect(() => {
+    if (submitSuccess) {
+      setTimeout(() => navigate('/user/dashboard'), 3000);
+    }
+  }, [submitSuccess, navigate]);
+
   const handleCandidateSelect = (candidateId) => {
     setSelectedCandidate(candidateId);
   };
@@ -40,32 +48,11 @@ const Votation = () => {
       return;
     }
 
-    setSubmitting(true);
-    try {
-      // Aquí debes reemplazar con tu endpoint real para enviar el voto
-      const response = await fetch('/api/votations/submit-vote', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          votationId,
-          candidateId: selectedCandidate,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al enviar el voto');
-      }
-
-      setSubmitSuccess(true);
-      // Opcional: redirigir después de un tiempo
-      setTimeout(() => navigate('/'), 3000);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSubmitting(false);
-    }
+    sendVote({
+      votationId: votationId, // ¡CAMBIO AQUÍ! Pasa votationId directamente
+      candidateId: selectedCandidate,
+      // El email ya NO se pasa aquí
+    });
   };
 
   if (loading) {
@@ -78,11 +65,11 @@ const Votation = () => {
     );
   }
 
-  if (error) {
+  if (error || submitError) {
     return (
       <div className="text-center py-20 text-red-500">
-        Error: {error}
-        <button 
+        Error: {error || submitError}
+        <button
           onClick={() => navigate('/')}
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
@@ -102,10 +89,10 @@ const Votation = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4  lg:pt-30">
+    <div className="max-w-2xl mx-auto p-4 lg:pt-30">
       <h1 className="text-2xl text-[var(--color-text)] font-bold mb-4">{votationData.title}</h1>
       <p className="mb-6 text-[var(--color-text-secondary)]">{votationData.description}</p>
-      
+
       <div className="mb-6">
         <h2 className="text-xl text-[var(--color-text)] font-semibold mb-2">Detalles de la votación:</h2>
         <p className='text-[var(--color-text)]'><strong>Fecha de cierre:</strong> {new Date(votationData.end_time).toLocaleString()}</p>
@@ -116,11 +103,11 @@ const Votation = () => {
         <h2 className="text-xl text-[var(--color-text)] font-semibold mb-4">Candidatos:</h2>
         <div className="space-y-4">
           {votationData.candidates.map((candidate) => (
-            <div 
+            <div
               key={candidate.id}
               className={`p-4 border text-[var(--color-text)] rounded-lg cursor-pointer transition-colors ${
-                selectedCandidate === candidate.id 
-                  ? 'bg-blue-100 border-blue-500' 
+                selectedCandidate === candidate.id
+                  ? 'bg-blue-100 border-blue-500'
                   : 'hover:bg-gray-50'
               }`}
               onClick={() => handleCandidateSelect(candidate.id)}
@@ -132,10 +119,12 @@ const Votation = () => {
         </div>
       </div>
 
+      {/* Se elimina el input de correo electrónico */}
+
       <div className="flex justify-end">
         <button
           onClick={handleSubmitVote}
-          disabled={submitting || !selectedCandidate}
+          disabled={submitting || !selectedCandidate} // Se eliminó la dependencia de voterEmail
           className={`px-6 py-2 rounded-md text-white ${
             submitting || !selectedCandidate
               ? 'bg-gray-400 cursor-not-allowed'
