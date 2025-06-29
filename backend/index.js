@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { authRouter } from "./src/routes/Auth.js";
 import { loginRouter } from "./src/routes/microsoft.js";
 import { votationRouter } from './src/routes/Votations.js'; // Asegúrate de que la ruta sea correcta
+import { voteRouter } from './src/routes/Vote.js'; // Asegúrate de que la ruta sea correcta
 import  sequelize  from './src/config/sequalize.js'; // Asegúrate de que la ruta sea correcta
 import passport from "passport";
 import "./src/middlewares/microsoft.js";
@@ -33,6 +34,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter); // uniblock
 app.use("/auth", loginRouter);  //microsoft
 app.use("/api/votations", votationRouter); // votaciones
+app.use("/api/vote", voteRouter); // votaciones
 
 
 
