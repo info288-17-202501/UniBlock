@@ -5,7 +5,6 @@ import User from './users.js';
 const Votation = sequelize.define('Votation', {
   id: {
     type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
   title: {

@@ -1,0 +1,37 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2025-06-30T23:20:05.425Z",
+    "idVotacion": "GENESIS",
+    "votos": [],
+    "hashAnterior": "0",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAiAoD5xz1+4KUJqcfiaVWxi0uHHyRwTkefbbX4hBeUkWEWkdkjzXf\nMBp74KjvzBGc+d/yjFMIMQNi8F6h+cXwo3QfwfsdPEb5q9xKIZyvYniKAAivxAgp\nDVYN3TxzJYrUemh8K/5bU0q9g6h95cjmaBZomIkQ4jLUZn6ehIHlkfoCs1vPA+j6\nc4xHGSBI55xYv/fwSvPtPFx0GoqmmG/iArxpkhFDf+p6P+bepIz/ulF52N3O+dIT\nIDv6L34+iEWM+s7bzDxAud7h5EN/MfR0HJFDS+z1dijY07E26XO/XtLb4mmimbB4\nd3Afv/VE2gb7akMSIXNfWCMlFhSGvDimmwIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "49006cc70474b4e7a850a50a3eda8f6e6eeaa76fedc03486d65dcbd8fb7e9130",
+    "firmaDigital": "45de85d1ca635e7c6e5bba2e90982dc59953d62dce921878c2964ae2bcf632b2f6f03be4592ddf803ab10fcd558a5e467636885ad4ffff148f990d1e836fb9442e1693f9940bdb729c0c5a1ef6f5fe8d0b9d6b520831d0d0b0e053d8404180d78186b5254a50f8090eed68a6649e8415c45850a24f9f8e00f658b7e83b5a30f512739952e99c151c401fdaa3beb785bd9799cde94bf51d341a6d174e7059b8c83359573df83881afb856a972580d0644573ee850849903e2dbfca2ae9ae123a27530a34b371c54990e9f98cd891c01bb03cbcacc212fbf8deb86ebd41f6375af544c6e3c8f711172ddc883897285692758d17dc2c56871ed05ec2149d7b63d92"
+  },
+  {
+    "index": 1,
+    "timestamp": "2025-06-30T23:21:05.012Z",
+    "idVotacion": "1f355854-0c5a-4105-89b9-36fabd9df7f9",
+    "votos": [
+      {
+        "votation_id": "1f355854-0c5a-4105-89b9-36fabd9df7f9",
+        "candidate_id": "11",
+        "timestamp": "2025-06-30T18:09:18.242Z",
+        "firma": "YKTBDxPF9XiqBUTRIa/MbfS+fYMUzPvQxYa3lj96DdlTITxJ11YHyBK1WYAiH8qrW2h1Fk/jHm5Ewh+PSKp4riJxcSjsSkEZFf/iUOv56jK+/uq4twEx6hob50gF0Kwgwewip5zcG4QVsZMQquTyesSUje8Fvww9sLi9V9X1Fm1OfkoplhuL5Qs8e7SmID7KIs/R5Zz6Lprr6QW21n0OshI13sVVlZJMGhh36bMPh3emh4oofwEZJUdfMLf8xu8UlaG3+gmggQ7Mssn0VphjbVtNwlTcx8ZPqbTa0zRqGFXyaNL2Lp2add81VMUtzOATm4EFYd5DF/dOuVT+oocXxg==",
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo7OSGswflYusWe/UkP8h\nKcVrlvSwqxAuWngYudJRUTZy8O1+39QVTNeBgqjG76MBYGhHwi0x/EPYqasNUv6E\n8EYQ3TTP7g+ZqY1ybcDETj0CJVjLMj2ps3/wJzA6+XTpQW93jWJ2nAmiR2tvRVSL\nSI/nniAXO4124IXcy/JdyDPXtP8ywU1qABGe3F7FKK8X9KjwHyfXXT4eEoTevfal\ntVKnR/JYe9GW/t/EaRG9Wxe3uuCcK0ipLQzVnDSZi20kuHb6XzAo72f8nat1oeeT\nvKoaC92auDzMnEwNKTy4jbgzNpdhp7xB18nNO4WGIQFCRbdRKKrT/Yg59dU97l6Z\nWQIDAQAB\n-----END PUBLIC KEY-----\n"
+      },
+      {
+        "votation_id": "1f355854-0c5a-4105-89b9-36fabd9df7f9",
+        "candidate_id": "11",
+        "timestamp": "2025-06-30T18:12:44.899Z",
+        "firma": "W3z3dTf4dgs1me9p4R9N7yE4fqU3t0OFV6ZBK1MJ0Rh24aKnatDx67fds7fFtt1PcZJrVoPZDFc6ZFAsgi1g0BUvt9ew5U6jByaLZ18tbppN3IIut+U/wos/pnW0lef0HZMNtAPItU5gvfqTD9XOBVMwPH541sZQEz5YQi9VnOnZ02GyrURaoYHSENDNWE0+MRR8yaQ1GEpp09f6JIKlLnfY8Jq6A851UNKS1nINIpxwSkIZ6tatVo9StKSdyEc/ocOxDB0VCcR488UmyA+8AnnD5B/I6tf7zHnT0s8lPSleGOjF2EHVYTb5P3bzW9wrLZgkymDbkLh6Eizdp/upqA==",
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo7OSGswflYusWe/UkP8h\nKcVrlvSwqxAuWngYudJRUTZy8O1+39QVTNeBgqjG76MBYGhHwi0x/EPYqasNUv6E\n8EYQ3TTP7g+ZqY1ybcDETj0CJVjLMj2ps3/wJzA6+XTpQW93jWJ2nAmiR2tvRVSL\nSI/nniAXO4124IXcy/JdyDPXtP8ywU1qABGe3F7FKK8X9KjwHyfXXT4eEoTevfal\ntVKnR/JYe9GW/t/EaRG9Wxe3uuCcK0ipLQzVnDSZi20kuHb6XzAo72f8nat1oeeT\nvKoaC92auDzMnEwNKTy4jbgzNpdhp7xB18nNO4WGIQFCRbdRKKrT/Yg59dU97l6Z\nWQIDAQAB\n-----END PUBLIC KEY-----\n"
+      }
+    ],
+    "hashAnterior": "49006cc70474b4e7a850a50a3eda8f6e6eeaa76fedc03486d65dcbd8fb7e9130",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAiAoD5xz1+4KUJqcfiaVWxi0uHHyRwTkefbbX4hBeUkWEWkdkjzXf\nMBp74KjvzBGc+d/yjFMIMQNi8F6h+cXwo3QfwfsdPEb5q9xKIZyvYniKAAivxAgp\nDVYN3TxzJYrUemh8K/5bU0q9g6h95cjmaBZomIkQ4jLUZn6ehIHlkfoCs1vPA+j6\nc4xHGSBI55xYv/fwSvPtPFx0GoqmmG/iArxpkhFDf+p6P+bepIz/ulF52N3O+dIT\nIDv6L34+iEWM+s7bzDxAud7h5EN/MfR0HJFDS+z1dijY07E26XO/XtLb4mmimbB4\nd3Afv/VE2gb7akMSIXNfWCMlFhSGvDimmwIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "2f1c6df8b4485ba25f4c48c353cf31969f3089b619bcb067ca1102c5eccab041",
+    "firmaDigital": "7b71922f352f2329f650e5cb24cf5944cb1100b7645cc688e7c8cedeecabbdc4fc354eb4b3dca6bbb7484790653c72fd64a06ff733894cf9272aba267324454781600abf69ac9d7856aa6350c272497991c7b42fa888ae7ad1170ce83d896e4b8b190b99913e3b8a0d359d2f8f430a906159a57266bc7b84de359b1db66fd59abe5ef63a8ccd9786ef4b756cd6c6baae236d52e3af02c380e904c3b085f9fbd439c1bf312d38c5b03fcb5106da07ed4af8ebb6bd16d0c9f91f8d237152eea02eb06e64983e3836f481d2b2ccc21f6b641b45da684089581f51527458def788a5f872535a2845e72b98630ee9d55381f7edadcd3a9de6c96b184f40d80f6d7d97"
+  }
+]

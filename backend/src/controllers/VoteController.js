@@ -6,6 +6,7 @@ import crypto from "crypto";
 import { decryptData } from "../services/cryptoService.js";
 import jwt from "jsonwebtoken";
 const { constants } = crypto;
+const NODO_VALIDADOR_URL = process.env.NODO_VALIDADOR_URL
 
 export async function createVoteController(req, res) {
   const { votationId, candidateId } = req.body;
@@ -63,6 +64,8 @@ export async function createVoteController(req, res) {
       publicKey: user.publicKey,
     };
 
+    console.log("Voto firmado:", votoFirmado);
+
     // Sumar el voto al candidato segun la id de la votación y el candidato
     const candidate = await Candidate.findOne({
       where: { id_votation: votationId, id: candidateId },
@@ -107,6 +110,48 @@ export function getVotesController(req, res) {
   // const votes = await VoteModel.find({});
 
   res.status(200).json({ message: "Votes retrieved successfully" });
+}
+
+export async function sendVotestoBlockchainController(req, res) {
+  const { votationId } = req.body;
+
+  try {
+    // 1. Obtener votos desde la base de datos
+    const votosRaw = await Vote.findAll({
+  where: { votation_id: votationId },
+  attributes: ['votation_id', 'candidate_id', 'timestamp', 'firma', 'public_key']
+});
+
+if (!votosRaw || votosRaw.length === 0) {
+  return res.status(404).json({ message: "No hay votos para esta votación." });
+}
+    const votos = votosRaw.map(v => v.dataValues);
+
+    console.log("Votos obtenidos:", votos);
+
+    // 2. Enviar los votos al nodo validador usando fetch
+    const response = await fetch(`${NODO_VALIDADOR_URL}/votar`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        idVotacion: votationId,
+        votos
+      })
+    });
+
+    const data = await response.json();
+    console.log("Respuesta del nodo:", data);
+
+    // 3. Responder según resultado del nodo
+    if (response.ok && data.exito) {
+      res.status(200).json({ message: "Votos enviados y bloque creado exitosamente en la blockchain." });
+    } else {
+      res.status(400).json({ message: "El nodo rechazó los votos.", detalle: data });
+    }
+  } catch (error) {
+    console.error("Error al enviar los votos:", error.message);
+    res.status(500).json({ error: "Error interno al enviar votos a la blockchain." });
+  }
 }
 
 export function getVoteByIdController(req, res) {
