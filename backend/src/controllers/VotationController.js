@@ -1,4 +1,5 @@
 import { Votation, Candidate } from '../models/index.js';
+import VoteCast from '../models/votes_cast.js';
 
 export async function createVotationController(req, res) {
   try {
@@ -76,5 +77,44 @@ export async function getVotationControllerID(req, res) {
   } catch (err) {
     console.error("Error retrieving votation:", err);
     res.status(500).json({ message: "Error retrieving votation", error: err.message });
+  }
+}
+
+//verificar el usuario ya votó
+export async function hasUserVoted(req, res) {
+  const { votationId } = req.params;
+
+  // 1. Obtener el token de la cookie
+  const token = req.cookies.access_token; 
+  if (!token) {
+    return res.status(401).json({ message: "No autorizado: No se encontró token de acceso" });
+  }
+  let userId;
+  try {
+    // 2. Verificar y decodificar el token JWT
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    // Extraer el userId del payload del token decodificado
+    userId = decodedToken.id;
+  } catch (error) {
+    console.error("Error al verificar o decodificar el token:", error);
+    return res.status(401).json({ message: "No autorizado: Token inválido o expirado" });
+  }
+
+  try {
+    const hasVoted = await VoteCast.findOne({
+      where: {
+        votation_id: votationId,
+        user_id: userId
+      }
+    });
+
+    if (hasVoted) {
+      return res.status(200).json({ hasVoted: true });
+    } else {
+      return res.status(200).json({ hasVoted: false });
+    }
+  } catch (err) {
+    console.error("Error checking if user has voted:", err);
+    res.status(500).json({ message: "Error checking if user has voted", error: err.message });
   }
 }

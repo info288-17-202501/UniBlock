@@ -3,7 +3,7 @@ import { use } from "react";
 
 const funcionPiola = () => {
   const isAuthenticated = useAuth();
-  return isAuthenticated ? "/vote" : "/auth" ;
+  return isAuthenticated ? "/user/dashboard" : "/auth" ;
 };
 
 const Hero = () => {

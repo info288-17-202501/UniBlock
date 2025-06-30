@@ -57,12 +57,11 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/create-votation" element={<VotationForm />} />
           <Route path="/admin/add-user" element={<AddUser />} />
+          <Route path="/user/dashboard" element={<UserDashboard />} />
+          <Route path="/vote/:votationId" element={<Votation />} />
         </Route>
-        <Route path="/user/dashboard" element={<UserDashboard />} />
-        <Route path="/vote/:votationId" element={<Votation />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/request-password-reset" element={<RequestPasswordReset />} />
-        
         <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
         <Route path="/privacidad" element={<PoliticasPrivacidad />} />
         <Route path="/nosotros" element={<Nosotros />} />
