@@ -5,6 +5,7 @@ import User from './users.js';
 const Votation = sequelize.define('Votation', {
   id: {
     type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4, // 
     primaryKey: true,
   },
   title: {
@@ -43,6 +44,11 @@ const Votation = sequelize.define('Votation', {
       key: 'id',
     },
   },
+  status:{
+    type: DataTypes.TEXT,
+    allowNull: true,
+    defaultValue: 'Activo', // Valores posibles: 'Activo', 'Pendiente', 'Terminada'
+  }
 }, {
   tableName: 'votations',
   timestamps: false,

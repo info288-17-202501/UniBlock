@@ -19,8 +19,8 @@ const itemData = [
   },
   {
     img: "../ver_estadisticas.png",
-    title: "Ver Estadísticas",
-    path: "/admin/stats",
+    title: "Panel de Votaciones",
+    path: "/admin/votations",
   },
 ];
 

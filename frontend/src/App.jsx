@@ -17,6 +17,7 @@ import UserDashboard from "@user/Dashboard";
 import Votation from "@user/Votation";
 import ResetPassword from "@pages/ResetPassword";
 import RequestPasswordReset from "@pages/RequestPasswordReset";
+import VotationPanel from "./pages/admin/VotationPanel";
 
 
 import TerminosCondiciones from "./pages/TerminosCondiciones";
@@ -59,6 +60,7 @@ function App() {
           <Route path="/admin/add-user" element={<AddUser />} />
           <Route path="/user/dashboard" element={<UserDashboard />} />
           <Route path="/vote/:votationId" element={<Votation />} />
+          <Route path="/admin/votations" element={<VotationPanel />} />
         </Route>
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/request-password-reset" element={<RequestPasswordReset />} />

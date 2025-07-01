@@ -1,5 +1,6 @@
 import { Votation, Candidate } from '../models/index.js';
 import VoteCast from '../models/votes_cast.js';
+import jwt from 'jsonwebtoken';
 
 export async function createVotationController(req, res) {
   try {
@@ -116,5 +117,55 @@ export async function hasUserVoted(req, res) {
   } catch (err) {
     console.error("Error checking if user has voted:", err);
     res.status(500).json({ message: "Error checking if user has voted", error: err.message });
+  }
+}
+
+
+export async function VotationbyUser(req, res) {
+  const token = req.cookies.access_token;
+  if (!token) {
+    return res.status(401).json({ message: "No autorizado: No se encontró token de acceso" });
+  }
+
+  let userId;
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    userId = decodedToken.id;
+  } catch (error) {
+    console.error("Error al verificar o decodificar el token:", error);
+    return res.status(401).json({ message: "No autorizado: Token inválido o expirado" });
+  }
+
+  try {
+    const votations = await Votation.findAll({
+      where: { UUID_user: userId },
+    });
+
+    if (!votations || votations.length === 0) {
+      return res.status(404).json({ message: "No votations found for this user" });
+    }
+  
+
+    const now = new Date();
+
+    // Procesar cada votación
+    const updatedVotations = await Promise.all(
+      votations.map(async (votation) => {
+        const endDateTime = new Date(`${votation.end_date.toISOString().split('T')[0]}T${votation.end_time}`);
+
+        if (votation.status !== "Terminada" && now > endDateTime) {
+          // actualizar en la base de datos
+          await votation.update({ status: "Pendiente" });
+          return { ...votation.dataValues, status: "Pendiente" };
+        }
+
+        return votation;
+      })
+    );
+
+    res.status(200).json({ votations: updatedVotations });
+  } catch (err) {
+    console.error("Error retrieving votations by user:", err);
+    res.status(500).json({ message: "Error retrieving votations by user", error: err.message });
   }
 }
