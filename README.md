@@ -4,9 +4,49 @@ Repositorio del equipo VTeam 7 para el curso INFO288: Sistemas Distribuidos. Est
 # Manual de Instalación
 A continuación se presentan los pasos para instalar nuestro sistema de votación en su máquina localmente.
 
-1. Instalar Git
+## Instalar Git
 
 Instalar Git para poder gestionar el código fuente del proyecto y establecer una vinculación con el repositorio remoto.
 - Git: https://git-scm.com/downloads
 
-- 
+Una vez que Git esté instalado, se debe clonar el repositorio en el directorio local. Esto permitirá obtener una copia del código en tu computadora para visualizarlo y ejecutar la página.
+- Comando: `git clone https://github.com/info288-17-202501/UniBlock.git`
+
+## Instalar Node
+
+Instalar Node.js para gestionar dependencias y compilación.
+- Nodejs: https://nodejs.org/en/
+
+Nota: El lenguaje principal de nuestro trabajo es JavaScript, el cual por defecto viene incluido al instalar Node.js
+
+## Instalar dependencias para backend
+
+`
+cd backend
+npm install
+`
+
+## Instalar dependencias para frontend
+
+`
+cd frontend
+npm install
+`
+
+Ya con todo instalado, es hora de ejecutar de iniciar el servidor.
+
+## Iniciar backend
+
+`
+cd backend
+npm run dev
+`
+
+## Iniciar frontend
+
+`
+cd frontend
+npm run dev
+`
+
+
