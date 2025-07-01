@@ -18,6 +18,7 @@ export default defineConfig({
       "@admin": "/src/pages/admin",
       "@user": "/src/pages/user",
       "@context": "/src/context",
+      "@assets": "/src/assets",
     },
   },
 });

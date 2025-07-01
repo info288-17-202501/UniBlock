@@ -1,5 +1,4 @@
 import { useAuth } from "@hooks/useAuthenticated";
-import { use } from "react";
 
 const funcionPiola = () => {
   const isAuthenticated = useAuth();
