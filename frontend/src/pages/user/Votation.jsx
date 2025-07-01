@@ -54,7 +54,7 @@ const Votation = () => {
 
   useEffect(() => {
     const updateItemsPerPage = () => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         if (window.innerWidth >= 1200) {
           setItemsPerPage(3);
         } else if (window.innerWidth >= 768) {
@@ -66,8 +66,8 @@ const Votation = () => {
     };
 
     updateItemsPerPage();
-    window.addEventListener('resize', updateItemsPerPage);
-    return () => window.removeEventListener('resize', updateItemsPerPage);
+    window.addEventListener("resize", updateItemsPerPage);
+    return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
 
   useEffect(() => {
@@ -82,15 +82,15 @@ const Votation = () => {
 
   const nextSlide = () => {
     if (votationData?.candidates) {
-      setCurrentIndex((prevIndex) => 
-        (prevIndex + 1) % votationData.candidates.length
+      setCurrentIndex(
+        (prevIndex) => (prevIndex + 1) % votationData.candidates.length
       );
     }
   };
 
   const prevSlide = () => {
     if (votationData?.candidates) {
-      setCurrentIndex((prevIndex) => 
+      setCurrentIndex((prevIndex) =>
         prevIndex === 0 ? votationData.candidates.length - 1 : prevIndex - 1
       );
     }
@@ -99,18 +99,18 @@ const Votation = () => {
   const getVisibleCandidates = () => {
     if (!votationData?.candidates) return [];
     const candidates = votationData.candidates;
-    
+
     // Si hay menos candidatos que itemsPerPage, devolver todos los candidatos
     if (candidates.length <= itemsPerPage) {
       return candidates;
     }
-    
+
     const visible = [];
     for (let i = 0; i < itemsPerPage; i++) {
       const index = (currentIndex + i) % candidates.length;
       visible.push(candidates[index]);
     }
-    
+
     return visible;
   };
 
@@ -136,40 +136,37 @@ const Votation = () => {
       </div>
     );
   }
-if (error || submitError) {
-  return (
-    <div className="flex items-center justify-center min-h-screen px-4 ">
-      <div className="bg-red-100 border border-red-400 text-red-700 rounded-lg p-6 max-w-xl w-full text-center shadow-md">
-        <div className="flex flex-col items-center space-y-4">
-          <svg
-            className="w-10 h-10 text-red-500"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728"
-            />
-          </svg>
-          <h2 className="text-2xl font-semibold">¡Ocurrió un error!</h2>
-          <p className="text-sm sm:text-base">
-            {error || submitError}
-          </p>
-          <button
-            onClick={() => navigate("/")}
-            className="mt-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-200"
-          >
-            Volver al inicio
-          </button>
+  if (error || submitError) {
+    return (
+      <div className="flex items-center justify-center min-h-screen px-4 ">
+        <div className="bg-red-100 border border-red-400 text-red-700 rounded-lg p-6 max-w-xl w-full text-center shadow-md">
+          <div className="flex flex-col items-center space-y-4">
+            <svg
+              className="w-10 h-10 text-red-500"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728"
+              />
+            </svg>
+            <h2 className="text-2xl font-semibold">¡Ocurrió un error!</h2>
+            <p className="text-sm sm:text-base">{error || submitError}</p>
+            <button
+              onClick={() => navigate("/")}
+              className="mt-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-200"
+            >
+              Volver al inicio
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
-
+    );
+  }
 
   if (submitSuccess) {
     return (
@@ -197,11 +194,11 @@ if (error || submitError) {
         </h2>
         <p className="text-[var(--color-text)]">
           <strong>Fecha de cierre:</strong>{" "}
-          {new Date(votationData.end_time).toLocaleString()}
+          {new Date(votationData.end_date).toLocaleDateString()}{" "}
         </p>
         <p className="text-[var(--color-text)]">
           <strong>Fecha de inicio:</strong>{" "}
-          {new Date(votationData.start_time).toLocaleString()}
+          {new Date(votationData.start_date).toLocaleDateString()}{" "}
         </p>
       </div>
 
@@ -217,8 +214,18 @@ if (error || submitError) {
               onClick={prevSlide}
               className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-orange-600 hover:bg-orange-700 text-white p-3 rounded-full shadow-lg transition-all duration-200"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
           )}
@@ -229,7 +236,9 @@ if (error || submitError) {
               <div
                 key={`${candidate.id}-${currentIndex}-${index}`}
                 className={`min-w-[280px] max-w-[380px] w-full rounded-xl overflow-hidden shadow-lg text-white transition transform hover:scale-[1.02] duration-200 ${
-                  selectedCandidate === candidate.id ? "ring-4 ring-orange-400" : ""
+                  selectedCandidate === candidate.id
+                    ? "ring-4 ring-orange-400"
+                    : ""
                 }`}
                 style={{ backgroundColor: "#2b2b2b" }}
               >
@@ -243,7 +252,7 @@ if (error || submitError) {
                         top: "-4px",
                         left: "-4px",
                         width: "calc(100% + 8px)",
-                        height: "calc(100% + 8px)"
+                        height: "calc(100% + 8px)",
                       }}
                     ></div>
 
@@ -262,12 +271,14 @@ if (error || submitError) {
                       {candidate.name}
                     </h3>
                     <p className="text-xs sm:text-sm md:text-base text-gray-300 italic leading-relaxed flex items-center justify-center">
-                      {candidate.degree || "Ingeniería civil informática – 4to año"}
+                      {candidate.degree ||
+                        "Ingeniería civil informática – 4to año"}
                     </p>
                   </div>
-                  <button 
+                  <button
                     onClick={() => handleCandidateSelect(candidate.id)}
-                    className="mt-4 bg-orange-600 hover:bg-orange-700 text-white font-semibold px-4 py-2 rounded-full cursor-pointer text-sm sm:text-base transition-all duration-200 w-[200px] self-center">
+                    className="mt-4 bg-orange-600 hover:bg-orange-700 text-white font-semibold px-4 py-2 rounded-full cursor-pointer text-sm sm:text-base transition-all duration-200 w-[200px] self-center"
+                  >
                     Seleccionar
                   </button>
                 </div>
@@ -281,8 +292,18 @@ if (error || submitError) {
               onClick={nextSlide}
               className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-orange-600 hover:bg-orange-700 text-white p-3 rounded-full shadow-lg transition-all duration-200"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           )}
@@ -290,12 +311,18 @@ if (error || submitError) {
           {/* Indicadores de puntos */}
           {votationData?.candidates?.length > itemsPerPage && (
             <div className="flex justify-center mt-6 space-x-2">
-              {Array.from({ length: Math.ceil(votationData.candidates.length / itemsPerPage) }).map((_, index) => (
+              {Array.from({
+                length: Math.ceil(
+                  votationData.candidates.length / itemsPerPage
+                ),
+              }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index * itemsPerPage)}
                   className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                    Math.floor(currentIndex / itemsPerPage) === index ? 'bg-orange-600' : 'bg-gray-400'
+                    Math.floor(currentIndex / itemsPerPage) === index
+                      ? "bg-orange-600"
+                      : "bg-gray-400"
                   }`}
                 />
               ))}
@@ -303,8 +330,6 @@ if (error || submitError) {
           )}
         </div>
       </div>
-
-      
 
       {/* Se elimina el input de correo electrónico */}
 
