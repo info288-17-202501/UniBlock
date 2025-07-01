@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 function VotationForm() {
+  const [authorized, setAuthorized] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     title: "",
@@ -17,7 +19,30 @@ function VotationForm() {
   const nextStep = () => setCurrentStep((prev) => prev + 1);
   const prevStep = () => setCurrentStep((prev) => prev - 1);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+      fetch("http://localhost:3000/api/checks/isadmin", {
+        method: "GET",
+        credentials: "include", 
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("No autorizado");
+          return res.json();
+        })
+        .then(() => {
+          setAuthorized(true);
+          setLoading(false);
+        })
+        .catch(() => {
+          setAuthorized(false);
+          setLoading(false);
+          navigate("/"); // o muestra mensaje si prefieres
+        });
+    }, []);
   
+    if (loading) return <div>Cargando...</div>;
+
 
   return (
     <div className="min-h-screen lg:pt-30 bg-white p-8">

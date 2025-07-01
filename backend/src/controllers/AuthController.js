@@ -83,6 +83,7 @@ export function checkAuthController(req, res) {
       user: {
         id: decoded.userId,
         email: decoded.email,
+        isAdmin: decoded.isAdmin,
         // Agrega más datos del usuario según lo que incluyas en el token
       },
     });
@@ -287,5 +288,49 @@ export async function changePasswordContoller(req, res) {
     }
     console.error("Error al cambiar la contraseña:", error);
     res.status(500).json({ message: "Error interno del servidor" });
+  }
+}
+
+export async function registerControllerSinVerificacion(req, res) {
+  const { username, email, password } = req.body;
+
+  try {
+    // Verificar si ya existe un usuario con ese correo
+    const userExists = await User.findOne({ where: { email } });
+
+    if (userExists) {
+      return res.status(409).json({ message: "El usuario ya está registrado" });
+    }
+
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Generar claves pública y privada
+    const { publicKey, privateKey } = generateKeyPair();
+
+    // Cifrar la clave privada
+    const { encryptedData: privateKeyEncrypted, iv: ivPriv } = encryptData(privateKey);
+
+    // Crear el nuevo usuario
+    const newUser = await User.create({
+      nombre: username,
+      email,
+      password: hashedPassword,
+      rol: "administrador",
+      isAdmin: true,
+      publicKey,
+      privateKey: privateKeyEncrypted,
+      ivPriv,
+    });
+
+    const { id, nombre, email: userEmail, rol, institucion } = newUser;
+
+    return res.status(201).json({
+      message: "Usuario registrado exitosamente",
+      user: { id, nombre, email: userEmail, rol, institucion },
+    });
+  } catch (error) {
+    console.error("Error en el registro:", error);
+    return res.status(500).json({ message: "Error interno del servidor" });
   }
 }

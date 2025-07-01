@@ -7,6 +7,7 @@ import { useDarkMode } from "@context/darkModeContext";
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const [userData, setUserData] = useState(null);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -22,14 +23,27 @@ const Header = () => {
         const res = await fetch("http://localhost:3000/api/auth/check", {
           credentials: "include",
         });
-        setIsAuthenticated(res.ok);
+
+        if (res.ok) {
+          const data = await res.json(); // Parse the JSON response
+          setIsAuthenticated(data.authenticated); // This will be true
+          setUserData(data.user); // Store the user object
+        } else {
+          // Handle cases where res.ok is false (e.g., 401, 500)
+          setIsAuthenticated(false);
+          setUserData(null);
+          // Optionally, you could parse the error message if your backend sends it
+          // const errorData = await res.json();
+          // console.error("Authentication error:", errorData.message);
+        }
       } catch (err) {
-        console.error(err);
+        console.error("Network or fetch error:", err);
         setIsAuthenticated(false);
+        setUserData(null);
       }
     };
     checkAuth();
-  }, []);
+  }, []); // Empty dependency array means this runs once on component mount
 
   if (location.pathname === "/auth") {
     return null;
@@ -147,6 +161,19 @@ const Header = () => {
                 </a>
               )}
             </li>
+
+            {/* Si es admin boton para /admin/dashboard*/}
+            {isAuthenticated && userData?.isAdmin && (
+              <li className="hover:scale-110 transition-transform duration-200">
+                <a
+                  href="/admin/dashboard"
+                  className="block py-2 flex items-center justify-center cursor-pointer font-subtitle"
+                >
+                  <span className="mr-2">Ir a panel administrador</span>
+                </a>
+              </li>
+            )}
+
 
             {/* Botón de modo oscuro (en escritorio) */}
             <li className="hidden lg:block hover:scale-110 transition-transform duration-200">

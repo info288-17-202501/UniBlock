@@ -8,6 +8,7 @@ import { votationRouter } from './src/routes/Votations.js'; // Asegúrate de que
 import { voteRouter } from './src/routes/Vote.js'; // Asegúrate de que la ruta sea correcta
 import  sequelize  from './src/config/sequalize.js'; // Asegúrate de que la ruta sea correcta
 import  sequelizeVote  from './src/config/sequalizeVote.js'; // Asegúrate de que la ruta sea correcta
+import { checksRouter } from "./src/routes/Checks.js";
 import passport from "passport";
 import "./src/middlewares/microsoft.js";
 
@@ -36,6 +37,7 @@ app.use("/api/auth", authRouter); // uniblock
 app.use("/auth", loginRouter);  //microsoft
 app.use("/api/votations", votationRouter); // votaciones
 app.use("/api/vote", voteRouter); // votaciones
+app.use("/api/checks", checksRouter); // Rutas de verificación
 
 
 

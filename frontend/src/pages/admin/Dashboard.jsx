@@ -1,6 +1,6 @@
-// https://mui.com/material-ui/react-image-list/
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { Typography } from "@mui/material";
@@ -22,15 +22,39 @@ const itemData = [
     title: "Ver Estadísticas",
     path: "/admin/stats",
   },
-
-  // Puedes agregar más con distintas rutas
 ];
 
 function Dashboard() {
   const isXs = useMediaQuery("(max-width:600px)");
   const isSm = useMediaQuery("(max-width:900px)");
-
   const cols = isXs ? 1 : isSm ? 2 : 3;
+
+  const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/checks/isadmin", {
+      method: "GET",
+      credentials: "include", 
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("No autorizado");
+        return res.json();
+      })
+      .then(() => {
+        setAuthorized(true);
+        setLoading(false);
+      })
+      .catch(() => {
+        setAuthorized(false);
+        setLoading(false);
+        navigate("/"); // o muestra mensaje si prefieres
+      });
+  }, []);
+
+  if (loading) return <div>Cargando...</div>;
+
   return (
     <div className="xl:pt-20" style={{ overflow: "hidden" }}>
       <Typography
@@ -38,7 +62,7 @@ function Dashboard() {
         gutterBottom
         sx={{
           textAlign: "center",
-          marginTop: "30px", // o lo que mida tu header
+          marginTop: "30px",
           marginBottom: 4,
         }}
       >
@@ -68,7 +92,11 @@ function Dashboard() {
                 srcSet={`${item.img}?w=248&h=164&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.title}
                 loading="lazy"
-                style={{ borderRadius: "8px", width: "100%", height: "auto" }}
+                style={{
+                  borderRadius: "8px",
+                  width: "100%",
+                  height: "auto",
+                }}
               />
               <Typography
                 variant="subtitle1"

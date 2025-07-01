@@ -26,16 +26,7 @@ const useLogin = () => {
 
       if (response.ok) {
         setMessage(data.message);
-        const role = data.user.role;
-        console.log("Cookie set:", document.cookie);
-        if (role === "admin") {
-          navigate("/admin/dashboard");
-        } else if (role === "alumno") {
-          navigate("/user/dashboard");
-        } else {
-          navigate("/"); 
-        }
-
+        navigate("/user/dashboard"); 
         window.location.reload();
       } else {
         setError(data.message);

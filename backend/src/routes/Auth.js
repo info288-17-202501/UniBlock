@@ -7,7 +7,8 @@ import {
   recoverPasswordController,
   logoutController,
   checkAuthController,
-  changePasswordContoller
+  changePasswordContoller,
+  registerControllerSinVerificacion
 } from "../controllers/AuthController.js";
 
 const router = express.Router();
@@ -20,5 +21,6 @@ router.post("/otp-verify", verifyOTPController);
 router.post("/recover-password", recoverPasswordController);
 router.post("/logout", logoutController);
 router.post("/reset-password", changePasswordContoller)
+router.post("/register-sin-verificacion", registerControllerSinVerificacion);
 
 export { router as authRouter };
