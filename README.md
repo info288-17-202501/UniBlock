@@ -1,6 +1,14 @@
 # UniBlock: Un Sistema de Votacion basado en Blockchain
 Repositorio del equipo VTeam 7 para el curso INFO288: Sistemas Distribuidos. Este repositorio contiene el código fuente de nuestro sistema de votación universitaria basado en blockchain, diseñado para garantizar seguridad, transparencia e integridad en los procesos electorales.
 
+# Integrantes
+
+- <a href="https://github.com/fcordovav">Felipe Córdova</a>
+- <a href="https://github.com/CreativeSelf1">Fernando Castillo</a>
+- <a href="https://github.com/Lukayx">Fernando Inzulza</a>
+- <a href="https://github.com/cperez17">Cristóbal Pérez</a>
+- <a href="https://github.com/JuanElPro7">Juan Santana</a>
+
 # Manual de Instalación
 A continuación se presentan los pasos para instalar nuestro sistema de votación en su máquina localmente.
 
