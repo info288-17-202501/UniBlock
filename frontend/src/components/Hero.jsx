@@ -1,8 +1,9 @@
-import React from "react";
+import { useAuth } from "@hooks/useAuthenticated";
+import { use } from "react";
 
 const funcionPiola = () => {
-  
-  return "/auth"
+  const isAuthenticated = useAuth();
+  return isAuthenticated ? "/user/dashboard" : "/auth" ;
 };
 
 const Hero = () => {

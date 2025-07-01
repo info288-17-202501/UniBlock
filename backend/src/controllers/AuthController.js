@@ -1,9 +1,12 @@
 import jwt from "jsonwebtoken";
-import { sendVerificationCode , sendPasswordResetLink} from "../config/mailer.js";
+import {
+  sendVerificationCode,
+  sendPasswordResetLink,
+} from "../config/mailer.js";
 import redisClient from "../config/redisConnect.js";
 import bcrypt from "bcrypt";
 import User from "../models/users.js";
-import { generateKeyPair, encryptData  } from "../services/cryptoService.js";
+import { generateKeyPair, encryptData } from "../services/cryptoService.js";
 
 export async function loginController(req, res) {
   const { email, password } = req.body;
@@ -22,6 +25,10 @@ export async function loginController(req, res) {
       return res.status(401).json({ message: "Credenciales inválidas" });
     }
 
+    if (!user.password) {
+      return res.status(401).json({ message: "Credenciales inválidas" });
+    }
+
     // Comparar la contraseña
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
@@ -33,7 +40,7 @@ export async function loginController(req, res) {
       id: user.id,
       email: user.email,
       role: user.rol,
-      isAdmin: user.isAdmin
+      isAdmin: user.isAdmin,
     };
 
     const token = jwt.sign(userData, process.env.SECRET_KEY, {
@@ -46,7 +53,7 @@ export async function loginController(req, res) {
       sameSite: "strict",
       maxAge: 3600000,
     });
-    
+
     res.status(200).json({ message: "Login exitoso", user: userData });
   } catch (error) {
     console.error("Error en el login:", error);
@@ -113,7 +120,6 @@ export function logoutController(req, res) {
   res.status(200).json({ message: "Logout successful" });
 }
 
-
 export async function registerController(req, res) {
   const { username, email, password } = req.body;
 
@@ -125,27 +131,49 @@ export async function registerController(req, res) {
         .status(400)
         .json({ message: "El email debe terminar con @alumnos.uach.cl" });
     }
-
-    // 2. Verificar si el usuario ya existe
+    
     const userExists = await User.findOne({ where: { email } });
 
-    if (userExists) {
+    // Si el usuario ya existe y tiene contraseña, es un conflicto
+    if (userExists && userExists.password) {
       return res.status(409).json({ message: "El usuario ya está registrado" });
     }
+
+    // Si el usuario existe pero no tiene contraseña (es de Microsoft), actualizamos
+    if (userExists && !userExists.password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      await userExists.update({
+        password: hashedPassword,
+        nombre: username,
+      });
+
+      return res.status(200).json({
+        message: "Usuario actualizado con contraseña",
+        user: {
+          id: userExists.id,
+          nombre: userExists.nombre,
+          email: userExists.email,
+          rol: userExists.rol,
+        },
+      });
+    }
+
+    // Si no existe, lo creamos desde cero
 
     // 3. Encriptar la contraseña
     const hashedPassword = await bcrypt.hash(password, 10);
 
-     // Generar claves
+    // Generar claves
     const { publicKey, privateKey } = generateKeyPair();
     // Cifrar clave privada
-    const { encryptedData: privateKeyEncrypted, iv: ivPriv } = encryptData(privateKey);
+    const { encryptedData: privateKeyEncrypted, iv: ivPriv } =
+      encryptData(privateKey);
 
     // 4. Crear el nuevo usuario
     const newUser = await User.create({
       nombre: username,
       email: email,
-      password: hashedPassword, 
+      password: hashedPassword,
       rol: "alumno",
       publicKey: publicKey,
       privateKey: privateKeyEncrypted,
@@ -165,7 +193,6 @@ export async function registerController(req, res) {
   }
 }
 
-
 export async function sendOTPController(req, res) {
   const { email } = req.body;
   const code = Math.floor(10000 + Math.random() * 90000).toString();
@@ -179,7 +206,6 @@ export async function sendOTPController(req, res) {
 
   res.status(200).json({ message: "OTP sent successfully" });
 }
-
 
 export async function verifyOTPController(req, res) {
   const { email, otp } = req.body;
@@ -195,7 +221,6 @@ export async function verifyOTPController(req, res) {
   await redisClient.del(`otp:${email}`);
   res.status(200).json({ message: "OTP verified successfully" });
 }
-
 
 export async function recoverPasswordController(req, res) {
   const { email } = req.body;
@@ -225,13 +250,14 @@ export async function recoverPasswordController(req, res) {
   res.status(200).json({ message: "Recovery email sent successfully" });
 }
 
-
 // Cambio de contraseña
 export async function changePasswordContoller(req, res) {
   const { token, password } = req.body;
 
   if (!token || !password) {
-    return res.status(400).json({ message: "Token y nueva contraseña son requeridos" });
+    return res
+      .status(400)
+      .json({ message: "Token y nueva contraseña son requeridos" });
   }
 
   try {

@@ -58,14 +58,14 @@ const UserDashboard = () => {
 
   return (
     <div className="pt-30 p-8">
-      <h1 className="text-3xl font-bold mb-4">Panel de Usuario</h1>
-      <p className="mb-8 text-gray-700">
+      <h1 className="text-3xl font-bold text-[var(--color-text)] mb-4">Panel de Usuario</h1>
+      <p className="mb-8 text-[var(--color-text-secondary)]">
         Bienvenido a tu panel de usuario. Aquí puedes ver todas las votaciones disponibles.
       </p>
 
       {/* Listado de todas las votaciones */}
       <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Todas las votaciones</h2>
+        <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-4">Todas las votaciones</h2>
 
         {votations.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -79,17 +79,17 @@ const UserDashboard = () => {
                 <div
                   key={votation.id}
                   onClick={() => handleVoteClick(votation.id)}
-                  className="border rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
+                  className="border border-[var(--button-border-color)] bg-[var(--button-background-color)] rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
                 >
-                  <h3 className="text-xl font-semibold mb-2">{votation.title}</h3>
-                  <p className="text-gray-600 mb-4 line-clamp-2">{votation.description}</p>
-                  <div className="flex justify-between text-sm text-gray-500">
-                    <span>Inicia: {new Date(votation.start_date).toLocaleDateString()}</span>
-                    <span>
+                  <h3 className="text-xl font-semibold text-[var(--button-text-color)] mb-2">{votation.title}</h3>
+                  <p className="text-[var(--button-text-color-secondary)] mb-4 line-clamp-2">{votation.description}</p>
+                  <div className="flex justify-between">
+                    <span className="text-[var(--button-text-color-secondary)]"><strong>Inicia:</strong> {new Date(votation.start_date).toLocaleDateString()}</span>
+                    <span className="text-[var(--button-text-color-secondary)]">
                       {startDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
                     </span>
-                    <span>Finaliza: {new Date(votation.end_date).toLocaleDateString()}</span>
-                    <span>
+                    <span className="text-[var(--button-text-color-secondary)]"><strong>Finaliza:</strong> {new Date(votation.end_date).toLocaleDateString()}</span>
+                    <span className="text-[var(--button-text-color-secondary)]" >
                       {endDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
                     </span>
                   </div>
@@ -106,7 +106,7 @@ const UserDashboard = () => {
             })}
           </div>
         ) : (
-          <p className="text-gray-600">No hay votaciones disponibles en este momento.</p>
+          <p className="text-[var(--color-text-secondary)]">No hay votaciones disponibles en este momento.</p>
         )}
       </div>
     </div>

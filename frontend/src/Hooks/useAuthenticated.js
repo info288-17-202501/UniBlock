@@ -6,7 +6,7 @@ export const useAuth = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("http://localhost/api/auth/check", {
+        const res = await fetch("http://localhost:3000/api/auth/check", {
           credentials: "include",
         });
 

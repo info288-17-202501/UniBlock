@@ -14,7 +14,7 @@ export default defineConfig({
     alias: {
       "@pages": "/src/pages",
       "@components": "/src/components",
-      "@hooks": "/src/hooks",
+      "@hooks": "/src/Hooks",
       "@admin": "/src/pages/admin",
       "@user": "/src/pages/user",
       "@context": "/src/context",

@@ -26,6 +26,7 @@ body {
   --button-border-color: #4b4b4b;
   --button-border-color-hover: #636363;
   --button-text-color: #ffffff;
+  --button-text-color-secondary: #cecece;
 
   --navbar-border-color: #e5e7eb;
 
@@ -45,6 +46,8 @@ body {
   --button-background-color-hover: #c8c8c8;
   --button-border-color: #eeeeee;
   --button-text-color: #111827;
+  --button-text-color-secondary: #262a33;
+  
 
   --navbar-border-color: #374151;
 

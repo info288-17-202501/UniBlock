@@ -4,11 +4,11 @@ dotenv.config();
 
 // Configura SendGrid (usa variables de entorno en producción)
 const transporter = nodemailer.createTransport({
-  host: "smtp.sendgrid.net",
+  host: "smtp-relay.brevo.com",
   port: 587,
   auth: {
-    user: "apikey", // ¡Literalmente así! No cambies esto.
-    pass: process.env.SENDGRID_API_KEY, // Tu API Key de SendGrid
+    user: process.env.BREVO_SMTP_USER,
+    pass: process.env.BREVO_SMTP_PASS,
   },
 });
 

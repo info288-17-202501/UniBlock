@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const sequelize = new Sequelize(process.env.DATABASE_VOTES_URL, {
   dialect: "postgres",
   dialectOptions: {
     ssl: {
@@ -15,7 +15,7 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
 });
 
 sequelize.authenticate()
-  .then(() => console.log("[*] Conexión exitosa a la base de datos [Users]"))
+  .then(() => console.log("[*] Conexión exitosa a la base de datos [Votes]"))
   .catch((err) => console.error("[X] Error conectando a la base de datos:", err));
 
 export default sequelize;

@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Turnstile from "react-turnstile";
 import useLogin from "../Hooks/useLogin";
 import useRegister from "../Hooks/useRegister";
-import { useDarkMode } from "@context/darkModeContext"; 
+import { useDarkMode } from "@context/darkModeContext";
 
 const Auth = () => {
   const { darkMode } = useDarkMode();
@@ -14,7 +14,7 @@ const Auth = () => {
     email: "",
     password: "",
   });
-  
+
   const [otpSent, setOtpSent] = useState(false);
   const [otpLoading, setOtpLoading] = useState(false);
   const [otp, setOtp] = useState("");
@@ -22,8 +22,18 @@ const Auth = () => {
   const [otpVerified, setOtpVerified] = useState(false);
   const [localError, setLocalError] = useState("");
 
-  const { login, loading: loginLoading, error: loginError, message: loginMessage } = useLogin();
-  const { register, loading: registerLoading, error: registerError, message: registerMessage } = useRegister();
+  const {
+    login,
+    loading: loginLoading,
+    error: loginError,
+    message: loginMessage,
+  } = useLogin();
+  const {
+    register,
+    loading: registerLoading,
+    error: registerError,
+    message: registerMessage,
+  } = useRegister();
 
   const loading = isLogin ? loginLoading : registerLoading;
   const error = isLogin ? loginError : registerError;
@@ -58,7 +68,9 @@ const Auth = () => {
         return;
       }
       if (!isAdult || !acceptPrivacy) {
-        setLocalError("Debes aceptar los términos y condiciones para continuar.");
+        setLocalError(
+          "Debes aceptar los términos y condiciones para continuar."
+        );
         return;
       }
       await register(formData.email, formData.password, formData.username);
@@ -90,10 +102,13 @@ const Auth = () => {
 
   const handleVerifyOtp = async () => {
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/otp-verify", {
-        email: formData.email,
-        otp,
-      });
+      const res = await axios.post(
+        "http://localhost:3000/api/auth/otp-verify",
+        {
+          email: formData.email,
+          otp,
+        }
+      );
       setOtpVerified(true);
     } catch (err) {
       setLocalError("OTP inválido o expirado.");
@@ -120,7 +135,7 @@ const Auth = () => {
     const top = window.screenY + (window.outerHeight - height) / 2;
 
     const popup = window.open(
-      "http://localhost/auth/microsoft",
+      "http://localhost:3000/auth/microsoft",
       "targetWindow",
       `toolbar=no,
       location=no,
@@ -139,6 +154,7 @@ const Auth = () => {
         sessionStorage.setItem("user", JSON.stringify(event.data));
         popup?.close();
         window.removeEventListener("message", receiveMessage);
+        window.location.href = "/user/dashboard"; // Redirige a la página de usuario
       }
     };
 
@@ -171,7 +187,10 @@ const Auth = () => {
           <form className="space-y-6" onSubmit={handleSubmit}>
             {!isLogin && (
               <div>
-                <label htmlFor="username" className="block text-sm text-[var(--color-text)] font-medium font-subtitle text-[--color-text]">
+                <label
+                  htmlFor="username"
+                  className="block text-sm text-[var(--color-text)] font-medium font-subtitle text-[--color-text]"
+                >
                   Ingresa tu nombre
                 </label>
                 <input
@@ -187,7 +206,10 @@ const Auth = () => {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium font-subtitle text-[var(--color-text)]">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium font-subtitle text-[var(--color-text)]"
+              >
                 Correo electrónico
               </label>
               <input
@@ -224,7 +246,10 @@ const Auth = () => {
 
             {!isLogin && otpSent && !otpVerified && (
               <div>
-                <label htmlFor="otp" className="block text-sm font-medium text-[var(--color-text)]">
+                <label
+                  htmlFor="otp"
+                  className="block text-sm font-medium text-[var(--color-text)]"
+                >
                   Código OTP
                 </label>
 
@@ -250,7 +275,11 @@ const Auth = () => {
                         }
                       }}
                       onKeyDown={(e) => {
-                        if (e.key === "Backspace" && !otpDigits[idx] && idx > 0) {
+                        if (
+                          e.key === "Backspace" &&
+                          !otpDigits[idx] &&
+                          idx > 0
+                        ) {
                           document.getElementById(`otp-${idx - 1}`)?.focus();
                         }
                         handleKeyDownOtp(e);
@@ -267,12 +296,17 @@ const Auth = () => {
                 >
                   Verificar OTP
                 </button>
-                {localError && <p className="text-red-500 text-sm">{localError}</p>}
+                {localError && (
+                  <p className="text-red-500 text-sm">{localError}</p>
+                )}
               </div>
             )}
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium font-subtitle text-[var(--color-text)]">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium font-subtitle text-[var(--color-text)]"
+              >
                 Contraseña
               </label>
               <div className="relative">
@@ -323,7 +357,10 @@ const Auth = () => {
                     onChange={() => setIsAdult(!isAdult)}
                     className="mr-2 mt-1"
                   />
-                  <label htmlFor="isAdult" className="text-sm text-[var(--color-text)]">
+                  <label
+                    htmlFor="isAdult"
+                    className="text-sm text-[var(--color-text)]"
+                  >
                     Acepto que soy mayor de 18 años
                   </label>
                 </div>
@@ -335,7 +372,10 @@ const Auth = () => {
                     onChange={() => setAcceptPrivacy(!acceptPrivacy)}
                     className="mr-2 mt-1"
                   />
-                  <label htmlFor="acceptPrivacy" className="text-sm text-[var(--color-text)]">
+                  <label
+                    htmlFor="acceptPrivacy"
+                    className="text-sm text-[var(--color-text)]"
+                  >
                     Acepto los{" "}
                     <a
                       href="/#"
@@ -367,6 +407,24 @@ const Auth = () => {
               </button>
             </div>
           </form>
+
+          {isLogin && (
+            <>
+            <div className="mt-5 text-center">
+              <span className=" mt-5 px-2 bg-[var(--color-background)] text-[var(--color-text-secondary)] text-sm">
+                ¿Olvidaste tu contraseña?
+              </span>
+              <div className="mt-2 text-center">
+                <a
+                  href="/request-password-reset"
+                  className="text-blue-600 hover:underline text-sm"
+                >
+                  Haz clic aquí para restablecerla
+                </a>
+              </div>
+              </div>
+            </>
+          )}
 
           <div className="mt-6">
             <div className="relative">

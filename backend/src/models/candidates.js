@@ -25,6 +25,11 @@ const Candidate = sequelize.define('Candidate', {
     },
     onDelete: 'CASCADE'
   },
+  number_of_votes: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
 }, {
   tableName: 'candidates',
   timestamps: false,

@@ -4,6 +4,7 @@ import {
   HiOutlineDocumentText,
   HiOutlineUserGroup,
 } from "react-icons/hi"; // <-- Agregamos el ícono de contacto (mail)
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -24,25 +25,34 @@ const Footer = () => {
           {/* Izquierda */}
           <div className="flex items-center gap-2 text-[var(--color-text)]">
             <HiOutlineShieldCheck className="text-xl" />
-            <a href="#" className="hover:underline text-[var(--color-text)]">
+            {/* <a href="#" className="hover:underline text-[var(--color-text)]">
               Políticas de privacidad
-            </a>
+            </a> */}
+            <Link to="/privacidad" className="hover:underline text-[var(--color-text)]">
+              Políticas de privacidad
+            </Link>
           </div>
 
           {/* Centro */}
           <div className="flex items-center gap-2 text-[var(--color-text)]">
             <HiOutlineDocumentText className="text-xl" />
-            <a href="#" className="hover:underline text-[var(--color-text)]">
+            {/* <a href="/terminos" className="hover:underline text-[var(--color-text)]">
               Términos y condiciones
-            </a>
+            </a> */}
+            <Link to="/terminos-condiciones" className="hover:underline text-[var(--color-text)]">
+              Términos y condiciones
+            </Link>
           </div>
 
           {/* Derecha */}
           <div className="flex items-center gap-2 text-[var(--color-text)]">
             <HiOutlineUserGroup className="text-xl" />
-            <a href="#" className="hover:underline text-[var(--color-text)]">
+            {/* <a href="#" className="hover:underline text-[var(--color-text)]">
               Nosotros
-            </a>
+            </a> */}
+            <Link to="/nosotros" className="hover:underline text-[var(--color-text)]">
+              Nosotros
+            </Link>
           </div>
         </div>
       </div>
