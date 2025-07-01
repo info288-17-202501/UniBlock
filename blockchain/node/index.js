@@ -7,7 +7,7 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const PEERS = process.env.PEERS ? process.env.PEERS.split(',') : [];
 
 const ES_VALIDADOR = process.env.VALIDADOR === 'true';
@@ -93,7 +93,7 @@ app.post('/votar', async (req, res) => {
     }
 
     for (const voto of votos) {
-        if (!voto.candidateId || !voto.timestamp || !voto.firma || !voto.publicKey) {
+        if (!voto.candidate_id || !voto.timestamp || !voto.firma || !voto.public_key) {
             return res.status(400).json({ error: 'Faltan campos en al menos un voto' });
         }
     }
