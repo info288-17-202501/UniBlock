@@ -18,8 +18,7 @@ Instalar Git para poder gestionar el código fuente del proyecto y establecer un
 - Git: https://git-scm.com/downloads
 
 Una vez que Git esté instalado, se debe clonar el repositorio en el directorio local. Esto permitirá obtener una copia del código en tu computadora para visualizarlo y ejecutar la página.
-- Comando:
-```git clone https://github.com/info288-17-202501/UniBlock.git```
+- Comando: ```git clone https://github.com/info288-17-202501/UniBlock.git```
 
 ## Instalar Node
 
