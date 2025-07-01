@@ -66,12 +66,29 @@ export async function getVotationControllerID(req, res) {
   const { id } = req.params;
 
   try {
-    const votation = await Votation.findByPk(id, {
+    let votation = await Votation.findByPk(id, {
       include: [{ model: Candidate, as: 'candidates' }]
     });
 
     if (!votation) {
       return res.status(404).json({ message: "Votation not found" });
+    }
+
+    // Calcular fecha y hora de término combinadas
+    const now = new Date();
+
+    const endDateTime = new Date(
+      `${votation.end_date.toISOString().split("T")[0]}T${votation.end_time}`
+    );
+
+    // Solo actualizar si no está terminada
+    if (
+      votation.status !== "Terminada" &&
+      now > endDateTime &&
+      votation.status !== "Pendiente"
+    ) {
+      votation.status = "Pendiente";
+      await votation.save();
     }
 
     res.status(200).json({ votation });
