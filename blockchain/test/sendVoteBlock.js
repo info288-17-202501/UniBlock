@@ -1,12 +1,21 @@
 const axios = require('axios');
 
 (async () => {
-    // Esto simula lo que haría tu página web
     const datosVotacion = {
-        idVotacion: 'VOTACION001',
+        idVotacion: '1',
         votos: [
-            { opcion: 'A', timestamp: new Date().toISOString() },
-            { opcion: 'B', timestamp: new Date().toISOString() }
+            {
+                candidateId: '1',
+                timestamp: new Date().toISOString(),
+                firma: 'FIRMA_DIGITAL_BASE64',
+                publicKey: '-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----'
+            },
+            {
+                candidateId: '2',
+                timestamp: new Date().toISOString(),
+                firma: 'FIRMA_DIGITAL_BASE64',
+                publicKey: '-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----'
+            }
         ]
     };
 

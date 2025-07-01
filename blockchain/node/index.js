@@ -8,10 +8,21 @@ const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
-const PEERS = process.env.PEERS ? process.env.PEERS.split(',') : []; // ejemplo: http://192.168.1.10:3001
+const PEERS = process.env.PEERS ? process.env.PEERS.split(',') : [];
 
 const ES_VALIDADOR = process.env.VALIDADOR === 'true';
-const claves = cargarClaves(__dirname + '/keypair.json');
+let claves = null;
+if (ES_VALIDADOR) {
+    try {
+        claves = cargarClaves(__dirname + '/keypair.json');
+        console.log('✅ Claves cargadas para validador');
+    } catch (error) {
+        console.error('❌ Error cargando claves:', error.message);
+        process.exit(1);
+    }
+} else {
+    console.log('ℹ️  Nodo listener - no requiere claves');
+}
 const blockchain = new Blockchain();
 
 blockchain.cargarDesdeDisco();
@@ -42,40 +53,53 @@ app.get('/cadena', (req, res) => {
     res.json(blockchain.cadena);
 });
 
-// ENDPOINT: sincronizar con peer
+// Sincronizar con peers
 async function sincronizar() {
     for (const peer of PEERS) {
         try {
-            const { data } = await axios.get(peer + '/cadena');
-            if (data.length > blockchain.cadena.length) {
+            const { data } = await axios.get(peer + '/cadena', {
+            headers: {
+                'ngrok-skip-browser-warning': 'true'
+            }
+        });
+            if (data.length > blockchain.cadena.length && blockchain.esCadenaValida(data)) {
                 blockchain.cadena = data;
                 blockchain.guardarEnDisco();
-                console.log('Cadena actualizada desde', peer);
+                console.log(`✅ Cadena sincronizada desde ${peer}`);
+            } else {
+                console.log(`❌ Cadena rechazada desde ${peer}`);
             }
         } catch (err) {
-            console.log('No se pudo conectar a', peer);
+            console.log(`⚠️  No se pudo conectar a ${peer}`);
         }
     }
 }
 
-// Intentar sincronizar al inicio si no es validador
-if (!ES_VALIDADOR) {
-    sincronizar();
-    setInterval(sincronizar, 10000); // cada 10 segundos
-}
+sincronizar();
+setInterval(sincronizar, 10000);
 
 app.listen(PORT, () => {
     console.log(`Nodo ejecutándose en puerto ${PORT} (validador=${ES_VALIDADOR})`);
 });
 
-// Recibe solo los votos y construye el bloque completo
-app.post('/votar', (req, res) => {
+// ✅ NUEVO ENDPOINT /votar: recibe votos SIN votationId individual
+app.post('/votar', async (req, res) => {
     const { idVotacion, votos } = req.body;
 
     if (!ES_VALIDADOR) return res.status(403).json({ error: 'Este nodo no es validador' });
 
+    if (!Array.isArray(votos) || votos.length === 0) {
+        return res.status(400).json({ error: 'Se requiere una lista de votos' });
+    }
+
+    for (const voto of votos) {
+        if (!voto.candidateId || !voto.timestamp || !voto.firma || !voto.publicKey) {
+            return res.status(400).json({ error: 'Faltan campos en al menos un voto' });
+        }
+    }
+
     const ultimo = blockchain.obtenerUltimoBloque();
-    const bloque = new Block(
+    const nuevoBloque = new Block(
         ultimo.index + 1,
         new Date().toISOString(),
         idVotacion,
@@ -83,9 +107,22 @@ app.post('/votar', (req, res) => {
         ultimo.hashPropio,
         claves.publicKey
     );
-    bloque.hashPropio = bloque.calcularHash();
-    bloque.firmarBloque(claves.privateKey);
+    nuevoBloque.hashPropio = nuevoBloque.calcularHash();
+    nuevoBloque.firmarBloque(claves.privateKey);
 
-    const exito = blockchain.agregarBloque(bloque);
+    const exito = blockchain.agregarBloque(nuevoBloque);
+
+    if (exito) {
+        // 🔁 Propagar a otros peers
+        for (const peer of PEERS) {
+            try {
+                await axios.post(peer + '/nuevo-bloque', nuevoBloque);
+                console.log(`📤 Bloque enviado a ${peer}`);
+            } catch (err) {
+                console.log(`⚠️  Error enviando bloque a ${peer}: ${err.message}`);
+            }
+        }
+    }
+
     res.json({ exito });
 });

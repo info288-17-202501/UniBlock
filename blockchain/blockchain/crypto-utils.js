@@ -1,6 +1,7 @@
 const fs = require('fs');
 const crypto = require('crypto');
 
+
 function generarParClaves(nombreArchivo) {
     const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
         modulusLength: 2048,
@@ -20,4 +21,12 @@ function cargarClaves(nombreArchivo) {
     return { publicKey, privateKey };
 }
 
-module.exports = { generarParClaves, cargarClaves };
+function verificarFirma(hash, firmaHex, publicKey) {
+    const verifier = crypto.createVerify('SHA256');
+    verifier.update(hash);
+    verifier.end();
+    return verifier.verify(publicKey, Buffer.from(firmaHex, 'hex'));
+}
+
+
+module.exports = { generarParClaves, cargarClaves, verificarFirma };

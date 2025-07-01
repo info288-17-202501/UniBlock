@@ -1,0 +1,21 @@
+module.exports = [
+  // Validador 1 (Tu clave)
+  `-----BEGIN RSA PUBLIC KEY-----
+MIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT
+WSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf
+z7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc
+L1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA
+sc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3
+nmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB
+-----END RSA PUBLIC KEY-----`,
+
+  // Validador 2 (Clave de tu amigo)
+  `-----BEGIN RSA PUBLIC KEY-----
+MIIBCgKCAQEAiAoD5xz1+4KUJqcfiaVWxi0uHHyRwTkefbbX4hBeUkWEWkdkjzXf
+MBp74KjvzBGc+d/yjFMIMQNi8F6h+cXwo3QfwfsdPEb5q9xKIZyvYniKAAivxAgp
+DVYN3TxzJYrUemh8K/5bU0q9g6h95cjmaBZomIkQ4jLUZn6ehIHlkfoCs1vPA+j6
+c4xHGSBI55xYv/fwSvPtPFx0GoqmmG/iArxpkhFDf+p6P+bepIz/ulF52N3O+dIT
+IDv6L34+iEWM+s7bzDxAud7h5EN/MfR0HJFDS+z1dijY07E26XO/XtLb4mmimbB4
+d3Afv/VE2gb7akMSIXNfWCMlFhSGvDimmwIDAQAB
+-----END RSA PUBLIC KEY-----`
+];

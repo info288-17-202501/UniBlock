@@ -1,31 +1,219 @@
 [
   {
     "index": 0,
-    "timestamp": "2025-06-24T18:56:58.771Z",
+    "timestamp": "2025-06-30T19:31:51.467Z",
     "idVotacion": "GENESIS",
     "votos": [],
     "hashAnterior": "0",
-    "hashPropio": "69fd8f0b6c7f65a506cc7cc38bbc43dc2c24fbcf439223358b5720e85f8e93b6",
-    "firmaDigital": "305fc4fb0786189f6e68a99b05fdb554bcffad516239465ebc97d9cedf8447e47b2b59cad5d9ca43157d961ac04a37f097595b6d08b21ff5f29f8f29fa0ef345a24c433787c87cdcb0694684da87d7721f998771fa3bbd385892149aed2be692e5c178e5a297ef087052d90b8c5e4cd1a3eb20f7b40e4baec97724a6f3abce8288224251cabc14e58ff5dd8023bebe5eea2de029c8fda799884205cd4c5727af2042102ef42adc954decdb6a81f08978ce03412bc90e65da1a814c95a4a70032b41962d47f64b74f998bbefaa87612218a1ed7d74a47d47cb73947cbf4b0e3416e677f4a93f86f67b74b3054ba78fdab99817c37c162990387428258fcf49136",
-    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAunQqfE1yGEbKr8w9iamZbAfCkTDbXLuG49pm9YrQlPZ+A+5uphO1\neXd5lMqFra2WmqlwvD/qVTiP6SL1nZg75wiZLZjRbxRnKqBDLmHnozkaRsPhW9zE\nfAb4doPERZuAl7bcAX/L7vsX0FSN+ajYqzVsFqoi8Sv59ifM1xjPD6NjlzYpiLaz\necR03ipWg0+QVQcUhxwyegFWf/iAPVwoHm0hN6GDZ9kxmIt+6cy4yNLCGIol8gJ1\nbB+rRjkTcLBcoZzF4rGetAB/BbRr0GbVttDIi9F7TGpsqkF9dXsqxwMNEUSPzsQO\nTpqVAdOb/EExkq1f0IvWU/ik7d635RuiCQIDAQAB\n-----END RSA PUBLIC KEY-----\n"
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT\nWSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf\nz7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc\nL1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA\nsc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3\nnmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "86debbf46bf07ac5e298e639ec091cc5f3868ea4a8735d6746e7d39add09bc84",
+    "firmaDigital": "5fe5930308ddc0329c95e8788eda7a9c23e103d8fa6e2fc04e2ddd3bdfd97f1aa14e879298f40cedecf0a43abdd4299c319e129893ff75c4ec5d187855c520648bf09ce4dbbb7883bbeaae47a22c3735b147b352dd8e02435eb1625481cbb0cc9799b22e389a048e6e73de8be2c5f3dabf14928641c9249cb1c0fc57e364542e22dd128854a237ebeebd1b08f0cfb916564f622251e2b827ede15618bc1599223932ff33cb152e25df953639a077497b5a5d35beb6dfffe557fec61476e71395c78ac6676d6984bbbc90f455d68203ee15c2abeb6525758c928d6caae3ac049a03f9af798935dd9043d54077944428235e1df0ab38014a71b1b3a946cf9034ae"
   },
   {
     "index": 1,
-    "timestamp": "2025-06-24T19:18:20.525Z",
-    "idVotacion": "VOTACION001",
+    "timestamp": "2025-06-30T19:45:51.048Z",
+    "idVotacion": "1",
     "votos": [
       {
-        "opcion": "A",
-        "timestamp": "2025-06-24T19:18:20.371Z"
+        "candidateId": "1",
+        "timestamp": "2025-06-30T19:45:50.182Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
       },
       {
-        "opcion": "B",
-        "timestamp": "2025-06-24T19:18:20.371Z"
+        "candidateId": "2",
+        "timestamp": "2025-06-30T19:45:50.207Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
       }
     ],
-    "hashAnterior": "69fd8f0b6c7f65a506cc7cc38bbc43dc2c24fbcf439223358b5720e85f8e93b6",
-    "hashPropio": "7df34e4f098ce6ce236476024baa030255ab5e20b0d04a3fe2eb092e5e416e04",
-    "firmaDigital": "48b0c17a8277869a2c4662798683bf5b0b930fb9c307d633c775c8afa4e04a620acedf7830193ed24e0a093008a3cbaac44dd8182c5b4505fbc0b41a52e8408bd09b69b2e22854f1366c512db5ae0f4edf22043bfd757281bbe07b15054ef4b0218b998482f1c01128237ed12ec3b023f400efc705f71d4fe801997c82a99ef8dc1e1a4df5fee8d5ded174e7d60790f8037cf6abc32873365e766d422fa9b0452566419566ea1a20a877aad0fb97d4f0576c959d9f41035f9e102f0b7075ca7001170185ed074ef67f485c66896b1423e1bbb9dea7ba74edc163d5a83d8103e18ca365beb28a7cc889baf666fc667a9d2c3a9aa1d18e2c6c42037558805270fe",
-    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAunQqfE1yGEbKr8w9iamZbAfCkTDbXLuG49pm9YrQlPZ+A+5uphO1\neXd5lMqFra2WmqlwvD/qVTiP6SL1nZg75wiZLZjRbxRnKqBDLmHnozkaRsPhW9zE\nfAb4doPERZuAl7bcAX/L7vsX0FSN+ajYqzVsFqoi8Sv59ifM1xjPD6NjlzYpiLaz\necR03ipWg0+QVQcUhxwyegFWf/iAPVwoHm0hN6GDZ9kxmIt+6cy4yNLCGIol8gJ1\nbB+rRjkTcLBcoZzF4rGetAB/BbRr0GbVttDIi9F7TGpsqkF9dXsqxwMNEUSPzsQO\nTpqVAdOb/EExkq1f0IvWU/ik7d635RuiCQIDAQAB\n-----END RSA PUBLIC KEY-----\n"
+    "hashAnterior": "86debbf46bf07ac5e298e639ec091cc5f3868ea4a8735d6746e7d39add09bc84",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT\nWSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf\nz7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc\nL1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA\nsc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3\nnmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "a9838673961479e6359b38146091d49feb477608a8028de44ec24d12ef2f8559",
+    "firmaDigital": "9653e172b21dcc06b7d0941d5caeb5e386b5b9e6fe89104a6140302d04bffcb92229cc38be308aee0e734edaf48ebe0aa849890eaa438157198b05ee7182515a8d9d648fed81bbba08e03c14e8dbc043053012ef88c1bde1a5ee5e28a82d12369130084b4e1690684801fb5a1124b5a7faa6d3895135fd33350eb147f6af1016efd72c96bc56f0d26da414b9b26cb109bcf566efe2a37c4cdb1a5bae8a61b1cffed959270068cd414050a81fb009cb30c1d1490090527ab28b45a842b0fa3691f547357c197663db2d5866662c855c17468084c2b7c58cfe731764a92816eaac35753b32ff00e59d6a2dad48f7afb275a6c63059558612d4c98a6e59ae5823cf"
+  },
+  {
+    "index": 2,
+    "timestamp": "2025-06-30T19:58:59.698Z",
+    "idVotacion": "2",
+    "votos": [
+      {
+        "candidateId": "1",
+        "timestamp": "2025-06-30T19:58:59.573Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      },
+      {
+        "candidateId": "2",
+        "timestamp": "2025-06-30T19:58:59.573Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      }
+    ],
+    "hashAnterior": "a9838673961479e6359b38146091d49feb477608a8028de44ec24d12ef2f8559",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT\nWSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf\nz7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc\nL1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA\nsc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3\nnmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "3d2c81ec3018e72d08d164add039c3b6db5a4faf377578b448e67d81f4d87933",
+    "firmaDigital": "511a8b8035720f881fe9eebb8aaff5d0a1b7262bdffe298002463e63174fcd469825b7c8dd36bc1578150510ac237d4b3145616d99eb9f466b8e9dd5e32f42f46d39df79c7f28045bbd3d135baec49729338642af600fd62139c83c40df84364574003f9f43c438cb9e41ca6280e81c007967a424cda25804e2086f9472348c245a066d1e99000d383e803d16ed0bca50fb62b0413ece85e4b8641bd8041e78c1eb98491a529829787ce35ddfe23769a9633dc60ed34076354471985a7bd2f757835d2eeabf1f9b626531b9299552d6ec3f4343c6070adfd4eac97bfe3c42c75d301298ae2b8cdf4988a82b56cbec32bc177a1f6ff53e0d16865b4546cab22d8"
+  },
+  {
+    "index": 3,
+    "timestamp": "2025-06-30T21:54:28.412Z",
+    "idVotacion": "3",
+    "votos": [
+      {
+        "candidateId": "1",
+        "timestamp": "2025-06-30T21:54:27.945Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      },
+      {
+        "candidateId": "2",
+        "timestamp": "2025-06-30T21:54:27.950Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      }
+    ],
+    "hashAnterior": "3d2c81ec3018e72d08d164add039c3b6db5a4faf377578b448e67d81f4d87933",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT\nWSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf\nz7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc\nL1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA\nsc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3\nnmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "2bd714348ab32615cd96c9a955c19dafd05e55a31f2ed6cd96ebb83535ee126d",
+    "firmaDigital": "454e0936cf29e7a9b61a8e500c0716e979e14ed6b67713a42d24c6a33f81f0f23e7aea47e55671bb059f47c209e0bee608e17a44adf051c3ee93b62a7055bbaf4525ef9127a9c827b8d48c71714150788e45dee8640fdb83b5c3f2815168e311240a119c3d1fc4a8e50ff6ee8f52535c141d874981be690bc016c03e195334c74af8d53535e55528eed4f9a7fd95412c7d8bb88118065ceab5923d7165ca39b3f2af972849410ce6e3566d367f37cb449d14a28e94b54daa14579f712385df254539904d45b13103f9b4e10b49a5dcf1a991fa7dedcc8d514b3cdbe47ebec4420415e2eae8db4a052c6396668891a57b40c46cc046ff7b348bbce239feb85192"
+  },
+  {
+    "index": 4,
+    "timestamp": "2025-06-30T21:56:45.319Z",
+    "idVotacion": "4",
+    "votos": [
+      {
+        "candidateId": "Sepe",
+        "timestamp": "2025-06-30T21:56:44.954Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      },
+      {
+        "candidateId": "2",
+        "timestamp": "2025-06-30T21:56:44.957Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      }
+    ],
+    "hashAnterior": "2bd714348ab32615cd96c9a955c19dafd05e55a31f2ed6cd96ebb83535ee126d",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT\nWSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf\nz7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc\nL1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA\nsc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3\nnmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "817f9cf53b0d2d1728dbf9ca45bee3df7638742902493ff62cf0321f9ddfa058",
+    "firmaDigital": "1869f40d795cf3424bb8ac0db1c5a1c30351bf9a2ee75cc9bd4a94be1aeb9f3256bb6e9e079a8a12039370441ecdc9dbbeb41ce67d7a6b2d43ae1c97eebb3321985f35e7fd24c881504866b4a172b290b09c5c8e77cb42d663e4410e018fe4199d82394a69a2c7e97b8bfe2c61fe5e58e65d05d3cbfd146ff4901037db323c2aa6642ac35083257f01e8827a9ff72da417351cad6ed2d5a29ede5402a13eeda4e463eb9ebd5b8d996a5029788c8ce6d5e7d9b369ecebb544c16ec2a58339cf9419a46023367ab0a01fbe07eb38e896f5ee2569973507208e2de3616d35c0c5b1fdf2bc17a1d024174f8db5791467d4c6576ac428491f43b7d2424a85de2cfe6d"
+  },
+  {
+    "index": 5,
+    "timestamp": "2025-06-30T22:00:45.405Z",
+    "idVotacion": "5",
+    "votos": [
+      {
+        "candidateId": "Sepe",
+        "timestamp": "2025-06-30T22:00:45.205Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      },
+      {
+        "candidateId": "2",
+        "timestamp": "2025-06-30T22:00:45.215Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      }
+    ],
+    "hashAnterior": "817f9cf53b0d2d1728dbf9ca45bee3df7638742902493ff62cf0321f9ddfa058",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT\nWSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf\nz7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc\nL1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA\nsc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3\nnmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "90b73bb6aac3d3fadf4a6e8f29e4a2fbac085592ba888e4f5893289f73b274ba",
+    "firmaDigital": "438e46d826724d1acbdcdb212ab04a12b658b44eda01c756e966e18b5276a7dc0b9f7c862d0267eeb8e9c6b7a78808c01df127450258874f83df7531ab65b711b571204c69d4f65c7a26fc1ea12d4f0665add02c09cc3050e91a1ed2a172a9af8d53e6e6f6bd833b1a789eb6932f31b6dc30ac251c63fd81a702f1280379831cbcf25d1da1cbe55d0a77761fd80de2e7c1bebbcccf531da9a331e7e59e6996cfae45d0452b85400c421188e7b24799c6d6504d65b7781386e727d28ae559078baef9b0c3579b9f666dd8fec4e919feee1793793f9f2825f52ba615c9279ef0a603f9e93b7da5ec34f02763d2cebae50f10385f984c23b9f8374ef1ae04fcbb8e"
+  },
+  {
+    "index": 6,
+    "timestamp": "2025-06-30T22:45:28.478Z",
+    "idVotacion": "6",
+    "votos": [
+      {
+        "candidateId": "Sepe",
+        "timestamp": "2025-06-30T22:45:28.340Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      },
+      {
+        "candidateId": "2",
+        "timestamp": "2025-06-30T22:45:28.343Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      }
+    ],
+    "hashAnterior": "90b73bb6aac3d3fadf4a6e8f29e4a2fbac085592ba888e4f5893289f73b274ba",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT\nWSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf\nz7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc\nL1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA\nsc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3\nnmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "573881467145de909576f2b5d22ee904b86aec78f20537e22fe913ebfd4ce988",
+    "firmaDigital": "18326545dff462b009e3b4f66e14170fa7f80e3177a48b817e4749375da66467086bd50be55cc23d71378e5c3835aedcb706b6a3675fc2a7f0f2e0b6a3a35d3597357c9ece4f865d28a8a363a201a88894e0ecc9d8203a6afb1c3b24cf5602b1f0be19f1d702dcbdd1785f2b8681b55f96cb6479b73701bfd742a1deaef7ea22138b72614474776f372893da0f72da26a3896fdcb60786525b89818e24803f297c6857371138b6e59743cda5634afe4f47f83c3835d28ef43b1e9f52cda0b0d9b08f24149dedb66a536d2dd9f868ab255ccef2d2585f985e9815c3b500b0e1bec77ab335a141dc5f80385551a9f91bf3631a5a6ed03bdc53ced20401eac09f12"
+  },
+  {
+    "index": 7,
+    "timestamp": "2025-06-30T22:49:12.788Z",
+    "idVotacion": "6",
+    "votos": [
+      {
+        "candidateId": "Sepe",
+        "timestamp": "2025-06-30T22:49:12.335Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      },
+      {
+        "candidateId": "2",
+        "timestamp": "2025-06-30T22:49:12.336Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      }
+    ],
+    "hashAnterior": "573881467145de909576f2b5d22ee904b86aec78f20537e22fe913ebfd4ce988",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAiAoD5xz1+4KUJqcfiaVWxi0uHHyRwTkefbbX4hBeUkWEWkdkjzXf\nMBp74KjvzBGc+d/yjFMIMQNi8F6h+cXwo3QfwfsdPEb5q9xKIZyvYniKAAivxAgp\nDVYN3TxzJYrUemh8K/5bU0q9g6h95cjmaBZomIkQ4jLUZn6ehIHlkfoCs1vPA+j6\nc4xHGSBI55xYv/fwSvPtPFx0GoqmmG/iArxpkhFDf+p6P+bepIz/ulF52N3O+dIT\nIDv6L34+iEWM+s7bzDxAud7h5EN/MfR0HJFDS+z1dijY07E26XO/XtLb4mmimbB4\nd3Afv/VE2gb7akMSIXNfWCMlFhSGvDimmwIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "6a63a02efde36100426d4ca6d7fab1c9a11f9c144c28a522f52c4f3b89286b68",
+    "firmaDigital": "71f5847487904303d87dad83ff1f89ed44aa5d8d01f6744c030bc4795179040dcc02ebb3b6890a2e98177c954891a78306545862072af786aabdb00502a762d892bdf59ad04ed10855b739302c6319a1178e6f29822b107d9f124cbf892974236ed0585b0f05904630aaae455ea2b9a637c8b405fd7687f962984c9b0bfead6811e27890ecd17aa9d5821911fc6442d3c792388efbfdc9841d68dbda79ebb812b82b8309625f0e7f0312d6e4ee9ab932d15d6691a5eacb2e6b6a6f6aacd919ad0f458a14d0a34560426b7dceb03c95833a7ee13f8bfc631f9b05afb609c3d964dd2bb59ee17bddbe10ec8e7875f7544515d323e97f3354b472d32ef8b0ddfe67"
+  },
+  {
+    "index": 8,
+    "timestamp": "2025-06-30T22:50:22.958Z",
+    "idVotacion": "9",
+    "votos": [
+      {
+        "candidateId": "Sepe",
+        "timestamp": "2025-06-30T22:50:22.821Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      },
+      {
+        "candidateId": "2",
+        "timestamp": "2025-06-30T22:50:22.821Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      }
+    ],
+    "hashAnterior": "6a63a02efde36100426d4ca6d7fab1c9a11f9c144c28a522f52c4f3b89286b68",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT\nWSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf\nz7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc\nL1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA\nsc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3\nnmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "ca0ca92f49ca0e0434e2f47f31a990b8a317d20d7aec3993f17982971819a9aa",
+    "firmaDigital": "132a8cadb0cf1ea117cf5993bee7a253bbec3b8a27429a514ce14e300b974d0bc107fb05c53b27762ae9bd25fad5d7e4b504b2888d7c872655e2afe65cb913af845a79dfd8993cb79228f74a0bdca00b2e8d47278c9e3ef489f25c23fcd2050b7f1a084109ca7b245f3a29ab21627392c377185484a68d683865de74e588e1513ade7e571dd14b949ea0774785149a887ba0dde19808f43fab0e7457e2b122e8aed0ef570545060697382547b0b81ce492a73d49d0d1b946fe81a2ff6b09acf14747fded93020407b281ed8cb327cf529590a2975e726506ee782c7b12c815cf2873b49fe1036f23c54af81a8e0d6f6e895c29bfda8ddd974f154c664d65fa57"
+  },
+  {
+    "index": 9,
+    "timestamp": "2025-06-30T22:52:15.542Z",
+    "idVotacion": "9",
+    "votos": [
+      {
+        "candidateId": "Sepe",
+        "timestamp": "2025-06-30T22:52:15.435Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      },
+      {
+        "candidateId": "2",
+        "timestamp": "2025-06-30T22:52:15.435Z",
+        "firma": "FIRMA_DIGITAL_BASE64",
+        "publicKey": "-----BEGIN PUBLIC KEY-----\\nCLAVE_PUBLICA_AQUI...\\n-----END PUBLIC KEY-----"
+      }
+    ],
+    "hashAnterior": "ca0ca92f49ca0e0434e2f47f31a990b8a317d20d7aec3993f17982971819a9aa",
+    "publicKey": "-----BEGIN RSA PUBLIC KEY-----\nMIIBCgKCAQEAoftB7Slxr/uFsv6b2tGos0xoMZ2YWGOkJItb97F705iVDZiGhzvT\nWSlACHTJYejsXOn9RRU2BSnQy5z7TyK+aqqI0An8vxKK2wXTC2EjMPz7Lz5wsSyf\nz7oIZV2CAVRPJe9fgcxRynseaO6S9i3nVNk0T5ZAWf6KZKze2dHWfoaXqconeXvc\nL1Wj1dylzoF1f4Kq3ftgozPe2yvjFWjauq9v48+1bLG98MTW00jyMYao1RaLRNxA\nsc3kOa0EBWhS7/paaUCwINFG5LCmeYcUFKQhfZP8IG1/6WOL4UXD4rbW5ESEhVk3\nnmlC82aF1ZzoRDQkpVdA03hSmjvHWtXGfQIDAQAB\n-----END RSA PUBLIC KEY-----\n",
+    "hashPropio": "85e30df247df22e5362051c865ea1580f4b3dc26fd877572d2d70d32300fc2ed",
+    "firmaDigital": "4de98d8836614d4734498c4d995ee5832a10e91fe9dc43585dba27c578799aa9210736f1b8aaf245208678d2158bcbb9609acd56666debf0852dc725b69b77d6c7f6e4947ba29a09092913b5af98cb001717023e7ca9b4981b249a59ae9187d428addacf35a877a625c213b29fee309d0ec4a4b2bc77c82eb440ecee1e74b524ba251d0bb8effd242e754224b0baa42f365ef92c2a233e0031b0a88007134bc80c83a42f95f5bea6ddbcd3982dfce0c9b2fede0381aa3dae1a4b75139a8ecb5a56df2b03d7e22d8c96679b2d35f580f4d59917cd391be223c19a88a19df6c4a644bf426c4862c7a83e0fb0324126a8157fb826e57f444e2832064c653ad79026"
   }
 ]

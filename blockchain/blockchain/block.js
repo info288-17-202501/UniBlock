@@ -7,13 +7,13 @@ class Block {
         this.idVotacion = idVotacion;
         this.votos = votos;
         this.hashAnterior = hashAnterior;
+        this.publicKey = publicKey;
         this.hashPropio = this.calcularHash();
         this.firmaDigital = null;
-        this.publicKey = publicKey;
     }
 
     calcularHash() {
-        const data = this.index + this.timestamp + this.idVotacion + JSON.stringify(this.votos) + this.hashAnterior;
+        const data = this.index + this.timestamp + this.idVotacion + JSON.stringify(this.votos) + this.hashAnterior + this.publicKey;
         return crypto.createHash('sha256').update(data).digest('hex');
     }
 
