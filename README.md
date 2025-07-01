@@ -19,6 +19,13 @@ Instalar Node.js para gestionar dependencias y compilación.
 
 Nota: El lenguaje principal de nuestro trabajo es JavaScript, el cual por defecto viene incluido al instalar Node.js
 
+## Instalar dependencias para blockchain
+
+```
+cd blockchain
+npm install
+```
+
 ## Instalar dependencias para backend
 
 ```
