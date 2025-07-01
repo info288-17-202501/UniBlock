@@ -378,7 +378,7 @@ const Auth = () => {
                   >
                     Acepto los{" "}
                     <a
-                      href="/#"
+                      href="/terminos-condiciones"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:underline"

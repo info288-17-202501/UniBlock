@@ -8,17 +8,17 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 const itemData = [
   {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+    img: "../crear_voto.png",
     title: "Crear Votación",
     path: "/admin/create-votation",
   },
   {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+    img: "../agregar_institucion.png",
     title: "Agregar Usuario",
     path: "/admin/add-user",
   },
   {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+    img: "../ver_estadisticas.png",
     title: "Ver Estadísticas",
     path: "/admin/stats",
   },

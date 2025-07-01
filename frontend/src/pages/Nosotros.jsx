@@ -1,4 +1,6 @@
 import React from "react";
+import integrantes from "../data/integrantes.json";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 const Nosotros = () => {
   return (
@@ -13,64 +15,34 @@ const Nosotros = () => {
 
       <h2 className="text-xl font-semibold mt-6 mb-4">Integrantes del equipo</h2>
 
-      <ul className="list-disc list-inside space-y-2 mb-6">
-        <li>
-          Felipe Córdova –{" "}
-          <a
-            href="https://www.linkedin.com/in/tu-linkedin"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          Fernando Castillo –{" "}
-          <a
-            href="https://www.linkedin.com/in/link-del-segundo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          Fernando Inzulza –{" "}
-          <a
-            href="https://www.linkedin.com/in/link-del-tercero"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          Juan Santana –{" "}
-          <a
-            href="https://www.linkedin.com/in/link-del-tercero"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          Cristóbal Pérez –{" "}
-          <a
-            href="https://www.linkedin.com/in/link-del-tercero"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            LinkedIn
-          </a>
-        </li>
-        {/* Agrega más integrantes según sea necesario */}
-      </ul>
+      <ul className="list-disc pl-5 space-y-4 mb-6">
+  {integrantes.map(({ nombre, linkedin, github }) => (
+    <li key={nombre}>
+      <div className="flex items-center space-x-2">
+        <span className="font-medium">{nombre}</span>
+        <a
+          href={linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-800"
+          title="LinkedIn"
+        >
+          <FaLinkedin size={20} />
+        </a>
+        <a
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-gray-700 hover:text-black"
+          title="GitHub"
+        >
+          <FaGithub size={20} />
+        </a>
+      </div>
+    </li>
+  ))}
+</ul>
+
 
       <p className="mb-4">
         Agradecemos el apoyo de todos quienes colaboraron en la validación del sistema.
