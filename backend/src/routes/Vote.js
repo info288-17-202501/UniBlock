@@ -5,7 +5,7 @@ import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
 
 router.post("/create-votation", createVoteController);
-router.post("/send-votes", sendVotestoBlockchainController);
+router.post("/send-votes/:id", sendVotestoBlockchainController);
 
 
 

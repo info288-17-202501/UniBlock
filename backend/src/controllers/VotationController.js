@@ -55,9 +55,29 @@ export async function createVotationController(req, res) {
 
 export async function getVotationsController(req, res) {
   try {
+    // 1. Obtener todas las votaciones
     const votations = await Votation.findAll();
-    res.status(200).json({ votations });
+
+    const now = new Date();
+
+    // 2. Revisar cuáles votaciones están activas pero ya pasaron su fecha/hora de término
+    const updates = await Promise.all(
+      votations.map(async (votation) => {
+        if (votation.status === "Activo") {
+          const endDateTime = new Date(`${votation.end_date}T${votation.end_time}`);
+          if (now > endDateTime) {
+            // Si ya pasó la fecha/hora de término, actualizar status a 'Pendiente'
+            votation.status = "Pendiente";
+            await votation.save();
+          }
+        }
+        return votation;
+      })
+    );
+
+    res.status(200).json({ votations: updates });
   } catch (err) {
+    console.error("Error al recuperar votaciones:", err);
     res.status(500).json({ message: "Error retrieving votations", error: err.message });
   }
 }
@@ -83,7 +103,7 @@ export async function getVotationControllerID(req, res) {
 
     // Solo actualizar si no está terminada
     if (
-      votation.status !== "Terminada" &&
+      votation.status !== "Terminado" &&
       now > endDateTime &&
       votation.status !== "Pendiente"
     ) {
@@ -170,7 +190,7 @@ export async function VotationbyUser(req, res) {
       votations.map(async (votation) => {
         const endDateTime = new Date(`${votation.end_date.toISOString().split('T')[0]}T${votation.end_time}`);
 
-        if (votation.status !== "Terminada" && now > endDateTime) {
+        if (votation.status !== "Terminado" && now > endDateTime) {
           // actualizar en la base de datos
           await votation.update({ status: "Pendiente" });
           return { ...votation.dataValues, status: "Pendiente" };
@@ -184,5 +204,45 @@ export async function VotationbyUser(req, res) {
   } catch (err) {
     console.error("Error retrieving votations by user:", err);
     res.status(500).json({ message: "Error retrieving votations by user", error: err.message });
+  }
+}
+
+
+// Obtener los resultados de una votación
+export async function getVotationResults(req, res) {
+  const { id } = req.params;
+
+  try {
+    const votation = await Votation.findByPk(id, {
+      include: [{ model: Candidate, as: "candidates" }],
+    });
+
+    if (!votation) {
+      return res.status(404).json({ message: "Votación no encontrada" });
+    }
+
+    if (votation.status !== "Terminado") {
+      return res
+        .status(400)
+        .json({ message: "La votación aún no ha finalizado" });
+    }
+
+    // Calcular total de votos sumando los votos de todos los candidatos
+    const totalVotes = votation.candidates.reduce(
+      (sum, candidate) => sum + Number(candidate.number_of_votes || 0),
+      0
+    );
+
+  
+    res.status(200).json({
+      votation,
+      totalVotes,
+    });
+  } catch (err) {
+    console.error("Error al obtener resultados de votación:", err);
+    res.status(500).json({
+      message: "Error al obtener resultados de votación",
+      error: err.message,
+    });
   }
 }

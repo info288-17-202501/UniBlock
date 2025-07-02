@@ -28,8 +28,14 @@ const UserDashboard = () => {
     fetchVotations();
   }, []);
 
-  const handleVoteClick = (votationId) => {
-    navigate(`/vote/${votationId}`);
+  const handleVoteClick = (votation) => {
+    if (votation.status === 'Activo') {
+      navigate(`/vote/${votation.id}`);
+    } else if (votation.status === 'Terminado') {
+      navigate(`/results/${votation.id}`);
+    } else if (votation.status === 'Pendiente') {
+      alert('Esta votación está pendiente de confirmación. Por favor, vuelve más tarde.');
+    }
   };
 
   if (isLoading) {
@@ -67,8 +73,8 @@ const UserDashboard = () => {
             {votations.map((votation) => (
               <div
                 key={votation.id}
-                onClick={() => handleVoteClick(votation.id)}
-                className="border border-[var(--button-border-color)] bg-[var(--button-background-color)] rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer"
+                onClick={() => handleVoteClick(votation)}
+                className={`border border-[var(--button-border-color)] bg-[var(--button-background-color)] rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer`}
               >
                 <h3 className="text-xl font-semibold text-[var(--button-text-color)] mb-2">
                   {votation.title}

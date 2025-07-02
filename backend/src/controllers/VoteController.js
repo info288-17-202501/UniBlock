@@ -2,6 +2,7 @@ import User from "../models/users.js";
 import Vote from "../models/votes.js";
 import Candidate from "../models/candidates.js";
 import VoteCast from "../models/votes_cast.js";
+import Votation from "../models/votations.js";
 import crypto from "crypto";
 import { decryptData } from "../services/cryptoService.js";
 import jwt from "jsonwebtoken";
@@ -113,7 +114,8 @@ export function getVotesController(req, res) {
 }
 
 export async function sendVotestoBlockchainController(req, res) {
-  const { votationId } = req.body;
+  const { id: votationId } = req.params;
+  console.log("ID de votación recibido:", votationId);
 
   try {
     // 1. Obtener votos desde la base de datos
@@ -140,7 +142,13 @@ if (!votosRaw || votosRaw.length === 0) {
     });
 
     const data = await response.json();
-    console.log("Respuesta del nodo:", data);
+    //console.log("Respuesta del nodo:", data);
+
+    //actulizar el estado de la votación a "terminada" en modelo Votation
+    await Votation.update(
+      { status: "Terminado" },
+      { where: { id: votationId } }
+    );
 
     // 3. Responder según resultado del nodo
     if (response.ok && data.exito) {

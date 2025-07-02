@@ -18,6 +18,7 @@ import Votation from "@user/Votation";
 import ResetPassword from "@pages/ResetPassword";
 import RequestPasswordReset from "@pages/RequestPasswordReset";
 import VotationPanel from "./pages/admin/VotationPanel";
+import ResultsPage from "./pages/user/ResultsPage";
 
 
 import TerminosCondiciones from "./pages/TerminosCondiciones";
@@ -61,6 +62,7 @@ function App() {
           <Route path="/user/dashboard" element={<UserDashboard />} />
           <Route path="/vote/:votationId" element={<Votation />} />
           <Route path="/admin/votations" element={<VotationPanel />} />
+          <Route path="/results/:id" element={<ResultsPage />} />
         </Route>
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/request-password-reset" element={<RequestPasswordReset />} />
