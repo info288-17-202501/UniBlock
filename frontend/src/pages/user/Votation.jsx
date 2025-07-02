@@ -26,7 +26,7 @@ const Votation = () => {
     const fetchVotationData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/votations/get-votation/${votationId}`,
+          `http://localhost/api/votations/get-votation/${votationId}`,
           {
             credentials: "include", // Asegúrate de incluir las cookies
           }

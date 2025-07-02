@@ -1,3 +1,0 @@
-# Ignore logs and PID files in the nginx directory
-nginx/nginx-1.28.0/logs
-nginx-1.28.0/logs

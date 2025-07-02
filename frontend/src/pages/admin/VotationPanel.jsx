@@ -8,7 +8,7 @@ const VotationPanel = () => {
   const fetchVotations = async () => {
     try {
       const res = await fetch(
-        "http://localhost:3000/api/votations/votation-by-user",
+        "http://localhost/api/votations/votation-by-user",
         {
           credentials: "include",
         }

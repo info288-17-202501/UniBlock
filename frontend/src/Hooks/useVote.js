@@ -11,7 +11,7 @@ const useVote = () => {
     setSuccess(false);
 
     try {
-      const response = await fetch('http://localhost:3000/api/vote/create-votation', {
+      const response = await fetch('http://localhost/api/vote/create-votation', {
         method: 'POST',
         credentials: 'include',
         headers: {

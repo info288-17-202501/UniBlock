@@ -12,7 +12,7 @@ const ResultsPage = () => {
     const fetchVotation = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/votations/results/${id}`,
+          `http://localhost/api/votations/results/${id}`,
           {
             credentials: "include",
           }

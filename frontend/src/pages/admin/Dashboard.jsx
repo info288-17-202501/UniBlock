@@ -34,7 +34,7 @@ function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/checks/isadmin", {
+    fetch("http://localhost/api/checks/isadmin", {
       method: "GET",
       credentials: "include", 
     })

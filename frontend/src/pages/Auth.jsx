@@ -88,7 +88,7 @@ const Auth = () => {
 
     try {
       setOtpLoading(true);
-      await axios.post("http://localhost:3000/api/auth/otp-send", {
+      await axios.post("http://localhost/api/auth/otp-send", {
         email: formData.email,
       });
       setOtpSent(true);
@@ -103,7 +103,7 @@ const Auth = () => {
   const handleVerifyOtp = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/auth/otp-verify",
+        "http://localhost/api/auth/otp-verify",
         {
           email: formData.email,
           otp,
