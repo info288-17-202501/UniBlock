@@ -16,7 +16,7 @@ const VotationPanel = () => {
 
       if (!res.ok) throw new Error("Error fetching votations");
       const data = await res.json();
-      setVotations(data.votations); // ✅ EXTRAER ARRAY
+      setVotations(data.votations); // EXTRAER ARRAY
     } catch (error) {
       console.error("Error fetching votations", error);
       setError("Error al cargar las votaciones.");
@@ -38,7 +38,7 @@ const VotationPanel = () => {
       });
       if (!res.ok) throw new Error();
       setVotations((prev) =>
-        prev.map((v) => (v.id === id ? { ...v, status: "terminada" } : v))
+        prev.map((v) => (v.id === id ? { ...v, status: "Terminado" } : v))
       );
     } catch (error) {
       alert("No se pudo terminar la votación.");
@@ -63,7 +63,7 @@ const VotationPanel = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-6 xl:pt-30">
       <h2 className="text-3xl font-bold mb-6 text-center">Mis Votaciones</h2>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow">
@@ -101,7 +101,7 @@ const VotationPanel = () => {
                     {votation.status}
                   </td>
                   <td className="py-3 px-4 border-b">
-                    {votation.status !== "Terminada" && (
+                    {votation.status !== "Terminado" && (
                       <button
                         onClick={() => handleEndVotation(votation.id)}
                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors"

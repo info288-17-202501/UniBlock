@@ -12,7 +12,7 @@ const NODO_VALIDADOR_URL = process.env.NODO_VALIDADOR_URL
 export async function createVoteController(req, res) {
   const { votationId, candidateId } = req.body;
   // 1. Obtener el token de la cookie
-  const token = req.cookies.access_token; 
+  const token = req.cookies.access_token;
 
   if (!token) {
     return res
@@ -80,11 +80,12 @@ export async function createVoteController(req, res) {
     // Guardar el voto en la tabla de votos emitidos
     const voteCast = await VoteCast.create({
       votation_id: votationId,
-      user_id: user.id});
+      user_id: user.id
+    });
     if (!voteCast) {
       return res.status(500).json({ message: "Error al guardar el voto emitido" });
     }
-    
+
 
     // Guardar el voto en la base de datos
     const newVote = await Vote.create({
@@ -115,18 +116,18 @@ export function getVotesController(req, res) {
 
 export async function sendVotestoBlockchainController(req, res) {
   const { id: votationId } = req.params;
-  console.log("ID de votación recibido:", votationId);
+  //console.log("ID de votación recibido:", votationId);
 
   try {
-    // 1. Obtener votos desde la base de datos
+    // 1. Obtener votos desde la base de datos  
     const votosRaw = await Vote.findAll({
-  where: { votation_id: votationId },
-  attributes: ['votation_id', 'candidate_id', 'timestamp', 'firma', 'public_key']
-});
+      where: { votation_id: votationId },
+      attributes: ['votation_id', 'candidate_id', 'timestamp', 'firma', 'public_key']
+    });
 
-if (!votosRaw || votosRaw.length === 0) {
-  return res.status(404).json({ message: "No hay votos para esta votación." });
-}
+    if (!votosRaw || votosRaw.length === 0) {
+      return res.status(404).json({ message: "No hay votos para esta votación." });
+    }
     const votos = votosRaw.map(v => v.dataValues);
 
     console.log("Votos obtenidos:", votos);
