@@ -15,7 +15,7 @@ import { hasUserVoted } from "../middlewares/hasUserVoted.js";
 
 const router = express.Router();
 
-router.post("/create-votation", authenticateToken, createVotationController);
+router.post("/create-votation", authenticateToken, isAdminMiddleware, createVotationController);
 router.get("/get-votations",authenticateToken, getVotationsController);
 router.get("/get-votation/:id", hasUserVoted, getVotationControllerID);
 router.get("/votation-by-user", authenticateToken, isAdminMiddleware , VotationbyUser);
