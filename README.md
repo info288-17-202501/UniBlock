@@ -54,6 +54,29 @@ npm install
 
 Ya con todo instalado, es hora de ejecutar de iniciar el servidor.
 
+## Iniciar Nginx
+
+🪟 Windows
+
+```
+cd nginx\nginx-1.28.0
+.\nginx.exe
+```
+
+🍎 macOS
+
+```
+cd ~/nginx/nginx-1.28.0
+sudo ./nginx
+```
+
+🐧 Ubuntu / Linux
+
+```
+cd ~/nginx/nginx-1.28.0
+sudo ./nginx
+```
+
 ## Iniciar backend
 
 ```
