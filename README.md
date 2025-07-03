@@ -60,21 +60,21 @@ Ya con todo instalado, es hora de ejecutar de iniciar el servidor.
 
 ```
 cd nginx\nginx-1.28.0
-.\nginx.exe
+start .\nginx.exe
 ```
 
 🍎 macOS
 
 ```
 cd ~/nginx/nginx-1.28.0
-sudo ./nginx
+sudo ./nginx.exe
 ```
 
 🐧 Ubuntu / Linux
 
 ```
 cd ~/nginx/nginx-1.28.0
-sudo ./nginx
+sudo ./nginx.exe
 ```
 
 ## Iniciar backend
