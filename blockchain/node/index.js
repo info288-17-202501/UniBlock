@@ -1,7 +1,7 @@
 const express = require('express');
 const Blockchain = require('../blockchain/blockchain');
-const Block = require('../blockchain/block');
-const { cargarClaves } = require('../blockchain/crypto-utils');
+const Block = require('../blockchain/block'); 
+const { cargarClaves } = require('../blockchain/crypto-utils'); 
 const axios = require('axios');
 
 const app = express();
@@ -23,17 +23,33 @@ if (ES_VALIDADOR) {
 } else {
     console.log('ℹ️  Nodo listener - no requiere claves');
 }
+
 const blockchain = new Blockchain();
 
 blockchain.cargarDesdeDisco();
+
+// **Modificación:** Mensaje más claro al inicio sobre el estado de la cadena
 if (blockchain.cadena.length === 0 && ES_VALIDADOR) {
-    blockchain.crearGenesis(claves.publicKey, claves.privateKey);
+    try {
+        blockchain.crearGenesis(claves.publicKey, claves.privateKey);
+        console.log('✅ Bloque Génesis creado. La cadena estaba vacía.');
+    } catch (error) {
+        console.error('❌ Error al crear el Bloque Génesis:', error.message);
+        process.exit(1);
+    }
+} else if (blockchain.cadena.length > 0) {
+    console.log(`✅ Blockchain cargada desde disco con ${blockchain.cadena.length} bloques.`);
+    
+    if (!blockchain.esCadenaValida(blockchain.cadena)) {
+        console.error('⚠️ La cadena cargada desde disco NO es válida. Esto podría causar problemas de sincronización con otros nodos.');
+    }
 }
+
 
 // ENDPOINT: recibe bloques externos
 app.post('/nuevo-bloque', (req, res) => {
     const datos = req.body;
-    const bloque = new Block(
+    const bloqueRecibido = new Block(
         datos.index,
         datos.timestamp,
         datos.idVotacion,
@@ -41,10 +57,17 @@ app.post('/nuevo-bloque', (req, res) => {
         datos.hashAnterior,
         datos.publicKey
     );
-    bloque.hashPropio = datos.hashPropio;
-    bloque.firmaDigital = datos.firmaDigital;
+    bloqueRecibido.hashPropio = datos.hashPropio;
+    bloqueRecibido.firmaDigital = datos.firmaDigital;
 
-    const exito = blockchain.agregarBloque(bloque);
+    const exito = blockchain.agregarBloque(bloqueRecibido);
+
+    if (exito) {
+        console.log(`✅ Bloque ${bloqueRecibido.index} recibido y agregado exitosamente.`);
+    } else {
+        console.error(`❌ Bloque ${bloqueRecibido.index} recibido de un peer PERO RECHAZADO por la lógica de 'agregarBloque'.`);
+        console.error(`   Datos del bloque recibido:`, bloqueRecibido); // Útil para depurar
+    }
     res.json({ exito });
 });
 
@@ -58,19 +81,36 @@ async function sincronizar() {
     for (const peer of PEERS) {
         try {
             const { data } = await axios.get(peer + '/cadena', {
-            headers: {
-                'ngrok-skip-browser-warning': 'true'
-            }
-        });
-            if (data.length > blockchain.cadena.length && blockchain.esCadenaValida(data)) {
-                blockchain.cadena = data;
-                blockchain.guardarEnDisco();
-                console.log(`✅ Cadena sincronizada desde ${peer}`);
+                headers: {
+                    'ngrok-skip-browser-warning': 'true' // Para entornos como ngrok
+                }
+            });
+
+            const cadenaRecibidaComoInstancias = data.map(b => {
+                const blockInstance = new Block(b.index, b.timestamp, b.idVotacion, b.votos, b.hashAnterior, b.publicKey);
+                blockInstance.hashPropio = b.hashPropio;
+                blockInstance.firmaDigital = b.firmaDigital;
+                return blockInstance;
+            });
+
+            if (cadenaRecibidaComoInstancias.length > blockchain.cadena.length) { 
+                if (blockchain.esCadenaValida(cadenaRecibidaComoInstancias)) {
+                    blockchain.cadena = cadenaRecibidaComoInstancias; 
+                    blockchain.guardarEnDisco();
+                    console.log(`✅ Cadena sincronizada desde ${peer} con ${cadenaRecibidaComoInstancias.length} bloques.`);
+                } else {
+                    console.error(`❌ Cadena recibida de ${peer} RECHAZADA durante la sincronización. La cadena no es válida.`);
+                }
             } else {
-                console.log(`❌ Cadena rechazada desde ${peer}`);
+                // console.log(`ℹ️  La cadena de ${peer} no es más larga (${data.length} vs ${blockchain.cadena.length}). No se requiere sincronización.`); // Descomentar para depuración exhaustiva
             }
         } catch (err) {
-            console.log(`⚠️  No se pudo conectar a ${peer}`);
+            if (err.code === 'ECONNREFUSED' || err.code === 'ENOTFOUND') {
+                console.log(`⚠️  No se pudo conectar a ${peer} (probablemente inactivo o inaccesible).`);
+            } else {
+                console.error(`❌ Error inesperado durante la sincronización con ${peer}: ${err.message}`);
+                // console.error(err); // Descomentar para ver el stack trace completo del error
+            }
         }
     }
 }
@@ -82,7 +122,7 @@ app.listen(PORT, () => {
     console.log(`Nodo ejecutándose en puerto ${PORT} (validador=${ES_VALIDADOR})`);
 });
 
-// ✅ NUEVO ENDPOINT /votar: recibe votos SIN votationId individual
+// El endpoint /votar: recibe votos y propaga. La lógica aquí es correcta en su intención.
 app.post('/votar', async (req, res) => {
     const { idVotacion, votos } = req.body;
 
@@ -113,15 +153,18 @@ app.post('/votar', async (req, res) => {
     const exito = blockchain.agregarBloque(nuevoBloque);
 
     if (exito) {
-        // 🔁 Propagar a otros peers
+        console.log(`✅ Nuevo bloque ${nuevoBloque.index} creado localmente y agregado.`);
+        // Propagar a otros peers
         for (const peer of PEERS) {
             try {
                 await axios.post(peer + '/nuevo-bloque', nuevoBloque);
-                console.log(`📤 Bloque enviado a ${peer}`);
+                console.log(`Bloque ${nuevoBloque.index} enviado a ${peer}`);
             } catch (err) {
-                console.log(`⚠️  Error enviando bloque a ${peer}: ${err.message}`);
+                console.log(`Error enviando bloque a ${peer}: ${err.message}`);
             }
         }
+    } else {
+        console.error(`Falló la adición del nuevo bloque localmente. Revisa 'agregarBloque'.`);
     }
 
     res.json({ exito });

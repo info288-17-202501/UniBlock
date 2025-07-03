@@ -69,6 +69,10 @@ function App() {
         <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
         <Route path="/privacidad" element={<PoliticasPrivacidad />} />
         <Route path="/nosotros" element={<Nosotros />} />
+
+        {/* Rutas de de usuarui invalida retorna a inicio */}
+        <Route path="*" element={<Home />} />
+      
       </Routes>
       <ScrollToTopButton />
     </>
