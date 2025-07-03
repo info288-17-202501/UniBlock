@@ -91,4 +91,9 @@ cd frontend
 npm run dev
 ```
 
+## Nodo Validador
+PORT=4000 PEERS="http://localhost:4001,http://localhost:4002" VALIDADOR=true node node/index.js
 
+## Nodos Listeners
+PORT=4001 PEERS="http://localhost:4000" VALIDADOR=false node node/index.js
+PORT=4002 PEERS="http://localhost:4000" VALIDADOR=false node node/index.js  
