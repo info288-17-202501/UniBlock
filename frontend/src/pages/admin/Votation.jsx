@@ -94,7 +94,7 @@ function ProgressBar({ currentStep }) {
           <div key={step} className="flex flex-col items-center z-10">
             <div
               className={`w-8 h-8 flex items-center justify-center rounded-full ${currentStep >= step
-                  ? "bg-blue-600 text-white"
+                  ? "bg-orange-600 text-white"
                   : "bg-gray-200 text-gray-600"
                 } font-medium`}
             >
@@ -110,15 +110,15 @@ function ProgressBar({ currentStep }) {
       </div>
       <div className="absolute top-4 left-0 right-0 flex px-8">
         <div
-          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${currentStep >= 2 ? "bg-blue-600" : "bg-transparent"
+          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${currentStep >= 2 ? "bg-orange-600" : "bg-transparent"
             }`}
         ></div>
         <div
-          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${currentStep >= 3 ? "bg-blue-600" : "bg-transparent"
+          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${currentStep >= 3 ? "bg-orange-600" : "bg-transparent"
             }`}
         ></div>
         <div
-          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${currentStep >= 4 ? "bg-blue-600" : "bg-transparent"
+          className={`flex-1 h-0.5 mx-2 transition-all duration-300 ${currentStep >= 4 ? "bg-orange-600" : "bg-transparent"
             }`}
         ></div>
       </div>
@@ -314,7 +314,7 @@ function Step3({ nextStep, prevStep, formData, setFormData }) {
             <input
               type="radio"
               name="usuarios"
-              className="h-4 w-4 text-blue-600"
+              className="h-4 w-4 text-orange-600"
               checked={formData.isPublic === true}
               onChange={() => setFormData({ ...formData, isPublic: true })}
             />
@@ -331,7 +331,7 @@ function Step3({ nextStep, prevStep, formData, setFormData }) {
             <input
               type="radio"
               name="usuarios"
-              className="h-4 w-4 text-blue-600"
+              className="h-4 w-4 text-orange-600"
               checked={formData.isPublic === false}
               onChange={() => setFormData({ ...formData, isPublic: false })}
             />
@@ -469,16 +469,16 @@ function Step4({ prevStep, formData }) {
 // Estilos con Tailwind
 const styles = `
 .input {
-  @apply w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm;
+  @apply w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 text-sm;
 }
 .btn-primary {
-  @apply w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+  @apply w-full bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500;
 }
 .btn-secondary {
   @apply w-full bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-4 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 border border-gray-300;
 }
 .btn-outline {
-  @apply bg-white hover:bg-gray-50 text-gray-700 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+  @apply bg-white hover:bg-gray-50 text-gray-700 py-2 px-4 border border-gray-300 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500;
 }
 .btn-success {
   @apply w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500;

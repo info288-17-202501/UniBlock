@@ -131,7 +131,7 @@ const Votation = () => {
     return (
       <div className="p-8">
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
         </div>
       </div>
     );
@@ -158,7 +158,7 @@ const Votation = () => {
             <p className="text-sm sm:text-base">{error || submitError}</p>
             <button
               onClick={() => navigate("/")}
-              className="mt-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-all duration-200"
+              className="mt-2 px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-full transition-all duration-200"
             >
               Volver al inicio
             </button>

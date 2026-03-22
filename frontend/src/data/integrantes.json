@@ -1,26 +1,31 @@
 [
   {
     "nombre": "Felipe Córdova",
+    "rol": "Programador Frontend",
     "linkedin": "https://www.linkedin.com/in/fcordovav/",
     "github": "https://github.com/fcordovav"
   },
   {
-    "nombre": "Fernando Castillo",
-    "linkedin": "https://www.linkedin.com/in/link-del-segundo",
-    "github": "https://github.com/CreativeSelf1"
-  },
-  {
     "nombre": "Fernando Inzulza",
+    "rol": "Programador Frontend",
     "linkedin": "https://www.linkedin.com/in/fernando-inzulza-9a42362a0/",
     "github": "https://github.com/Lukayx"
   },
   {
+    "nombre": "Fernando Castillo",
+    "rol": "Programador Backend",
+    "linkedin": "https://www.linkedin.com/in/link-del-segundo",
+    "github": "https://github.com/CreativeSelf1"
+  },
+  {
     "nombre": "Juan Santana",
+    "rol": "Programador Blockchain",
     "linkedin": "https://www.linkedin.com/in/link-del-tercero",
     "github": "https://github.com/JuanElPro7"
   },
   {
     "nombre": "Cristóbal Pérez",
+    "rol": "Programador Blockchain",
     "linkedin": "https://www.linkedin.com/in/link-del-tercero",
     "github": "https://github.com/cperez17"
   }

@@ -1,0 +1,4 @@
+ℹ️  Nodo listener - no requiere claves
+✅ Blockchain cargada y validada desde disco.
+✅ Blockchain cargada desde disco con 4 bloques.
+Nodo ejecutándose en puerto 4001 (validador=false)

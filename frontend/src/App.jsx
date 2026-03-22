@@ -49,6 +49,11 @@ function App() {
     }
   }, [location.pathname]);
 
+  // Scroll to top on every route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <>
       <Header />

@@ -19,16 +19,15 @@ const PreguntasFrecuentes = () => {
           <div key={index}>
             <button
               onClick={() => togglePregunta(index)}
-              // className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer"
-              className="w-full flex justify-between items-center py-2 text-left hover:underline cursor-pointer text-[var(--color-text)]"
+              className="w-full flex justify-between items-center py-2 text-left cursor-pointer text-[var(--color-text)] group transition-all duration-300"
             >
-              <span className="text-lg text-[var(--color-text)] font-medium">
+              <span className="text-lg font-medium group-hover:text-orange-500 transition-colors duration-300">
                 {item.pregunta}
               </span>
               {activeIndex === index ? (
-                <ChevronUp className="w-5 h-5 text-[var(--color-text)]" />
+                <ChevronUp className="w-5 h-5 group-hover:text-orange-500 transition-colors duration-300" />
               ) : (
-                <ChevronDown className="w-5 h-5 text-[var(--color-text)]" />
+                <ChevronDown className="w-5 h-5 group-hover:text-orange-500 transition-colors duration-300" />
               )}
             </button>
             {activeIndex === index && (
@@ -41,7 +40,7 @@ const PreguntasFrecuentes = () => {
                       href={item.link_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 underline hover:text-blue-800"
+                      className="text-orange-600 underline hover:text-orange-800"
                     >
                       {item.link_texto}
                     </a>

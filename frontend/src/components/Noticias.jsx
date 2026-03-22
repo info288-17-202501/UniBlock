@@ -1,190 +1,3 @@
-// import React, { useState } from 'react';
-// import { Bar, Line, Pie, Doughnut } from 'react-chartjs-2';
-// import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement, PointElement, ArcElement } from 'chart.js';
-
-// // Registra los componentes de Chart.js
-// ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement, PointElement, ArcElement);
-
-// const noticias = [
-//   {
-//     titulo: 'Resultados de la Votación para Centro de Alumnos',
-//     descripcion: 'Los resultados de la última votación para el Centro de Alumnos se han procesado. A continuación, mostramos los resultados por facultad.',
-//     grafico: {
-//       type: 'pie',
-//       labels: ['Ingeniería', 'Ciencias', 'Humanidades'],
-//       datasets: [
-//         {
-//           label: 'Votos',
-//           data: [120, 90, 150],
-//           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-//         },
-//       ],
-//     },
-//   },
-//   {
-//     titulo: 'Resultados de la Votación para Rector',
-//     descripcion: 'La votación para elegir al nuevo rector también se ha cerrado. Los resultados han sido procesados y aquí los mostramos.',
-//     grafico: {
-//       type: 'line',
-//       labels: ['Candidato A', 'Candidato B', 'Candidato C'],
-//       datasets: [
-//         {
-//           label: 'Votos',
-//           data: [250, 180, 120],
-//           borderColor: '#36A2EB',
-//           backgroundColor: 'rgba(255, 255, 255, 0.2)',
-//           fill: true,
-//         },
-//       ],
-//     },
-//   },
-//   {
-//     titulo: 'Movilización Estudiantil: ¿Qué opina la comunidad?',
-//     descripcion: 'En esta noticia se presenta la votación sobre la movilización estudiantil. Los resultados muestran un fuerte apoyo a la movilización.',
-//     grafico: {
-//       type: 'bar',
-//       labels: ['Sí', 'No'],
-//       datasets: [
-//         {
-//           label: 'Votos',
-//           data: [400, 50],
-//           backgroundColor: '#FF9F40',
-//         },
-//       ],
-//     },
-//   },
-//   {
-//     titulo: 'Resultados de la Votación para Dirección de Escuela',
-//     descripcion: 'Los resultados de la votación para la Dirección de Escuela también han sido procesados. Aquí están los detalles.',
-//     grafico: {
-//       type: 'doughnut',
-//       labels: ['Candidato A', 'Candidato B', 'Candidato C'],
-//       datasets: [
-//         {
-//           label: 'Votos',
-//           data: [200, 170, 110],
-//           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-//         },
-//       ],
-//     },
-//   },
-//   {
-//     titulo: 'Resultados de la Votación para Movimiento Social Estudiantil',
-//     descripcion: 'Esta noticia presenta los resultados de la votación sobre un importante movimiento social que involucra a estudiantes.',
-//     grafico: {
-//       type: 'line',
-//       labels: ['Sí', 'No'],
-//       datasets: [
-//         {
-//           label: 'Votos',
-//           data: [350, 90],
-//           borderColor: '#4BC0C0',
-//           backgroundColor: 'rgba(75, 192, 192, 0.2)',
-//           fill: true,
-//         },
-//       ],
-//     },
-//   },
-//   {
-//     titulo: 'Análisis de Participación Estudiantil en Votaciones Recientes',
-//     descripcion: 'En este artículo se analizan las tendencias y la participación en las votaciones más recientes en la universidad.',
-//     grafico: {
-//       type: 'bar',
-//       labels: ['Ingeniería', 'Ciencias', 'Humanidades', 'Medicina'],
-//       datasets: [
-//         {
-//           label: 'Votos',
-//           data: [300, 250, 150, 100],
-//           backgroundColor: '#FFCE56',
-//         },
-//       ],
-//     },
-//   },
-//   {
-//     titulo: 'Votación sobre Reglas de Participación',
-//     descripcion: 'Los resultados de la votación acerca de las nuevas reglas para las elecciones internas han sido analizados y compartidos.',
-//     grafico: {
-//       type: 'pie',
-//       labels: ['Aprobado', 'Rechazado'],
-//       datasets: [
-//         {
-//           label: 'Resultados',
-//           data: [320, 80],
-//           backgroundColor: ['#FF6384', '#36A2EB'],
-//         },
-//       ],
-//     },
-//   },
-// ];
-
-// const Noticias = () => {
-//   const [paginaActual, setPaginaActual] = useState(1); // Página actual
-//   const noticiasPorPagina = 3; // Número de noticias por página
-
-//   // Función para cambiar la página
-//   const cambiarPagina = (numeroPagina) => {
-//     if (numeroPagina > 0 && numeroPagina <= totalPaginas) {
-//       setPaginaActual(numeroPagina);
-//     }
-//   };
-
-//   // Total de páginas
-//   const totalPaginas = Math.ceil(noticias.length / noticiasPorPagina);
-
-//   // Noticias a mostrar en la página actual
-//   const noticiasVisibles = noticias.slice((paginaActual - 1) * noticiasPorPagina, paginaActual * noticiasPorPagina);
-
-//   return (
-//     <section id="noticias" className='mt-24'>
-//       <h2 className="text-2xl font-bold text-[var(--color-text)] mb-6">Noticias</h2>
-//       {/* Noticias */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//         {noticiasVisibles.map((item, index) => (
-//           // <div key={index} className="border p-4 rounded-lg shadow-lg hover:shadow-xl transition">
-//           <div key={index} className="p-4 border border-[var(--border-color)] rounded-lg shadow-lg hover:shadow-xl transition">
-//             <div className="pb-4">
-//               <h3 className="text-xl text-[var(--color-text)] font-semibold">{item.titulo}</h3>
-//             </div>
-//             <p className="text-[var(--color-text-secondary)]">{item.descripcion}</p>
-//             <div className="py-4">
-//               {item.grafico.type === 'bar' && <Bar data={item.grafico} options={{ responsive: true }} />}
-//               {item.grafico.type === 'line' && <Line data={item.grafico} options={{ responsive: true }} />}
-//               {item.grafico.type === 'pie' && <div className="w-full max-w-[300px] h-[300px] mx-auto"><Pie data={item.grafico} options={{ responsive: true, maintainAspectRatio: false }} /></div>}
-//               {item.grafico.type === 'doughnut' && <div className="w-full max-w-[300px] h-[300px] mx-auto"><Doughnut data={item.grafico} options={{ responsive: true, maintainAspectRatio: false }} /></div>}
-//               {/* {item.grafico.type === 'pie' && <Pie data={item.grafico} options={{ responsive: true }} />}
-//               {item.grafico.type === 'doughnut' && <Doughnut data={item.grafico} options={{ responsive: true }} />} */}
-//             </div>
-//             <hr className="my-2 border-gray-300" />
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* Paginación */}
-//       {totalPaginas > 1 && (
-//         <div className="flex justify-center mt-6 space-x-4">
-//           <button
-//             onClick={() => cambiarPagina(paginaActual - 1)}
-//             className="btn border-2 border-gray-500 text-gray-500 rounded-full px-6 py-3 hover:bg-gray-500 hover:text-white"
-//             disabled={paginaActual === 1}
-//           >
-//             Anterior
-//           </button>
-//           <span className="text-lg text-[var(--color-text)] font-semibold">{paginaActual} / {totalPaginas}</span>
-//           <button
-//             onClick={() => cambiarPagina(paginaActual + 1)}
-//             className="btn border-2 border-gray-500 text-gray-500 rounded-full px-6 py-3 hover:bg-gray-500 hover:text-white"
-//             disabled={paginaActual === totalPaginas}
-//           >
-//             Siguiente
-//           </button>
-//         </div>
-//       )}
-//     </section>
-//   );
-// };
-
-// export default Noticias;
-
 import React, { useState } from "react";
 import { Bar, Line, Pie, Doughnut } from "react-chartjs-2";
 import {
@@ -199,11 +12,9 @@ import {
   PointElement,
   ArcElement,
 } from "chart.js";
-import MobileStepper from "@mui/material/MobileStepper";
-import Button from "@mui/material/Button";
-import { useTheme } from "@mui/material/styles";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { useDarkMode } from "@context/darkModeContext";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, TrendingUp, Award, Users, Info } from "lucide-react";
 
 // Registra los componentes de Chart.js
 ChartJS.register(
@@ -218,11 +29,14 @@ ChartJS.register(
   ArcElement
 );
 
-const noticias = [
+const NOTICIAS = [
   {
-    titulo: "Resultados de la Votación para Centro de Alumnos",
-    descripcion:
-      "Los resultados de la última votación para el Centro de Alumnos se han procesado. A continuación, mostramos los resultados por facultad.",
+    id: 1,
+    titulo: "Resultados: Centro de Alumnos 2026",
+    fecha: "Marzo 15, 2026",
+    categoria: "Resultados",
+    icon: <Award className="w-5 h-5" />,
+    descripcion: "La Facultad de Ingeniería lidera la participación en la elección de la nueva directiva estudiantil.",
     grafico: {
       type: "pie",
       labels: ["Ingeniería", "Ciencias", "Humanidades"],
@@ -230,107 +44,71 @@ const noticias = [
         {
           label: "Votos",
           data: [120, 90, 150],
-          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+          backgroundColor: ["#EF5218", "#F97316", "#FB923C"],
+          borderWidth: 0,
         },
       ],
     },
   },
   {
-    titulo: "Resultados de la Votación para Rector",
-    descripcion:
-      "La votación para elegir al nuevo rector también se ha cerrado. Los resultados han sido procesados y aquí los mostramos.",
+    id: 2,
+    titulo: "Participación en Tiempo Real",
+    fecha: "Marzo 12, 2026",
+    categoria: "Tendencias",
+    icon: <TrendingUp className="w-5 h-5" />,
+    descripcion: "Se observa un incremento del 25% en la participación digital respecto al año anterior.",
     grafico: {
       type: "line",
-      labels: ["Candidato A", "Candidato B", "Candidato C"],
+      labels: ["Lun", "Mar", "Mie", "Jue", "Vie"],
       datasets: [
         {
-          label: "Votos",
-          data: [250, 180, 120],
-          borderColor: "#36A2EB",
-          backgroundColor: "rgba(255, 255, 255, 0.2)",
+          label: "Votantes",
+          data: [250, 310, 420, 380, 510],
+          borderColor: "#EF5218",
+          backgroundColor: "rgba(239, 82, 24, 0.1)",
           fill: true,
+          tension: 0.4,
+          pointBackgroundColor: "#EF5218",
         },
       ],
     },
   },
   {
-    titulo: "Movilización Estudiantil: ¿Qué opina la comunidad?",
-    descripcion:
-      "En esta noticia se presenta la votación sobre la movilización estudiantil. Los resultados muestran un fuerte apoyo a la movilización.",
+    id: 3,
+    titulo: "Aprobación Reforma de Estatutos",
+    fecha: "Marzo 10, 2026",
+    categoria: "Consulta",
+    icon: <Users className="w-5 h-5" />,
+    descripcion: "Los estudiantes han aprobado por amplia mayoría las nuevas reglas de gobernanza digital.",
     grafico: {
       type: "bar",
-      labels: ["Sí", "No"],
+      labels: ["A favor", "En contra", "Nulo"],
       datasets: [
         {
           label: "Votos",
-          data: [400, 50],
-          backgroundColor: "#FF9F40",
+          data: [400, 50, 15],
+          backgroundColor: ["#EF5218", "#4b5563", "#9ca3af"],
+          borderRadius: 8,
         },
       ],
     },
   },
   {
-    titulo: "Resultados de la Votación para Dirección de Escuela",
-    descripcion:
-      "Los resultados de la votación para la Dirección de Escuela también han sido procesados. Aquí están los detalles.",
+    id: 4,
+    titulo: "Dirección de Escuela: Resultados",
+    fecha: "Marzo 05, 2026",
+    categoria: "Resultados",
+    icon: <Award className="w-5 h-5" />,
+    descripcion: "El proceso cerró con una auditoría exitosa en la red blockchain descentralizada.",
     grafico: {
       type: "doughnut",
-      labels: ["Candidato A", "Candidato B", "Candidato C"],
+      labels: ["Lista A", "Lista B", "Lista C"],
       datasets: [
         {
           label: "Votos",
           data: [200, 170, 110],
-          backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        },
-      ],
-    },
-  },
-  {
-    titulo: "Resultados de la Votación para Movimiento Social Estudiantil",
-    descripcion:
-      "Esta noticia presenta los resultados de la votación sobre un importante movimiento social que involucra a estudiantes.",
-    grafico: {
-      type: "line",
-      labels: ["Sí", "No"],
-      datasets: [
-        {
-          label: "Votos",
-          data: [350, 90],
-          borderColor: "#4BC0C0",
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-          fill: true,
-        },
-      ],
-    },
-  },
-  {
-    titulo: "Análisis de Participación Estudiantil en Votaciones Recientes",
-    descripcion:
-      "En este artículo se analizan las tendencias y la participación en las votaciones más recientes en la universidad.",
-    grafico: {
-      type: "bar",
-      labels: ["Ingeniería", "Ciencias", "Humanidades", "Medicina"],
-      datasets: [
-        {
-          label: "Votos",
-          data: [300, 250, 150, 100],
-          backgroundColor: "#FFCE56",
-        },
-      ],
-    },
-  },
-  {
-    titulo: "Votación sobre Reglas de Participación",
-    descripcion:
-      "Los resultados de la votación acerca de las nuevas reglas para las elecciones internas han sido analizados y compartidos.",
-    grafico: {
-      type: "pie",
-      labels: ["Aprobado", "Rechazado"],
-      datasets: [
-        {
-          label: "Resultados",
-          data: [320, 80],
-          backgroundColor: ["#FF6384", "#36A2EB"],
+          backgroundColor: ["#EF5218", "#F97316", "#FB923C"],
+          borderWidth: 0,
         },
       ],
     },
@@ -338,146 +116,153 @@ const noticias = [
 ];
 
 const Noticias = () => {
-  const [paginaActual, setPaginaActual] = useState(0); // Cambié el valor a 0 porque MobileStepper empieza desde 0
-  const noticiasPorPagina = 3; // Número de noticias por página
-  const theme = useTheme();
+  const { darkMode } = useDarkMode();
+  const [paginaActual, setPaginaActual] = useState(0);
+  const itemsPorPagina = 3;
+  const totalPaginas = Math.ceil(NOTICIAS.length / itemsPorPagina);
 
-  // Función para cambiar la página
-  const handleNext = () => {
-    if (paginaActual < totalPaginas - 1) {
-      setPaginaActual((prev) => prev + 1);
-    }
-  };
+  const handleNext = () => setPaginaActual((p) => (p + 1) % totalPaginas);
+  const handleBack = () => setPaginaActual((p) => (p - 1 + totalPaginas) % totalPaginas);
 
-  const handleBack = () => {
-    if (paginaActual > 0) {
-      setPaginaActual((prev) => prev - 1);
-    }
-  };
-
-  // Total de páginas
-  const totalPaginas = Math.ceil(noticias.length / noticiasPorPagina);
-
-  // Noticias a mostrar en la página actual
-  const noticiasVisibles = noticias.slice(
-    paginaActual * noticiasPorPagina,
-    (paginaActual + 1) * noticiasPorPagina
+  const visibles = NOTICIAS.slice(
+    paginaActual * itemsPorPagina,
+    (paginaActual + 1) * itemsPorPagina
   );
 
-  return (
-    <section id="noticias" className="mt-24">
-      <h2 className="text-3xl font-bold text-[var(--color-text)] mb-6">
-        Noticias
-      </h2>
-      {/* Noticias */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {noticiasVisibles.map((item, index) => (
-          <div
-            key={index}
-            className="p-4 border flex flex-col h-full border-[var(--border-color)] rounded-lg shadow-lg hover:shadow-xl transition"
-          >
-            <div className="pb-4">
-              <h3 className="text-xl text-[var(--color-text)] font-semibold">
-                {item.titulo}
-              </h3>
-            </div>
-            <p className="text-[var(--color-text-secondary)]">
-              {item.descripcion}
-            </p>
-            <div className="py-4 flex-grow">
-              {item.grafico.type === "bar" && (
-                <Bar data={item.grafico} options={{ responsive: true }} />
-              )}
-              {item.grafico.type === "line" && (
-                <Line data={item.grafico} options={{ responsive: true }} />
-              )}
-              {item.grafico.type === "pie" && (
-                <div className="w-full max-w-[300px] h-[300px] mx-auto">
-                  <Pie
-                    data={item.grafico}
-                    options={{ responsive: true, maintainAspectRatio: false }}
-                  />
-                </div>
-              )}
-              {item.grafico.type === "doughnut" && (
-                <div className="w-full max-w-[300px] h-[300px] mx-auto">
-                  <Doughnut
-                    data={item.grafico}
-                    options={{ responsive: true, maintainAspectRatio: false }}
-                  />
-                </div>
-              )}
-            </div>
-            <hr className="my-2 border-gray-300" />
-          </div>
-        ))}
-      </div>
+  const chartTextColor = darkMode ? "#e2e8f0" : "#1f2937";
+  const gridColor = darkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(31, 41, 55, 0.1)";
 
-      {/* Paginación con MobileStepper */}
-      {totalPaginas > 1 && (
-        <div className="flex justify-center mt-6 space-x-4">
-          <MobileStepper
-            variant="dots"
-            steps={totalPaginas}
-            position="static"
-            activeStep={paginaActual}
-            sx={{
-              maxWidth: 400,
-              flexGrow: 1,
-              backgroundColor: "transparent",
-              ".MuiMobileStepper-dot": {
-                backgroundColor: "#ccc", // color de los dots inactivos
-              },
-              ".MuiMobileStepper-dotActive": {
-                backgroundColor: "#EF5218", // dot activo
-              },
-              ".MuiButton-root": {
-                color: "#EF5218", // botones activos
-                display: "flex",
-                alignItems: "end",   // centra verticalmente
-                "&.Mui-disabled": {
-                  color: "#63230b", // color cuando el botón está deshabilitado
-                },
-                // íconos dentro del botón deshabilitado
-                "&.Mui-disabled .MuiSvgIcon-root": {
-                  color: "#63230b", // flecha deshabilitada
-                },
-              },
-              ".MuiSvgIcon-root": {
-                color: "#EF5218", // flechas activas
-              },
-            }}
-            nextButton={
-              <Button
-                size="small"
-                onClick={handleNext}
-                disabled={paginaActual === totalPaginas - 1}
-              >
-                Siguiente
-                {theme.direction === "rtl" ? (
-                  <KeyboardArrowLeft />
-                ) : (
-                  <KeyboardArrowRight />
-                )}
-              </Button>
-            }
-            backButton={
-              <Button
-                size="small"
-                onClick={handleBack}
-                disabled={paginaActual === 0}
-              >
-                {theme.direction === "rtl" ? (
-                  <KeyboardArrowRight />
-                ) : (
-                  <KeyboardArrowLeft />
-                )}
-                Anterior
-              </Button>
-            }
-          />
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          color: chartTextColor,
+          font: { family: 'inherit', size: 11, weight: 'bold' }
+        }
+      },
+      tooltip: {
+        backgroundColor: darkMode ? '#374151' : '#1f2937',
+        titleFont: { size: 13 },
+        bodyFont: { size: 13 },
+        padding: 12,
+        cornerRadius: 8,
+      }
+    },
+    scales: {
+      x: { 
+        grid: { display: false }, 
+        ticks: { color: chartTextColor, font: { weight: '600' } } 
+      },
+      y: { 
+        grid: { color: gridColor }, 
+        ticks: { color: chartTextColor, font: { weight: '600' } } 
+      }
+    }
+  };
+
+  return (
+    <section id="noticias" className="py-24 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div>
+            <span className="text-orange-600 font-bold tracking-wider uppercase text-sm mb-2 block">
+              Resultados y Prensa
+            </span>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-text)]">
+              Noticias del <span className="text-orange-600">Proceso</span>
+            </h2>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleBack}
+              className="p-3 rounded-full border border-[var(--border-color)] hover:bg-orange-500/10 hover:text-orange-600 transition-all text-[var(--color-text)]"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <div className="text-sm font-medium text-[var(--color-text)] opacity-60">
+              {paginaActual + 1} / {totalPaginas}
+            </div>
+            <button
+              onClick={handleNext}
+              className="p-3 rounded-full border border-[var(--border-color)] hover:bg-orange-500/10 hover:text-orange-600 transition-all text-[var(--color-text)]"
+              aria-label="Next"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
         </div>
-      )}
+
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <AnimatePresence mode="popLayout text">
+            {visibles.map((item) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className="group relative bg-[var(--color-background-secondary)] border border-[var(--border-color)] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full"
+              >
+                {/* Header Card */}
+                <div className="p-6 pb-4">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2 text-orange-600">
+                      <div className="p-2 bg-orange-500/10 rounded-lg">
+                        {item.icon}
+                      </div>
+                      <span className="text-xs font-bold uppercase tracking-widest">{item.categoria}</span>
+                    </div>
+                    <span className="text-xs text-[var(--color-text)] opacity-50 font-medium">{item.fecha}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-[var(--color-text)] group-hover:text-orange-600 transition-colors mb-3 leading-tight">
+                    {item.titulo}
+                  </h3>
+                  <p className="text-sm text-[var(--color-text)] opacity-70 leading-relaxed">
+                    {item.descripcion}
+                  </p>
+                </div>
+
+                {/* Chart Area */}
+                <div className="px-6 pb-6 mt-auto">
+                  <div className="bg-[var(--color-background)] rounded-2xl p-4 border border-[var(--border-color)] h-56 flex items-center justify-center relative overflow-hidden">
+                    <div className="w-full h-full relative z-10">
+                      {item.grafico.type === "bar" && <Bar data={item.grafico} options={chartOptions} />}
+                      {item.grafico.type === "line" && <Line data={item.grafico} options={chartOptions} />}
+                      {item.grafico.type === "pie" && <Pie data={item.grafico} options={chartOptions} />}
+                      {item.grafico.type === "doughnut" && <Doughnut data={item.grafico} options={chartOptions} />}
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Overlay (Visual Only) */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-background-secondary)] via-transparent to-transparent opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none" />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Info Banner */}
+        <div className="mt-16 p-6 bg-orange-600/10 border border-orange-500/20 rounded-2xl flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+          <div className="p-3 bg-orange-600 rounded-xl text-white">
+            <Info className="w-6 h-6" />
+          </div>
+          <div className="flex-1">
+            <h4 className="font-bold text-[var(--color-text)]">Datos auditados por Blockchain</h4>
+            <p className="text-sm text-[var(--color-text)] opacity-70">Todos los resultados mostrados son inmutables y pueden ser verificados directamente en la red descentralizada de UniBlock.</p>
+          </div>
+          <button className="px-6 py-2 bg-orange-600 text-white font-bold rounded-xl hover:bg-orange-700 transition-colors text-sm shadow-md">
+            Ver Explorador
+          </button>
+        </div>
+      </div>
     </section>
   );
 };

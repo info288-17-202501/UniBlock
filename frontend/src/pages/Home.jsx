@@ -4,6 +4,7 @@ import AcercaDe from "@components/AcercaDe";
 import ComoVotar from "@components/ComoVotar";
 import ProximasVotaciones from "@components/ProximasVotaciones";
 import Noticias from "@components/Noticias";
+import Planes from "@components/Planes";
 import PreguntasFrecuentes from "@components/PreguntasFrecuentes";
 import Usuarios from "@components/Usuarios";
 import Footer from "../components/Footer";
@@ -17,6 +18,7 @@ const Home = () => {
         <ComoVotar />
         <ProximasVotaciones />
         <Noticias />
+        <Planes />
         <PreguntasFrecuentes />
         <Usuarios />
       </div>

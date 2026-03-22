@@ -1,10 +1,17 @@
 [
   {
-    "titulo": "Elección de Representantes 2025",
-    "fechaInicio": "2025-07-04T12:00:00"
+    "titulo": "Elección Centro de Alumnos 2026",
+    "descripcion": "Votación oficial para elegir la nueva directiva del Centro de Alumnos de la Universidad Austral de Chile.",
+    "fechaInicio": "2026-05-15T09:00:00"
   },
   {
-    "titulo": "Votación Reforma de Estatutos",
-    "fechaInicio": "2025-07-03T18:00:00"
+    "titulo": "Reforma de Estatutos Universitarios",
+    "descripcion": "Consulta vinculante sobre modificaciones al reglamento interno de participación estudiantil.",
+    "fechaInicio": "2026-06-01T10:00:00"
+  },
+  {
+    "titulo": "Elección de Representantes de Facultad",
+    "descripcion": "Selección de delegados representantes para cada facultad en el consejo universitario.",
+    "fechaInicio": "2026-07-10T08:00:00"
   }
 ]

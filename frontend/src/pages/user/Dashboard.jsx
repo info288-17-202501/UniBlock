@@ -42,7 +42,7 @@ const UserDashboard = () => {
     return (
       <div className="p-8">
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
         </div>
       </div>
     );
@@ -111,7 +111,7 @@ const UserDashboard = () => {
                   <span
                     className={`px-2 py-1 rounded ${
                       votation.public
-                        ? 'bg-blue-100 text-blue-700'
+                        ? 'bg-orange-100 text-orange-700'
                         : 'bg-purple-100 text-purple-700'
                     }`}
                   >

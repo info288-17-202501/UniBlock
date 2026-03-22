@@ -49,7 +49,7 @@ const ResultsPage = () => {
         <p>{error || "No se pudo cargar la votación."}</p>
         <button
           onClick={() => navigate("/user/dashboard")}
-          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+          className="mt-4 px-4 py-2 bg-orange-600 text-white rounded"
         >
           Volver al Panel
         </button>
@@ -90,7 +90,7 @@ const ResultsPage = () => {
               className="flex justify-between items-center p-4 bg-gray-100 rounded"
             >
               <span className="font-medium">{candidate.name}</span>
-              <span className="text-lg font-bold text-blue-700">
+              <span className="text-lg font-bold text-orange-700">
                 {candidate.number_of_votes} votos
               </span>
             </li>
@@ -102,7 +102,7 @@ const ResultsPage = () => {
 
       <button
         onClick={() => navigate("/user/dashboard")}
-        className="mt-6 px-4 py-2 bg-blue-600 text-white rounded"
+        className="mt-6 px-4 py-2 bg-orange-600 text-white rounded"
       >
         Volver al Panel
       </button>

@@ -1,0 +1,29 @@
+ℹ️  Nodo listener - no requiere claves
+✅ Blockchain cargada y validada desde disco.
+✅ Blockchain cargada desde disco con 4 bloques.
+node:events:486
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::4002
+    at Server.setupListenHandle [as _listen2] (node:net:1948:16)
+    at listenInCluster (node:net:2005:12)
+    at Server.listen (node:net:2110:7)
+    at app.listen (/Users/fcordova/Desktop/UniBlock/blockchain/node_modules/express/lib/application.js:635:24)
+    at Object.<anonymous> (/Users/fcordova/Desktop/UniBlock/blockchain/node/index.js:121:5)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Object..js (node:internal/modules/cjs/loader:1943:10)
+    at Module.load (node:internal/modules/cjs/loader:1533:32)
+    at Module._load (node:internal/modules/cjs/loader:1335:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (node:net:1984:8)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -48,
+  syscall: 'listen',
+  address: '::',
+  port: 4002
+}
+
+Node.js v24.14.0
