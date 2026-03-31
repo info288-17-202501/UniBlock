@@ -101,7 +101,7 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center flex-1">
             {/* Logo */}
-            <a href="/" className="logo shrink-0 mr-10">
+            <a href="/" className="logo shrink-0 mr-4 sm:mr-10">
               <img
                 src="/logo.png"
                 alt="Logo de la página"

@@ -3,11 +3,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--color-background);
   transition: 300ms background-color ease;
+  overflow-x: hidden;
+  width: 100vw;
 }
 
 @theme {

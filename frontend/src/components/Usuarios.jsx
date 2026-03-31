@@ -51,27 +51,26 @@ const Usuarios = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.15 }}
-        className="text-[var(--color-text)] opacity-70 mb-12 max-w-2xl mx-auto"
+        className="text-[var(--color-text-secondary)] mb-16 max-w-2xl mx-auto text-lg leading-relaxed px-4"
       >
-        Instituciones y estudiantes que ya confiaron en nuestro sistema de votación blockchain para sus procesos electorales.
+        Instituciones de prestigio que ya han integrado nuestra tecnología para garantizar la transparencia total en sus procesos democráticos.
       </motion.p>
 
-      {/* Logos de instituciones */}
-      <div className="relative mb-24 max-w-6xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="relative mb-32 max-w-5xl mx-auto px-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-20 items-center justify-items-center">
           {usuariosFiltrados.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex items-center justify-center h-40 border-2 border-[var(--border-color)] bg-[var(--color-background-secondary)] p-8 rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:border-orange-500 hover:-translate-y-2 transition-all duration-500 group"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="flex items-center justify-center w-full grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer"
             >
               <img
                 src={item.imagen}
                 alt="Logo institución"
-                className="max-h-24 w-full object-contain transition-all duration-500 scale-90 group-hover:scale-105"
+                className="h-16 sm:h-20 md:h-24 w-auto object-contain transition-transform duration-500 hover:scale-110"
               />
             </motion.div>
           ))}

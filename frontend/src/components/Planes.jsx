@@ -50,7 +50,7 @@ const Planes = () => {
           <span className="text-orange-600 font-bold tracking-wider uppercase text-sm mb-2 block">
             Pricing & Capacidad
           </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-[var(--color-text)] mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[var(--color-text)] mb-6">
             Planes a tu <span className="text-orange-600">Medida</span>
           </h2>
           <p className="max-w-2xl mx-auto text-[var(--color-text)] opacity-70 text-lg">
@@ -58,7 +58,7 @@ const Planes = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-8 items-stretch max-w-4xl mx-auto">
           {PLANES.map((plan, index) => (
             <motion.div
               key={plan.id}
